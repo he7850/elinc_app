@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.bmob.im.demo.ui.fragment.CardFragment">
+    <!--  list View -->
+    <com.bmob.im.demo.view.xlist.XListView
+        android:id="@+id/card_list"
+        android:divider="@drawable/base_horizontal_line"
+        android:dividerHeight="1dp"
+        android:fastScrollEnabled="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+    </com.bmob.im.demo.view.xlist.XListView>
+    <!--  评论输入栏，一般隐藏，评论时弹出 -->
+    <include layout="@layout/include_comment_bottom_bar"/>
+</LinearLayout>

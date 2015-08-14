@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.bmob.im.demo.ui.MainActivity">
+
+    <item android:id="@+id/action_chat" android:title="@string/chat"
+        android:orderInCategory="80"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/icon_chatting"/>
+
+    <item android:id="@+id/action_add" android:title="添加"
+        android:orderInCategory="90"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/icon_add"/>
+</menu>

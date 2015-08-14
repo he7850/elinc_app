@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.bmob.im.demo.ui.MainActivity"
+    >
+
+    <item android:id="@+id/action_add_aim" android:title="设定目标"
+        android:orderInCategory="80"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/new_target_e"
+        />
+
+    <item android:id="@+id/action_add_contact" android:title="寻找学伴"
+        android:orderInCategory="90"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/new_friend_e"/>
+
+    <item android:id="@+id/action_add_question" android:title="学习问题"
+        android:orderInCategory="90"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/new_question_e"/>
+</menu>
