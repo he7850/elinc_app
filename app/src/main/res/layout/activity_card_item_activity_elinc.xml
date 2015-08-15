@@ -7,29 +7,41 @@
     <include
         android:id="@+id/common_actionbar"
         layout="@layout/include_action_bar" />
+    <LinearLayout
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="打卡标题：" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loading"
+            android:id="@+id/card_goal_e" />
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/loading"
-        android:id="@+id/card_goal_e"
-        android:layout_gravity="center_horizontal" />
-
-
-    <TextView
-        android:id="@+id/card_claim_e"
-        android:layout_width="wrap_content"
-        android:text="@string/loading"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="赞"
-        android:id="@+id/follow_card_e"
-        android:layout_gravity="right" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearance"
+            android:text="打卡宣言：" />
+        <TextView
+            android:id="@+id/card_claim_e"
+            android:layout_width="wrap_content"
+            android:text="@string/loading"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="赞"
+            android:id="@+id/follow_card_e"
+            android:layout_gravity="left" />
+    </LinearLayout>
     <com.bmob.im.demo.view.xlist.XListView
         android:id="@+id/list_reply_of_card_e"
         android:layout_width="match_parent"
@@ -42,22 +54,5 @@
         android:fastScrollEnabled="true"
         android:paddingBottom="10dp"
         />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/edit_reply_e" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/submit_reply_of_card_e"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/icon_answer_e"/>
-    </LinearLayout>
+    <include layout="@layout/include_comment_bottom_bar"/>
 </LinearLayout>
