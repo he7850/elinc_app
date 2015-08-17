@@ -1,43 +1,25 @@
 package com.bmob.im.demo.ui.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.text.Layout;
-import android.text.Selection;
-import android.text.Spannable;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bmob.im.demo.R;
-import com.bmob.im.demo.adapter.EmoViewPagerAdapter;
-import com.bmob.im.demo.adapter.EmoteAdapter;
 import com.bmob.im.demo.adapter.base.BaseListAdapter;
 import com.bmob.im.demo.adapter.base.ViewHolder;
 import com.bmob.im.demo.bean.Card;
 import com.bmob.im.demo.bean.CardReply;
-import com.bmob.im.demo.bean.FaceText;
 import com.bmob.im.demo.bean.User;
 import com.bmob.im.demo.ui.CardItemActivityElinc;
 import com.bmob.im.demo.ui.FragmentBase;
-import com.bmob.im.demo.util.CommonUtils;
-import com.bmob.im.demo.util.FaceTextUtils;
-import com.bmob.im.demo.view.EmoticonsEditText;
 import com.bmob.im.demo.view.EmoticonsTextView;
 import com.bmob.im.demo.view.xlist.XListView;
 
@@ -49,7 +31,6 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 public class CardFragment extends FragmentBase implements XListView.IXListViewListener{
@@ -62,8 +43,7 @@ public class CardFragment extends FragmentBase implements XListView.IXListViewLi
     private final int pageCapacity=10;
 
     private List<CardAndReplies>cardAndRepliesList;
-    public int listLength;
-    public boolean ready;
+    public int cardListLength;
     public int readyItemNum;
 
     public CardFragment() {}
@@ -108,21 +88,22 @@ public class CardFragment extends FragmentBase implements XListView.IXListViewLi
         BmobQuery<Card>query = new BmobQuery<>();
         query.order("-updatedAt");
         curPage = 0;
+        cardListLength = pageCapacity * (curPage + 1);
+        readyItemNum = 0;
         query.setLimit(pageCapacity * (curPage + 1));
         query.include("goal");  // 希望在查询帖子信息的同时也把发布人的信息查询出来
-        ready = false;
         query.findObjects(getActivity(), new FindListener<Card>() {
             @Override
             public void onSuccess(List<Card> list) {
-                CardFragment.this.listLength = list.size();
-                CardFragment.this.readyItemNum = 0;
+                cardListLength = list.size();
+                readyItemNum = 0;
                 if (list.size() < pageCapacity * (curPage + 1)) {
                     listView.setPullLoadEnable(false);
                 } else {
                     listView.setPullLoadEnable(true);
                 }
                 cardAndRepliesList.clear();
-                for (int i = 0; i < listLength; i++) {
+                for (int i = 0; i < cardListLength; i++) {
 
                     cardAndRepliesList.add(new CardAndReplies(list.get(i)));
 
@@ -134,18 +115,28 @@ public class CardFragment extends FragmentBase implements XListView.IXListViewLi
                     bmobQuery.findObjects(getActivity(), new FindListener<CardReply>() {
                         @Override
                         public void onSuccess(List<CardReply> list) {
+                            Log.i("update card list","card"+finalI);
                             int listSize = list.size();
-                            for (int j = 0; j < (listSize > 3 ? 3 : listSize); j++) {
-                                cardAndRepliesList.get(finalI).cardReplies[j] = list.get(j);
-                                cardAndRepliesList.get(finalI).replyNum = listSize;
+                            CardReply[] cardReplies = new CardReply[3];
+                            for (int i = 0; i < (listSize > 3 ? 3 : listSize); i++) {
+                                cardReplies[i] = list.get(i);
                             }
-                            CardFragment.this.readyItemNum++;
+                            cardAndRepliesList.get(finalI).setCardReplies(cardReplies);
+                            cardAndRepliesList.get(finalI).setReplyNum(listSize);
+                            Log.i("card"+finalI+"'s reply number",listSize+"");
+                            readyItemNum++;
+                            if ( cardListLength == readyItemNum){
+                                Log.i("data","have been updated");
+                                myAdapter.notifyDataSetChanged();
+                                listView.stopRefresh();
+                            }else{
+                                Log.i("data","wait for update");
+                            }
                         }
 
                         @Override
                         public void onError(int i, String s) {
                             ShowToast("查询评论失败");
-                            ready = true;
                         }
                     });
                 }
@@ -155,7 +146,6 @@ public class CardFragment extends FragmentBase implements XListView.IXListViewLi
             public void onError(int i, String s) {
                 listView.stopRefresh();
                 Toast.makeText(getActivity(), "打卡记录获取失败", Toast.LENGTH_SHORT).show();
-                ready = true;
             }
         });
     }
@@ -163,28 +153,22 @@ public class CardFragment extends FragmentBase implements XListView.IXListViewLi
     @Override
     public void onRefresh() {
         refreshList();
-        while(!ready){
-            if ( listLength == readyItemNum){
-                ready = true;
-                myAdapter.notifyDataSetChanged();
-                listView.stopRefresh();
-            }
-        }
     }
     //上拉加载更多
     @Override
     public void onLoadMore() {
+        cardListLength = (curPage + 1) * pageCapacity;
+        readyItemNum = 0;
         BmobQuery<Card> query = new BmobQuery<>();
         query.setSkip((curPage + 1) * pageCapacity);
         query.setLimit(pageCapacity);
         query.order("-updatedAt");
         query.include("goal");  // 希望在查询帖子信息的同时也把发布人的信息查询出来
-        ready = false;
         query.findObjects(getActivity(), new FindListener<Card>() {
             @Override
             public void onSuccess(List<Card> list) {
                 if (list.size() != 0) { //拉取到新的数据
-                    listLength = list.size();
+                    cardListLength = list.size();
                     readyItemNum = 0;
                     for (int i = 0; i < list.size(); i++) {
                         int existItemNum = cardAndRepliesList.size();
@@ -201,21 +185,24 @@ public class CardFragment extends FragmentBase implements XListView.IXListViewLi
                                 int listSize = list.size();
                                 for (int j = 0; j < (listSize > 3 ? 3 : listSize); j++) {
                                     cardAndRepliesList.get(finalI).cardReplies[j] = list.get(j);
-                                    cardAndRepliesList.get(finalI).replyNum = listSize;
                                 }
-                                CardFragment.this.readyItemNum++;
+                                cardAndRepliesList.get(finalI).replyNum = listSize;
+                                Log.i("card"+finalI+"'s replylist number",listSize+"");
+                                readyItemNum++;
+                                if ( cardListLength == readyItemNum){
+                                    myAdapter.notifyDataSetChanged();
+                                    listView.stopLoadMore();
+                                }
                             }
 
                             @Override
                             public void onError(int i, String s) {
-                                ready = true;
                                 ShowToast("查询评论失败");
                             }
                         });
                     }
                     curPage++;
                 } else {                    //数据全部拉取完
-                    ready = true;
                     ShowToast("数据加载完成");
                     listView.setPullLoadEnable(false);
                     listView.stopLoadMore();
@@ -225,28 +212,43 @@ public class CardFragment extends FragmentBase implements XListView.IXListViewLi
             @Override
             public void onError(int i, String s) {
                 ShowToast("数据加载失败");
-                ready = true;
             }
         });
-
-        while(!ready){
-            if ( listLength == readyItemNum){
-                ready = true;
-                myAdapter.notifyDataSetChanged();
-                listView.stopLoadMore();
-            }
-        }
     }
 
 
     public class CardAndReplies{
-        public Card card;
-        public CardReply[] cardReplies;
-        public int replyNum;
+        private Card card;
+        private CardReply[] cardReplies;
+        private int replyNum;
         public CardAndReplies(Card card){
             this.card = card;
             cardReplies = new CardReply[3];
         }
+        public int getReplyNum() {
+            return replyNum;
+        }
+
+        public void setReplyNum(int replyNum) {
+            this.replyNum = replyNum;
+        }
+
+        public Card getCard() {
+            return card;
+        }
+
+        public void setCard(Card card) {
+            this.card = card;
+        }
+
+        public CardReply[] getCardReplies() {
+            return cardReplies;
+        }
+
+        public void setCardReplies(CardReply[] cardReplies) {
+            this.cardReplies = cardReplies;
+        }
+
     }
 
     public class CardListAdapter extends BaseListAdapter<CardAndReplies> {
@@ -266,36 +268,34 @@ public class CardFragment extends FragmentBase implements XListView.IXListViewLi
             if (convertView == null) {
                 convertView = mInflater.inflate(R.layout.item_card_in_list_elinc, null);
             }
-            final CardAndReplies contract = getList().get(arg0);
+            final CardAndReplies data = getList().get(arg0);
             TextView goal_content = ViewHolder.get(convertView, R.id.goal_content);
             TextView claim = ViewHolder.get(convertView, R.id.claim);
             TextView created_at = ViewHolder.get(convertView, R.id.created_at);
             TextView reply_num = ViewHolder.get(convertView,R.id.reply_num);
-            final LinearLayout comment_layout = ViewHolder.get(convertView, R.id.comment_layout);
+            LinearLayout comment_layout = ViewHolder.get(convertView, R.id.comment_layout);
 
-            goal_content.setText(contract.card.getGoal().getGoalContent());
-            claim.setText(contract.card.getCardClaim());
-            created_at.setText(contract.card.getCreatedAt());
-            LinearLayout linearLayout = new LinearLayout(getActivity());
-            linearLayout.setOrientation(LinearLayout.VERTICAL);
-            linearLayout.setLayoutParams(layoutParams);
-            for (int i = 0; i < (contract.replyNum>3?3:contract.replyNum); i++) {
-                final User replyAuthor = contract.cardReplies[i].getReplyAuthor();
-                final User replyTo = contract.cardReplies[i].getReplyTo();
-                final String content = contract.cardReplies[i].getContent();
+            goal_content.setText(data.getCard().getGoal().getGoalContent());
+            claim.setText(data.getCard().getGoal().getClaim());
+            created_at.setText(data.getCard().getCreatedAt());
+            comment_layout.removeAllViews();
+            for (int i = 0; i < ( data.getReplyNum() > 3 ? 3 : data.getReplyNum() ); i++) {
+                User replyAuthor = data.getCardReplies()[i].getReplyAuthor();
+                User replyTo = data.getCardReplies()[i].getReplyTo();
+                String content = data.getCardReplies()[i].getContent();
                 String line = replyAuthor.getNick() + ":" +
                         (replyTo.getObjectId().equals(me.getObjectId()) ? "" : ("@" + replyTo.getNick() + "  ")) +
                         content;
                 EmoticonsTextView commentLine = new EmoticonsTextView(getActivity());
                 commentLine.setText(line);
                 commentLine.setLayoutParams(layoutParams);
-                linearLayout.addView(commentLine);
+                comment_layout.addView(commentLine);
             }
-            comment_layout.removeAllViews();
-            comment_layout.addView(linearLayout);
-            if (contract.replyNum>3){
+            //评论多于3条提示
+            if ( data.getReplyNum() > 3 ){
+                Log.i("data "+arg0,""+data.getReplyNum());
                 reply_num.setTextColor(getResources().getColor(R.color.material_deep_teal_500));
-                reply_num.setText("评论还有" + (contract.replyNum - 3) + "条，点击查看详情..");
+                reply_num.setText("评论还有" + (data.getReplyNum() - 3) + "条，点击查看详情..");
                 reply_num.setVisibility(View.VISIBLE);
                 reply_num.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -303,12 +303,14 @@ public class CardFragment extends FragmentBase implements XListView.IXListViewLi
                         Intent intent = new Intent();
                         intent.setClass(getActivity(), CardItemActivityElinc.class);
                         Bundle bundle = new Bundle();
-                        bundle.putString("cardId",contract.card.getObjectId());
+                        bundle.putString("cardId",data.getCard().getObjectId());
                         intent.putExtras(bundle);
                         startAnimActivity(intent);
                         refreshList();
                     }
                 });
+            }else{
+                reply_num.setVisibility(View.GONE);
             }
 
             //设置点赞按钮
@@ -317,7 +319,7 @@ public class CardFragment extends FragmentBase implements XListView.IXListViewLi
                 @Override
                 public void onClick(View v) {
                     BmobQuery<User> query = new BmobQuery<>();
-                    query.addWhereRelatedTo("likedBy", new BmobPointer(contract));
+                    query.addWhereRelatedTo("likedBy", new BmobPointer(data));
                     query.findObjects(mContext, new FindListener<User>() {
                         @Override
                         public void onSuccess(List<User> object) {//记录点赞
@@ -334,12 +336,12 @@ public class CardFragment extends FragmentBase implements XListView.IXListViewLi
                                 ShowToast("已经赞过了");
                             } else {
                                 Card card = new Card();
-                                card.setObjectId(contract.card.getObjectId());
+                                card.setObjectId(data.getCard().getObjectId());
                                 card.increment("likedByNum");
                                 BmobRelation likedBy = new BmobRelation();
                                 likedBy.add(me);
                                 card.setLikedBy(likedBy);
-                                card.setObjectId(contract.card.getObjectId());
+                                card.setObjectId(data.getCard().getObjectId());
                                 card.update(mContext, new UpdateListener() {
                                     @Override
                                     public void onSuccess() {
@@ -369,7 +371,7 @@ public class CardFragment extends FragmentBase implements XListView.IXListViewLi
                     Intent intent = new Intent();
                     intent.setClass(getActivity(), CardItemActivityElinc.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("cardId",contract.card.getObjectId());
+                    bundle.putString("cardId", data.getCard().getObjectId());
                     intent.putExtras(bundle);
                     startAnimActivity(intent);
                     refreshList();

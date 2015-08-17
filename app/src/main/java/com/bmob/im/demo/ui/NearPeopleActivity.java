@@ -9,7 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+
+import cn.bmob.im.BmobChatManager;
+import cn.bmob.im.BmobUserManager;
 import cn.bmob.im.task.BRequest;
+import cn.bmob.im.util.BmobLog;
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.CountListener;
 import cn.bmob.v3.listener.FindListener;
 
@@ -34,6 +41,7 @@ public class NearPeopleActivity extends ActivityBase implements IXListViewListen
 	XListView mListView;
 	NearPeopleAdapter adapter;
 	String from = "";
+	User currentUser;
 
 	List<User> nears = new ArrayList<User>();
 
@@ -48,6 +56,7 @@ public class NearPeopleActivity extends ActivityBase implements IXListViewListen
 
 	private void initView() {
 		initTopBarForLeft("学伴推荐");
+		currentUser = BmobUser.getCurrentUser(this,User.class);
 		initXListView();
 	}
 
@@ -79,16 +88,81 @@ public class NearPeopleActivity extends ActivityBase implements IXListViewListen
 			progress.show();
 		}
 		
-		if(!mApplication.getLatitude().equals("")&&!mApplication.getLongtitude().equals("")){
-			double latitude = Double.parseDouble(mApplication.getLatitude());
-			double longtitude = Double.parseDouble(mApplication.getLongtitude());
-			//封装的查询方法，当进入此页面时 isUpdate为false，当下拉刷新的时候设置为true就行。
-			//此方法默认每页查询10条数据,若想查询多于10条，可在查询之前设置BRequest.QUERY_LIMIT_COUNT，如：BRequest.QUERY_LIMIT_COUNT=20
-			// 此方法是新增的查询指定10公里内的性别为女性的用户列表，默认包含好友列表
-			//如果你不想查询性别为女的用户，可以将equalProperty设为null或者equalObj设为null即可
-			userManager.queryKiloMetersListByPage(isUpdate,0,"location", longtitude, latitude, true,QUERY_KILOMETERS,"sex",null,new FindListener<User>() {
-			//此方法默认查询所有带地理位置信息的且性别为女的用户列表，如果你不想包含好友列表的话，将查询条件中的isShowFriends设置为false就行
-//			userManager.queryNearByListByPage(isUpdate,0,"location", longtitude, latitude, true,"sex",false,new FindListener<User>() {
+//		if(!mApplication.getLatitude().equals("")&&!mApplication.getLongtitude().equals("")){
+//			double latitude = Double.parseDouble(mApplication.getLatitude());
+//			double longtitude = Double.parseDouble(mApplication.getLongtitude());
+//			//封装的查询方法，当进入此页面时 isUpdate为false，当下拉刷新的时候设置为true就行。
+//			//此方法默认每页查询10条数据,若想查询多于10条，可在查询之前设置BRequest.QUERY_LIMIT_COUNT，如：BRequest.QUERY_LIMIT_COUNT=20
+//			// 此方法是新增的查询指定10公里内的性别为女性的用户列表，默认包含好友列表
+//			//如果你不想查询性别为女的用户，可以将equalProperty设为null或者equalObj设为null即可
+//			userManager.queryKiloMetersListByPage(isUpdate,0,"location", longtitude, latitude, true,QUERY_KILOMETERS,"sex",null,new FindListener<User>() {
+//			//此方法默认查询所有带地理位置信息的且性别为女的用户列表，如果你不想包含好友列表的话，将查询条件中的isShowFriends设置为false就行
+////			userManager.queryNearByListByPage(isUpdate,0,"location", longtitude, latitude, true,"sex",false,new FindListener<User>() {
+//
+//
+//				@Override
+//				public void onSuccess(List<User> arg0) {
+//					// TODO Auto-generated method stub
+//					if (CollectionUtils.isNotNull(arg0)) {
+//						if(isUpdate){
+//							nears.clear();
+//						}
+//						adapter.addAll(arg0);
+//						if(arg0.size()<BRequest.QUERY_LIMIT_COUNT){
+//							mListView.setPullLoadEnable(false);
+//							ShowToast("搜索完成^_^!");
+//						}else{
+//							mListView.setPullLoadEnable(true);
+//						}
+//					}else{
+//						ShowToast("附近没有人T_T");
+//					}
+//
+//					if(!isUpdate){
+//						progress.dismiss();
+//					}else{
+//						refreshPull();
+//					}
+//				}
+//
+//				@Override
+//				public void onError(int arg0, String arg1) {
+//					// TODO Auto-generated method stub
+//					ShowToast("附近没有人T_T");
+//					mListView.setPullLoadEnable(false);
+//					if(!isUpdate){
+//						progress.dismiss();
+//					}else{
+//						refreshPull();
+//					}
+//				}
+//
+//			});
+//		}else{
+//			ShowToast("附近没有人T_T");
+//			progress.dismiss();
+//			refreshPull();
+//		}
+
+		/**之下为按标签匹配的算法
+		 * by VkaZas 2015.8.16
+		 */
+		List<String> tags = currentUser.getTags();
+		List<BmobQuery<User>> queries = new ArrayList<BmobQuery<User>>();
+		BmobQuery<User> query = new BmobQuery<User>();
+		if (CollectionUtils.isNotNull(tags)) {
+			BmobLog.i("获取tag数量", String.valueOf(tags.size()));
+			for (int i=0;i<tags.size();i++) {
+				BmobLog.i("获取tag", tags.get(i));
+				if (tags.get(i)!=null) {
+					query.addWhereContains("tags",tags.get(i));
+					queries.add(query);
+				}
+			}
+		}
+		BmobQuery<User> orQuery = new BmobQuery<User>();
+		orQuery.or(queries);
+		orQuery.findObjects(this, new FindListener<User>() {
 
 				@Override
 				public void onSuccess(List<User> arg0) {
@@ -97,29 +171,29 @@ public class NearPeopleActivity extends ActivityBase implements IXListViewListen
 						if(isUpdate){
 							nears.clear();
 						}
+						for (int i=0;i<arg0.size();i++) {
+							BmobLog.i("匹配列表中的用户",arg0.get(i).getUsername());
+							if (arg0.get(i).getUsername().equals(currentUser.getUsername())) {
+								arg0.remove(i);
+								break;
+							}
+						}
+						for (int i=arg0.size();i>=0;i--) {
+							if (i>4) {
+								arg0.remove(i);
+							}
+						}
 						adapter.addAll(arg0);
 						if(arg0.size()<BRequest.QUERY_LIMIT_COUNT){
 							mListView.setPullLoadEnable(false);
-							ShowToast("搜索完成^_^!");
+							ShowToast("匹配完成^_^!");
 						}else{
 							mListView.setPullLoadEnable(true);
 						}
 					}else{
-						ShowToast("附近没有人T_T");
+						ShowToast("没有匹配到人T_T");
 					}
-					
-					if(!isUpdate){
-						progress.dismiss();
-					}else{
-						refreshPull();
-					}
-				}
-				
-				@Override
-				public void onError(int arg0, String arg1) {
-					// TODO Auto-generated method stub
-					ShowToast("附近没有人T_T");
-					mListView.setPullLoadEnable(false);
+
 					if(!isUpdate){
 						progress.dismiss();
 					}else{
@@ -127,13 +201,18 @@ public class NearPeopleActivity extends ActivityBase implements IXListViewListen
 					}
 				}
 
-			});
-		}else{
-			ShowToast("附近没有人T_T");
-			progress.dismiss();
-			refreshPull();
-		}
-		
+				@Override
+				public void onError(int arg0, String arg1) {
+					// TODO Auto-generated method stub
+					ShowToast("没有匹配到人T_T");
+					mListView.setPullLoadEnable(false);
+					if(!isUpdate){
+						progress.dismiss();
+					}else{
+						refreshPull();
+					}
+				}
+		});
 	}
 	
 	/** 查询更多
