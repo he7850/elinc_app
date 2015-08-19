@@ -6,101 +6,108 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         >
-        <TextView
-            android:id="@+id/question_title"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/loading"
-            android:fontFamily="微软雅黑"
-            android:textSize="16sp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="6dp"
-            />
-        <TextView
-            android:text="加载中"
-            android:fontFamily="微软雅黑"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:orientation="horizontal">
+            <com.bmob.im.demo.view.CircleImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
 
-            android:paddingBottom="5dp"
-            android:id="@+id/question_content"
-            android:textSize="12sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:typeface="sans"/>
-
-
+                android:id="@+id/avatar_for_question"
+                />
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                >
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    >
-                <com.bmob.im.demo.view.CircleImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp"
-                    android:id="@+id/avatar_for_question"
-                    />
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:text="加载中"
+                            android:fontFamily="微软雅黑"
+                            android:id="@+id/question_author"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:typeface="sans"
+                            android:gravity="center_vertical"
+                            android:textSize="24sp"
+                            />
+                        <TextView
+
+                            android:id="@+id/question_number_of_answer"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="加载中。。。"
+                            android:fontFamily="微软雅黑"
+                            android:gravity="center_vertical"
+                            android:textSize="20sp"
+                            android:typeface="sans" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
 
                 <TextView
-                    android:text="加载中"
+                    android:text="加载中 date"
                     android:fontFamily="微软雅黑"
-                    android:id="@+id/question_author"
+                    android:id="@+id/question_date"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:typeface="sans"
                     android:gravity="center_vertical"
-                    android:textSize="10sp"
+                    android:textSize="18sp"
                     />
-                    </LinearLayout>
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    >
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginRight="10dp"
-                    android:id="@+id/imageView2"
-                    android:src="@drawable/icon_heat_e"/>
-
-                <TextView
-
-                android:id="@+id/question_number_of_answer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="加载中。。。"
-                    android:fontFamily="微软雅黑"
-                android:gravity="center_vertical"
-                    android:textSize="10sp"
-                android:typeface="sans" />
-                </LinearLayout>
 
             </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:layout_gravity="center_horizontal"
-            android:background="#DDDFDD">
-
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/question_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/loading"
+                android:fontFamily="微软雅黑"
+                android:textSize="36sp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="6dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:text="加载中"
+                android:fontFamily="微软雅黑"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+
+                android:paddingBottom="5dp"
+                android:id="@+id/question_content"
+                android:textSize="24sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:typeface="sans"/>
+        </LinearLayout>
+
 
     </LinearLayout>
 
