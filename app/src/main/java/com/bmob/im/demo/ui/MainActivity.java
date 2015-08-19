@@ -14,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.design.widget.*;
 import android.support.v7.internal.view.menu.MenuPopupHelper;
+import android.support.v7.internal.view.menu.MenuView;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -85,9 +86,12 @@ public class MainActivity extends ActivityBase implements EventListener{
 		/**
 		 * 设置ToolBar
 		 */
+		View itemView = findViewById(R.id.action_add);
+		
+
 		Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
 		toolbar.setTitle("Elinc");
-		toolbar.setBackgroundResource(R.drawable.nav_background_e);
+		toolbar.setBackgroundColor(getResources().getColor(R.color.elinc_main_green));
 		setSupportActionBar(toolbar);
 		final android.support.v7.app.ActionBar main_ab = getSupportActionBar();
 		if (main_ab != null) {
@@ -243,9 +247,6 @@ public class MainActivity extends ActivityBase implements EventListener{
 
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 		tabLayout.setupWithViewPager(viewPager);
-		tabLayout.setBackgroundResource(R.drawable.tab_background_e);
-		tabLayout.setTabTextColors(R.color.window_background, R.color.window_background);
-
 
 //		FloatingActionButton fab_toChat = (FloatingActionButton) findViewById(R.id.fab_toChat);
 //		fab_toChat.setOnClickListener(new View.OnClickListener() {

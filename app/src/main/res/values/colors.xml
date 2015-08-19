@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="elinc_main_green">#66CC99</color>
+    <color name="elinc_unselected_tab">#9D9D9D</color>
     <color name="elinc_green">#31B590</color>
+    <color name="elinc_border_grey">#BCBCBC</color>
+
     <color name="window_background">#FFF5F5F5</color>
     <color name="base_actionbar_bg">#f5f5f5</color>
     <color name="base_action_bar_title_color">#2f2725</color>
