@@ -60,6 +60,7 @@ public class QuestionListAdapter extends BaseListAdapter<Question> {
         TextView question_title = ViewHolder.get(convertView, R.id.question_title);
         TextView question_content = ViewHolder.get(convertView, R.id.question_content);
         TextView question_author = ViewHolder.get(convertView,R.id.question_author);
+        TextView question_date = ViewHolder.get(convertView,R.id.question_date);
         CircleImageView user_avatar= ViewHolder.get(convertView,R.id.avatar_for_question);
         final TextView question_number_of_answer = ViewHolder.get(convertView,R.id.question_number_of_answer);
         //Button btn_add = ViewHolder.get(convertView, R.id.question_content);
@@ -74,6 +75,7 @@ public class QuestionListAdapter extends BaseListAdapter<Question> {
         if(contract.getTitle()!=null){question_title.setText(contract.getTitle());}
         if(contract.getQuestionContent()!=null){question_content.setText(contract.getQuestionContent());}
         if(contract.getAuthor()!=null){question_author.setText(contract.getAuthor().getUsername());}
+        question_date.setText(contract.getCreatedAt());
         String avatar=contract.getAuthor().getAvatar();
         if(avatar!=null && !avatar.equals("")){//加载头像-为了不每次都加载头像
             ImageLoader.getInstance().displayImage(avatar, user_avatar, ImageLoadOptions.getOptions(),animateFirstListener);
@@ -92,13 +94,13 @@ public class QuestionListAdapter extends BaseListAdapter<Question> {
             public void onSuccess(int count) {
                 // TODO Auto-generated method stub
                 //toast("Barbie has played" + count + "games");
-                question_number_of_answer.setText( "回答数：" + count);
+                question_number_of_answer.setText( "" + count);
             }
 
             @Override
             public void onFailure(int code, String msg) {
                 // TODO Auto-generated method stub
-                question_number_of_answer.setText("加载中。。");
+                question_number_of_answer.setText("0");
             }
         });
 
