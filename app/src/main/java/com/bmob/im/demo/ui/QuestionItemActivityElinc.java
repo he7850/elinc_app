@@ -441,7 +441,18 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
         final User user = BmobUser.getCurrentUser(this, User.class);
         Question question=new Question();
         question.setObjectId( bundle.getString("questionId"));
-        System.out.println("4");
+        question.increment("numberOfAnswer");
+        question.update(QuestionItemActivityElinc.this, new UpdateListener() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+
+            }
+        });
         new_answer.setAnswerContent(a);
         new_answer.setQuestionId(question);
         new_answer.setResponder(user);
@@ -449,7 +460,6 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
         new_answer.save(QuestionItemActivityElinc.this, new SaveListener() {
             @Override
             public void onSuccess() {
-                System.out.println("yes");
                 Tool.alert(QuestionItemActivityElinc.this, "提交成功");
                 BmobLog.i("Json测试", user.getUsername());
                 BmobLog.i("Json测试", CreatJsonMsgInString(author_name, user.getUsername(), bundle.getString("questionId")));
@@ -530,11 +540,6 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
     }
-
-
-
-
-
 
 
 

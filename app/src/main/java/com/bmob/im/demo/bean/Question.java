@@ -19,6 +19,7 @@ public class Question extends BmobObject {
     private String questionAvatar;
     private BmobRelation answerList;
     private BmobRelation followerList;
+    private Integer numberOfAnswer;
 
     public BmobRelation getFollowerList() {
         return followerList;
@@ -34,6 +35,14 @@ public class Question extends BmobObject {
 
     public void setAnswerList(BmobRelation answerList) {
         this.answerList = answerList;
+    }
+
+    public Integer getNumberOfAnswer() {
+        return numberOfAnswer;
+    }
+
+    public void setNumberOfAnswer(Integer numberOfAnswer) {
+        this.numberOfAnswer = numberOfAnswer;
     }
 
     public String getQuestionAvatar() {
