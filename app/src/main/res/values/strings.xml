@@ -2,7 +2,7 @@
 <resources>
 
     <string name="begin_page_string">每一个目标\n都是你人生的重要组成部分\nELINC郁林</string>
-    <string name="app_name">Bmob_IM_test</string>
+    <string name="app_name">郁林</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="login_username_hint">请输入手机号&#8230;</string>
