@@ -90,7 +90,7 @@ public class MainActivity extends ActivityBase implements EventListener{
 		
 
 		Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
-		toolbar.setTitle("Elinc");
+		toolbar.setTitle("郁林");
 		toolbar.setBackgroundColor(getResources().getColor(R.color.elinc_main_green));
 		setSupportActionBar(toolbar);
 		final android.support.v7.app.ActionBar main_ab = getSupportActionBar();
