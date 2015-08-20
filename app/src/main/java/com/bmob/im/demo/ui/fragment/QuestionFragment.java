@@ -46,7 +46,10 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
     QuestionListAdapter adapter;
     private View view;
     String searchName ="";
-    final int pageCapacity=2;
+    private final int pageCapacity=10;
+    int curPage = 0;
+    ProgressDialog progress ;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_question, container, false);
@@ -86,97 +89,9 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
 
     }
 
-    int curPage = 0;
-    ProgressDialog progress ;
-    private void initSearchList(final boolean isUpdate){
-        if(!isUpdate){
-            progress = new ProgressDialog(getActivity());
-            progress.setMessage("正在搜索...");
-            progress.setCanceledOnTouchOutside(true);
-            progress.show();
-        }
 
-        BmobQuery<Question> mainQuery = new BmobQuery<Question>();
-        mainQuery.include("author");
-        mainQuery.order("-createdAt");
-        mainQuery.findObjects(getActivity(), new FindListener<Question>() {
-            @Override
-            public void onSuccess(List<Question> list) {
-                // TODO Auto-generated method stub
-                if (CollectionUtils.isNotNull(list)) {
-                    if (isUpdate) {
-                        question.clear();
-                    }
-                    adapter.addAll(list);
-                    if (list.size() < BRequest.QUERY_LIMIT_COUNT) {
-                        mListView.setPullLoadEnable(false);
-                        ShowToast("问题搜索完成!");
-                    } else {
-                        mListView.setPullLoadEnable(true);
-                    }
-                } else {
-                    BmobLog.i("查询成功:无返回值");
-                    if (question != null) {
-                        question.clear();
-                    }
-                    ShowToast("没有您要找的问题，去提问吧");
-                }
-                if (!isUpdate) {
-                    progress.dismiss();
-                } else {
-                    refreshPull();
-                }
-                //这样能保证每次查询都是从头开始
-                curPage = 0;
-            }
-            @Override
-            public void onError(int code, String msg) {
-                // TODO Auto-generated method stub
-                BmobLog.i("查询错误:" + msg);
-                if (question != null) {
-                    question.clear();
-                }
-                ShowToast("问题不存在");
-                mListView.setPullLoadEnable(false);
-                refreshPull();
-                //这样能保证每次查询都是从头开始
-                curPage = 0;
-            }
-        });
 
-    }
 
-    /** 查询更多
-     * @Title: queryMoreNearList
-     * @Description: TODO
-     * @param @param page
-     * @return void
-     * @throws
-     */
-    private void queryMoreSearchList(int page){
-        BmobQuery<Question> mainQuery = new BmobQuery<Question>();
-        mainQuery.include("author");
-        mainQuery.order("-createdAt");
-        mainQuery.findObjects(getActivity(), new FindListener<Question>() {
-            @Override
-            public void onSuccess(List<Question> list) {
-                // TODO Auto-generated method stub
-                if (CollectionUtils.isNotNull(list)) {
-                    question.clear();
-                    adapter.addAll(list);
-                }
-                refreshLoad();
-            }
-
-            @Override
-            public void onError(int i, String s) {
-                // TODO Auto-generated method stub
-                ShowLog("搜索更多问题出错:" + s);
-                mListView.setPullLoadEnable(false);
-                refreshLoad();
-            }
-        });
-    }
 
     @Override
     public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
@@ -204,8 +119,10 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
     @Override
     public void onLoadMore() {
         BmobQuery<Question> mainQuery = new BmobQuery<Question>();
+        mainQuery.setSkip((curPage + 1) * pageCapacity);
+        mainQuery.setLimit(pageCapacity);
         mainQuery.include("author");
-        mainQuery.order("createdAt");
+        mainQuery.order("-createdAt");
         mainQuery.findObjects(getActivity(), new FindListener<Question>() {
             @Override
             public void onSuccess(List<Question> list) {
@@ -242,6 +159,8 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
     public void initAdapter(){
         BmobQuery<Question> allQuery = new BmobQuery<Question>();
         allQuery.include("author");
+        allQuery.order("-createdAt");
+        allQuery.setLimit(pageCapacity);
         allQuery.findObjects(getActivity(), new FindListener<Question>() {
             @Override
             public void onSuccess(List<Question> list) {
@@ -290,6 +209,7 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
         BmobQuery<Question> mainQuery = new BmobQuery<Question>();
         mainQuery.include("author");
         mainQuery.order("-createdAt");
+        mainQuery.setLimit(pageCapacity);
         mainQuery.findObjects(getActivity(), new FindListener<Question>() {
             @Override
             public void onSuccess(List<Question> list) {

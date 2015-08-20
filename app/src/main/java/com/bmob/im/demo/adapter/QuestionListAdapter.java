@@ -82,27 +82,8 @@ public class QuestionListAdapter extends BaseListAdapter<Question> {
         }else {
             user_avatar.setImageResource(R.drawable.head);
         }
-        /*if(contract.getAuthor().getAvatar()!=null){
-            user_avatar.setImageBitmap(returnBitMap(imgUrl));
-        }
-        URI uri=new URI();
-        uri.parse("content://com.changcheng.provider.contactprovider/contact")*/
-        BmobQuery<Answer> query = new BmobQuery<Answer>();
-        query.addWhereEqualTo("questionId", contract);
-        query.count(context, Answer.class, new CountListener() {
-            @Override
-            public void onSuccess(int count) {
-                // TODO Auto-generated method stub
-                //toast("Barbie has played" + count + "games");
-                question_number_of_answer.setText( "" + count);
-            }
+        question_number_of_answer.setText("" + contract.getNumberOfAnswer());
 
-            @Override
-            public void onFailure(int code, String msg) {
-                // TODO Auto-generated method stub
-                question_number_of_answer.setText("0");
-            }
-        });
 
         return convertView;
     }

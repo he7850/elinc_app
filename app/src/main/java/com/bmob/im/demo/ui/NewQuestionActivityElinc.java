@@ -146,6 +146,7 @@ public class NewQuestionActivityElinc extends ActivityBase {
         new_question.setTags(tags);
         new_question.setQuestionContent(questionContent);
         new_question.setTitle(title);
+        new_question.setNumberOfAnswer(0);
         new_question.setAuthor(BmobUser.getCurrentUser(this, User.class));
         new_question.save(NewQuestionActivityElinc.this, new SaveListener() {
             @Override
