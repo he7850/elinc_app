@@ -39,7 +39,7 @@
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
     <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
-   <!-- <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />-->
+    <!-- <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" /> -->
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_GPS" />
@@ -224,6 +224,10 @@
         <activity
             android:name=".ui.PicDragZoomActivityElinc"
             android:label="@string/title_activity_pic_drag_zoom_activity_elinc" >
+        </activity>
+        <activity
+            android:name=".ui.FindQuestion"
+            android:label="@string/title_activity_find_question" >
         </activity>
     </application>
 

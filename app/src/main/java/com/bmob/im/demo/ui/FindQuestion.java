@@ -1,38 +1,48 @@
-package com.bmob.im.demo.ui.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
+/*
+public class FindQuestion extends AppCompatActivity {
 
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 
-import cn.bmob.im.bean.BmobChatUser;
-import cn.bmob.im.task.BRequest;
-import cn.bmob.im.util.BmobLog;
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.listener.CountListener;
-import cn.bmob.v3.listener.FindListener;
+}*/
 
-import com.bmob.im.demo.R;
-import com.bmob.im.demo.adapter.QuestionListAdapter;
-import com.bmob.im.demo.bean.Question;
-import com.bmob.im.demo.bean.Tool;
-import com.bmob.im.demo.ui.FragmentBase;
-import com.bmob.im.demo.ui.QuestionItemActivityElinc;
-import com.bmob.im.demo.util.CollectionUtils;
-import com.bmob.im.demo.view.xlist.XListView;
-import com.bmob.im.demo.view.xlist.XListView.IXListViewListener;
+
+package com.bmob.im.demo.ui;
+
+        import java.util.ArrayList;
+        import java.util.List;
+
+        import android.app.ProgressDialog;
+        import android.content.Intent;
+        import android.os.Bundle;
+        import android.util.Log;
+        import android.view.LayoutInflater;
+        import android.view.Menu;
+        import android.view.MenuItem;
+        import android.view.View;
+        import android.view.View.OnClickListener;
+        import android.view.ViewGroup;
+        import android.widget.AdapterView;
+        import android.widget.AdapterView.OnItemClickListener;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.ListView;
+
+        import cn.bmob.im.bean.BmobChatUser;
+        import cn.bmob.im.task.BRequest;
+        import cn.bmob.im.util.BmobLog;
+        import cn.bmob.v3.BmobQuery;
+        import cn.bmob.v3.listener.CountListener;
+        import cn.bmob.v3.listener.FindListener;
+
+        import com.bmob.im.demo.R;
+        import com.bmob.im.demo.adapter.QuestionListAdapter;
+        import com.bmob.im.demo.bean.Question;
+        import com.bmob.im.demo.bean.Tool;
+        import com.bmob.im.demo.ui.FragmentBase;
+        import com.bmob.im.demo.ui.QuestionItemActivityElinc;
+        import com.bmob.im.demo.util.CollectionUtils;
+        import com.bmob.im.demo.view.xlist.XListView;
+        import com.bmob.im.demo.view.xlist.XListView.IXListViewListener;
 
 /** 添加好友
  * @ClassName: SearchQuestion
@@ -40,7 +50,9 @@ import com.bmob.im.demo.view.xlist.XListView.IXListViewListener;
  * @author smile
  * @date 2014-6-5 下午5:26:41
  */
-public class QuestionFragment extends FragmentBase implements OnClickListener,IXListViewListener,OnItemClickListener{
+public class FindQuestion extends ActivityBase implements View.OnClickListener,XListView.IXListViewListener,AdapterView.OnItemClickListener {
+    EditText et_search_question;
+    Button btn_search_question;
     List<Question> question = new ArrayList<Question>();
     XListView mListView;
     QuestionListAdapter adapter;
@@ -48,20 +60,39 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
     String searchName ="";
     final int pageCapacity=2;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_question, container, false);
-        /*listView = (ListView)view.findViewById(R.id.question_list);*/
-        return view;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_find_question);
     }
+
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        initView();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_find_question, menu);
+        return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private void initView(){
         //initTopBarForLeft("查找问题");
-
+        et_search_question = (EditText)findViewById(R.id.et_search_question);
+        btn_search_question = (Button)findViewById(R.id.btn_search_question);
+        btn_search_question.setOnClickListener(this);
         initXListView();
         initAdapter();
         refreshList();
@@ -79,7 +110,7 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
         //
         mListView.pullRefreshing();
         mListView.setDividerHeight(2);
-        adapter = new QuestionListAdapter(getActivity(), question);
+        adapter = new QuestionListAdapter(FindQuestion.this, question);
         mListView.setAdapter(adapter);
 
         mListView.setOnItemClickListener(this);
@@ -90,16 +121,25 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
     ProgressDialog progress ;
     private void initSearchList(final boolean isUpdate){
         if(!isUpdate){
-            progress = new ProgressDialog(getActivity());
+            progress = new ProgressDialog(FindQuestion.this);
             progress.setMessage("正在搜索...");
             progress.setCanceledOnTouchOutside(true);
             progress.show();
         }
-
+        BmobQuery<Question> eq1 = new BmobQuery<Question>();
+        eq1.addWhereContains("title", et_search_question.getText().toString());
+        BmobQuery<Question> eq2 = new BmobQuery<Question>();
+        eq2.addWhereContains("question_content", et_search_question.getText().toString());
+        BmobQuery<Question> eq3=new BmobQuery<Question>();
+        eq3.addWhereContains("tags", et_search_question.getText().toString());
+        List<BmobQuery<Question>> queries = new ArrayList<BmobQuery<Question>>();
+        queries.add(eq1);
+        queries.add(eq2);
+        queries.add(eq3);
         BmobQuery<Question> mainQuery = new BmobQuery<Question>();
         mainQuery.include("author");
-        mainQuery.order("-createdAt");
-        mainQuery.findObjects(getActivity(), new FindListener<Question>() {
+        mainQuery.or(queries);
+        mainQuery.findObjects(FindQuestion.this, new FindListener<Question>() {
             @Override
             public void onSuccess(List<Question> list) {
                 // TODO Auto-generated method stub
@@ -154,10 +194,20 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
      * @throws
      */
     private void queryMoreSearchList(int page){
+        BmobQuery<Question> eq1 = new BmobQuery<Question>();
+        eq1.addWhereContains("title", et_search_question.getText().toString());
+        BmobQuery<Question> eq2 = new BmobQuery<Question>();
+        eq2.addWhereContains("question_content", et_search_question.getText().toString());
+        BmobQuery<Question> eq3=new BmobQuery<Question>();
+        eq3.addWhereContains("tags", et_search_question.getText().toString());
+        List<BmobQuery<Question>> queries = new ArrayList<BmobQuery<Question>>();
+        queries.add(eq1);
+        queries.add(eq2);
+        queries.add(eq3);
         BmobQuery<Question> mainQuery = new BmobQuery<Question>();
         mainQuery.include("author");
-        mainQuery.order("-createdAt");
-        mainQuery.findObjects(getActivity(), new FindListener<Question>() {
+        mainQuery.or(queries);
+        mainQuery.findObjects(FindQuestion.this, new FindListener<Question>() {
             @Override
             public void onSuccess(List<Question> list) {
                 // TODO Auto-generated method stub
@@ -186,14 +236,29 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
         //ShowToast("point"+position);
         bundle.putString("questionId", questionId);
         intent.putExtras(bundle);
-        intent.setClass(getActivity(), QuestionItemActivityElinc.class);
+        intent.setClass(FindQuestion.this, QuestionItemActivityElinc.class);
         startAnimActivity(intent);
     }
 
 
     @Override
     public void onClick(View arg0) {
+        // TODO Auto-generated method stub
+        switch (arg0.getId()) {
+            case R.id.btn_search_question://搜索
+                question.clear();
+                searchName = et_search_question.getText().toString();
+                if(searchName!=null && !searchName.equals("")){
+                    initSearchList(false);
+                }else{
+                    ShowToast("请输入搜索内容");
+                }
+                ShowToast(searchName);
+                break;
 
+            default:
+                break;
+        }
     }
 
     @Override
@@ -203,10 +268,20 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
 
     @Override
     public void onLoadMore() {
+        BmobQuery<Question> eq1 = new BmobQuery<Question>();
+        eq1.addWhereContains("title", et_search_question.getText().toString());
+        BmobQuery<Question> eq2 = new BmobQuery<Question>();
+        eq2.addWhereContains("question_content", et_search_question.getText().toString());
+        BmobQuery<Question> eq3=new BmobQuery<Question>();
+        eq3.addWhereContains("tags", et_search_question.getText().toString());
+        List<BmobQuery<Question>> queries = new ArrayList<BmobQuery<Question>>();
+        queries.add(eq1);
+        queries.add(eq2);
+        queries.add(eq3);
         BmobQuery<Question> mainQuery = new BmobQuery<Question>();
         mainQuery.include("author");
-        mainQuery.order("createdAt");
-        mainQuery.findObjects(getActivity(), new FindListener<Question>() {
+        mainQuery.or(queries);
+        mainQuery.findObjects(FindQuestion.this, new FindListener<Question>() {
             @Override
             public void onSuccess(List<Question> list) {
                 // TODO Auto-generated method stub
@@ -242,7 +317,7 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
     public void initAdapter(){
         BmobQuery<Question> allQuery = new BmobQuery<Question>();
         allQuery.include("author");
-        allQuery.findObjects(getActivity(), new FindListener<Question>() {
+        allQuery.findObjects(FindQuestion.this, new FindListener<Question>() {
             @Override
             public void onSuccess(List<Question> list) {
                 // TODO Auto-generated method stub
@@ -286,11 +361,20 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
         });
     }
     private void refreshList(){
-
+        BmobQuery<Question> eq1 = new BmobQuery<Question>();
+        eq1.addWhereContains("title", et_search_question.getText().toString());
+        BmobQuery<Question> eq2 = new BmobQuery<Question>();
+        eq2.addWhereContains("question_content", et_search_question.getText().toString());
+        BmobQuery<Question> eq3=new BmobQuery<Question>();
+        eq3.addWhereContains("tags", et_search_question.getText().toString());
+        List<BmobQuery<Question>> queries = new ArrayList<BmobQuery<Question>>();
+        queries.add(eq1);
+        queries.add(eq2);
+        queries.add(eq3);
         BmobQuery<Question> mainQuery = new BmobQuery<Question>();
         mainQuery.include("author");
-        mainQuery.order("-createdAt");
-        mainQuery.findObjects(getActivity(), new FindListener<Question>() {
+        mainQuery.or(queries);
+        mainQuery.findObjects(FindQuestion.this, new FindListener<Question>() {
             @Override
             public void onSuccess(List<Question> list) {
                 // TODO Auto-generated method stub

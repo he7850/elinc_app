@@ -26,11 +26,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginTop="3dp">
@@ -39,25 +39,30 @@
                             android:fontFamily="微软雅黑"
                             android:id="@+id/question_author"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:typeface="sans"
-                            android:gravity="left"
+
                             android:textSize="12sp"
                             android:textColor="#66cc99"
-                            android:layout_weight="8"
+
                             />
-                        <TextView
-                            android:id="@+id/question_number_of_answer"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0"
-                            android:layout_weight="2"
-                            android:layout_gravity="right"
-                            android:fontFamily="微软雅黑"
-                            android:gravity="center_vertical"
-                            android:textSize="10sp"
-                            android:typeface="sans" />
-                    </LinearLayout>
+
+                            <TextView
+                                android:layout_alignParentRight="true"
+                                android:id="@+id/question_number_of_answer"
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:gravity="center"
+                                android:fontFamily="微软雅黑"
+                                android:textSize="12sp"
+                                android:typeface="sans"
+                                android:background="@drawable/corner_bg"
+                                android:layout_marginRight="45dp"
+
+                                />
+
+                    </RelativeLayout>
 
 
                 </LinearLayout>
@@ -72,7 +77,7 @@
                         android:layout_height="match_parent"
                         android:typeface="sans"
                         android:gravity="center_vertical"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="2dp"
                         android:textSize="10sp"
                         android:textColor="#757575"
                         />
