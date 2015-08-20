@@ -69,7 +69,7 @@ public class NearPeopleActivity extends ActivityBase implements IXListViewListen
 		mListView.setPullRefreshEnable(true);
 		// 设置监听器
 		mListView.setXListViewListener(this);
-		//
+		// 设置下拉刷新
 		mListView.pullRefreshing();
 		
 		adapter = new NearPeopleAdapter(this, nears);

@@ -2,7 +2,10 @@ package com.bmob.im.demo.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Outline;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,41 +20,47 @@ import com.bmob.im.demo.adapter.base.BaseListAdapter;
 import com.bmob.im.demo.adapter.base.ViewHolder;
 import com.bmob.im.demo.bean.Card;
 import com.bmob.im.demo.bean.CardReply;
+import com.bmob.im.demo.bean.Goal;
+import com.bmob.im.demo.bean.Tool;
 import com.bmob.im.demo.bean.User;
 import com.bmob.im.demo.ui.CardItemActivityElinc;
 import com.bmob.im.demo.ui.FragmentBase;
+import com.bmob.im.demo.ui.NewGoalActivityElinc;
 import com.bmob.im.demo.view.EmoticonsTextView;
 import com.bmob.im.demo.view.xlist.XListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
-public class CardFragment extends FragmentBase implements XListView.IXListViewListener{
-    private View view;
+public class CardFragment extends FragmentBase{
     private User me;
-    private CardListAdapter myAdapter;
-    private XListView listView;
-
-    private int curPage = 0;
-    private final int pageCapacity=10;
-
-    private List<CardAndReplies>cardAndRepliesList;
-    public int cardListLength;
-    public int readyItemNum;
+    private Goal[] goal;
+    private int goalNum;
+    private CardView goal1,goal2,goal3;
+    private TextView title1,title2,title3;
+    private TextView claim1,claim2,claim3;
+    private TextView date1,date2,date3;
+    private TextView fight_num1,fight_num2,fight_num3;
+    private TextView comment_num1,comment_num2,comment_num3;
+    private Button btn_add_goal;
+    TextView card1,card2,card3;
 
     public CardFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_card, container, false);
+        View view = inflater.inflate(R.layout.fragment_card, container, false);
         return view;
     }
 
@@ -59,325 +68,105 @@ public class CardFragment extends FragmentBase implements XListView.IXListViewLi
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         me = BmobUser.getCurrentUser(getActivity(), User.class);
+        initView();
         initList();
     }
 
-    //初始化基本元素
+    private void initView() {
+        goal1 = (CardView) findViewById(R.id.goal1);
+        goal2 = (CardView) findViewById(R.id.goal2);
+        goal3 = (CardView) findViewById(R.id.goal3);
+        title1 = (TextView) findViewById(R.id.title1);
+        title2 = (TextView) findViewById(R.id.title2);
+        title3 = (TextView) findViewById(R.id.title3);
+        claim1 = (TextView) findViewById(R.id.claim1);
+        claim2 = (TextView) findViewById(R.id.claim2);
+        claim3 = (TextView) findViewById(R.id.claim3);
+        date1 = (TextView) findViewById(R.id.date1);
+        date2 = (TextView) findViewById(R.id.date1);
+        date3 = (TextView) findViewById(R.id.date1);
+        fight_num1 = (TextView) findViewById(R.id.fight_num1);
+        fight_num2 = (TextView) findViewById(R.id.fight_num2);
+        fight_num3 = (TextView) findViewById(R.id.fight_num3);
+        comment_num1 = (TextView) findViewById(R.id.comment_num1);
+        comment_num2 = (TextView) findViewById(R.id.comment_num2);
+        comment_num3 = (TextView) findViewById(R.id.comment_num3);
+        btn_add_goal = (Button) findViewById(R.id.btn_new_goal);
+        card1 = (TextView) findViewById(R.id.btn_card1);
+        card2 = (TextView) findViewById(R.id.btn_card2);
+        card3 = (TextView) findViewById(R.id.btn_card3);
+        btn_add_goal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startAnimActivity(new Intent(getActivity(), NewGoalActivityElinc.class));
+                initList();
+            }
+        });
+    }
+
     private void initList(){
-        cardAndRepliesList = new ArrayList<>();
-        listView = (XListView)findViewById(R.id.card_list);
-        // 允许加载更多
-        listView.setPullLoadEnable(true);
-        // 允许下拉
-        listView.setPullRefreshEnable(true);
-        // 设置监听器
-        listView.setXListViewListener(this);
-        //禁止快速下拉
-        listView.setFastScrollEnabled(false);
-        //设置下拉刷新
-        listView.pullRefreshing();
-        //设置divider高度
-        listView.setDividerHeight(2);
-        myAdapter = new CardListAdapter(getActivity(),cardAndRepliesList);
-        listView.setAdapter(myAdapter);
-        refreshList();
-    }
-
-    //刷新列表，更新前 curPage 页数据
-    private void refreshList(){
-        BmobQuery<Card>query = new BmobQuery<>();
-        query.order("-updatedAt");
-        curPage = 0;
-        cardListLength = pageCapacity * (curPage + 1);
-        readyItemNum = 0;
-        query.setLimit(pageCapacity * (curPage + 1));
-        query.include("goal");  // 希望在查询帖子信息的同时也把发布人的信息查询出来
-        query.findObjects(getActivity(), new FindListener<Card>() {
+        goal = new Goal[3];
+        BmobQuery<Goal> query = new BmobQuery<>();
+        //用此方式可以构造一个BmobPointer对象。只需要设置objectId就行
+        query.addWhereEqualTo("author", new BmobPointer(me));
+        query.addWhereNotEqualTo("out", true);
+        query.findObjects(getActivity(), new FindListener<Goal>() {
             @Override
-            public void onSuccess(List<Card> list) {
-                cardListLength = list.size();
-                readyItemNum = 0;
-                if (list.size() < pageCapacity * (curPage + 1)) {
-                    listView.setPullLoadEnable(false);
-                } else {
-                    listView.setPullLoadEnable(true);
+            public void onSuccess(final List<Goal> list) {
+                goalNum = list.size();
+                Log.i("goalNum", goalNum + "");
+                if (goalNum == 0 ){
+                    goal1.setVisibility(View.GONE);
+                    goal2.setVisibility(View.GONE);
+                    goal3.setVisibility(View.GONE);
+                    btn_add_goal.setBackgroundColor(Color.parseColor("#FF7171"));
                 }
-                cardAndRepliesList.clear();
-                for (int i = 0; i < cardListLength; i++) {
-
-                    cardAndRepliesList.add(new CardAndReplies(list.get(i)));
-
-                    BmobQuery<CardReply> bmobQuery = new BmobQuery<>();
-                    bmobQuery.addWhereEqualTo("card", new BmobPointer(list.get(i)));
-                    bmobQuery.include("replyAuthor,replyTo");
-                    bmobQuery.order("-updatedAt");
-                    final int finalI = i;
-                    bmobQuery.findObjects(getActivity(), new FindListener<CardReply>() {
+                if (goalNum > 0){
+                    goal1.setVisibility(View.VISIBLE);
+                    goal2.setVisibility(View.GONE);
+                    goal3.setVisibility(View.GONE);
+                    btn_add_goal.setBackgroundColor(Color.parseColor("#FF7171"));
+                    title1.setText(list.get(0).getGoalContent());
+                    claim1.setText(list.get(0).getClaim());
+                    date1.setText(list.get(0).getDay().toString());
+                    comment_num1.setText("3");
+                    fight_num1.setText("4");
+                    card1.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onSuccess(List<CardReply> list) {
-                            Log.i("update card list","card"+finalI);
-                            int listSize = list.size();
-                            CardReply[] cardReplies = new CardReply[3];
-                            for (int i = 0; i < (listSize > 3 ? 3 : listSize); i++) {
-                                cardReplies[i] = list.get(i);
-                            }
-                            cardAndRepliesList.get(finalI).setCardReplies(cardReplies);
-                            cardAndRepliesList.get(finalI).setReplyNum(listSize);
-                            Log.i("card"+finalI+"'s reply number",listSize+"");
-                            readyItemNum++;
-                            if ( cardListLength == readyItemNum){
-                                Log.i("data","have been updated");
-                                myAdapter.notifyDataSetChanged();
-                                listView.stopRefresh();
-                            }else{
-                                Log.i("data","wait for update");
-                            }
-                        }
+                        public void onClick(View v) {
 
-                        @Override
-                        public void onError(int i, String s) {
-                            ShowToast("查询评论失败");
                         }
                     });
                 }
+                if (goalNum > 1){
+                    goal1.setVisibility(View.VISIBLE);
+                    goal2.setVisibility(View.VISIBLE);
+                    goal3.setVisibility(View.GONE);
+                    btn_add_goal.setBackgroundColor(Color.parseColor("#FFEA00"));
+                    title2.setText(list.get(1).getGoalContent());
+                    claim2.setText(list.get(1).getClaim());
+                    date2.setText(list.get(1).getDay());
+                    comment_num2.setText("3");
+                    fight_num2.setText("4");
+                }
+                if (goalNum > 2){
+                    goal1.setVisibility(View.VISIBLE);
+                    goal2.setVisibility(View.VISIBLE);
+                    goal3.setVisibility(View.VISIBLE);
+                    btn_add_goal.setBackgroundColor(Color.parseColor("#66CC99"));
+                    title3.setText(list.get(2).getGoalContent());
+                    claim3.setText(list.get(2).getClaim());
+                    date3.setText(list.get(2).getDay());
+                    comment_num3.setText("3");
+                    fight_num3.setText("4");
+                }
+
             }
 
             @Override
-            public void onError(int i, String s) {
-                listView.stopRefresh();
-                Toast.makeText(getActivity(), "打卡记录获取失败", Toast.LENGTH_SHORT).show();
+            public void onError(int code, String msg) {
+                Toast.makeText(getActivity(), "无法获取目标！", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-    //刷新列表
-    @Override
-    public void onRefresh() {
-        refreshList();
-    }
-    //上拉加载更多
-    @Override
-    public void onLoadMore() {
-        cardListLength = (curPage + 1) * pageCapacity;
-        readyItemNum = 0;
-        BmobQuery<Card> query = new BmobQuery<>();
-        query.setSkip((curPage + 1) * pageCapacity);
-        query.setLimit(pageCapacity);
-        query.order("-updatedAt");
-        query.include("goal");  // 希望在查询帖子信息的同时也把发布人的信息查询出来
-        query.findObjects(getActivity(), new FindListener<Card>() {
-            @Override
-            public void onSuccess(List<Card> list) {
-                if (list.size() != 0) { //拉取到新的数据
-                    cardListLength = list.size();
-                    readyItemNum = 0;
-                    for (int i = 0; i < list.size(); i++) {
-                        int existItemNum = cardAndRepliesList.size();
-                        cardAndRepliesList.add(new CardAndReplies(list.get(i)));
-
-                        BmobQuery<CardReply> bmobQuery = new BmobQuery<>();
-                        bmobQuery.addWhereEqualTo("card", new BmobPointer(list.get(i)));
-                        bmobQuery.include("replyAuthor,replyTo");
-                        bmobQuery.order("-updatedAt");
-                        final int finalI = i + existItemNum;
-                        bmobQuery.findObjects(getActivity(), new FindListener<CardReply>() {
-                            @Override
-                            public void onSuccess(List<CardReply> list) {
-                                int listSize = list.size();
-                                for (int j = 0; j < (listSize > 3 ? 3 : listSize); j++) {
-                                    cardAndRepliesList.get(finalI).cardReplies[j] = list.get(j);
-                                }
-                                cardAndRepliesList.get(finalI).replyNum = listSize;
-                                Log.i("card"+finalI+"'s replylist number",listSize+"");
-                                readyItemNum++;
-                                if ( cardListLength == readyItemNum){
-                                    myAdapter.notifyDataSetChanged();
-                                    listView.stopLoadMore();
-                                }
-                            }
-
-                            @Override
-                            public void onError(int i, String s) {
-                                ShowToast("查询评论失败");
-                            }
-                        });
-                    }
-                    curPage++;
-                } else {                    //数据全部拉取完
-                    ShowToast("数据加载完成");
-                    listView.setPullLoadEnable(false);
-                    listView.stopLoadMore();
-                }
-            }
-
-            @Override
-            public void onError(int i, String s) {
-                ShowToast("数据加载失败");
-            }
-        });
-    }
-
-
-    public class CardAndReplies{
-        private Card card;
-        private CardReply[] cardReplies;
-        private int replyNum;
-        public CardAndReplies(Card card){
-            this.card = card;
-            cardReplies = new CardReply[3];
-        }
-        public int getReplyNum() {
-            return replyNum;
-        }
-
-        public void setReplyNum(int replyNum) {
-            this.replyNum = replyNum;
-        }
-
-        public Card getCard() {
-            return card;
-        }
-
-        public void setCard(Card card) {
-            this.card = card;
-        }
-
-        public CardReply[] getCardReplies() {
-            return cardReplies;
-        }
-
-        public void setCardReplies(CardReply[] cardReplies) {
-            this.cardReplies = cardReplies;
-        }
-
-    }
-
-    public class CardListAdapter extends BaseListAdapter<CardAndReplies> {
-        private final ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        public CardListAdapter(Context context, List<CardAndReplies> list) {
-            super(context, list);
-        }
-
-        @Override
-        public void notifyDataSetChanged() {
-            super.notifyDataSetChanged();
-        }
-
-        @Override
-        public View bindView(final int arg0, View convertView, ViewGroup arg2) {
-            if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.item_card_in_list_elinc, null);
-            }
-            final CardAndReplies data = getList().get(arg0);
-            TextView goal_content = ViewHolder.get(convertView, R.id.goal_content);
-            TextView claim = ViewHolder.get(convertView, R.id.claim);
-            TextView created_at = ViewHolder.get(convertView, R.id.created_at);
-            TextView reply_num = ViewHolder.get(convertView,R.id.reply_num);
-            LinearLayout comment_layout = ViewHolder.get(convertView, R.id.comment_layout);
-
-            goal_content.setText(data.getCard().getGoal().getGoalContent());
-            claim.setText(data.getCard().getGoal().getClaim());
-            created_at.setText(data.getCard().getCreatedAt());
-            comment_layout.removeAllViews();
-            for (int i = 0; i < ( data.getReplyNum() > 3 ? 3 : data.getReplyNum() ); i++) {
-                User replyAuthor = data.getCardReplies()[i].getReplyAuthor();
-                User replyTo = data.getCardReplies()[i].getReplyTo();
-                String content = data.getCardReplies()[i].getContent();
-                String line = replyAuthor.getNick() + ":" +
-                        (replyTo.getObjectId().equals(me.getObjectId()) ? "" : ("@" + replyTo.getNick() + "  ")) +
-                        content;
-                EmoticonsTextView commentLine = new EmoticonsTextView(getActivity());
-                commentLine.setText(line);
-                commentLine.setLayoutParams(layoutParams);
-                comment_layout.addView(commentLine);
-            }
-            //评论多于3条提示
-            if ( data.getReplyNum() > 3 ){
-                Log.i("data "+arg0,""+data.getReplyNum());
-                reply_num.setTextColor(getResources().getColor(R.color.material_deep_teal_500));
-                reply_num.setText("评论还有" + (data.getReplyNum() - 3) + "条，点击查看详情..");
-                reply_num.setVisibility(View.VISIBLE);
-                reply_num.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent();
-                        intent.setClass(getActivity(), CardItemActivityElinc.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("cardId",data.getCard().getObjectId());
-                        intent.putExtras(bundle);
-                        startAnimActivity(intent);
-                        refreshList();
-                    }
-                });
-            }else{
-                reply_num.setVisibility(View.GONE);
-            }
-
-            //设置点赞按钮
-            final Button like = ViewHolder.get(convertView, R.id.add_like);
-            like.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    BmobQuery<User> query = new BmobQuery<>();
-                    query.addWhereRelatedTo("likedBy", new BmobPointer(data));
-                    query.findObjects(mContext, new FindListener<User>() {
-                        @Override
-                        public void onSuccess(List<User> object) {//记录点赞
-                            //查询是否已经点赞过
-                            Log.i("life", "查询个数：" + object.size());
-                            boolean like = false;
-                            for (int i = 0; i < object.size(); i++) {
-                                if (object.get(i).getObjectId().equals(me.getObjectId())) {
-                                    like = true;
-                                    break;
-                                }
-                            }
-                            if (like) {
-                                ShowToast("已经赞过了");
-                            } else {
-                                Card card = new Card();
-                                card.setObjectId(data.getCard().getObjectId());
-                                card.increment("likedByNum");
-                                BmobRelation likedBy = new BmobRelation();
-                                likedBy.add(me);
-                                card.setLikedBy(likedBy);
-                                card.setObjectId(data.getCard().getObjectId());
-                                card.update(mContext, new UpdateListener() {
-                                    @Override
-                                    public void onSuccess() {
-                                        ShowToast("点赞成功");
-                                    }
-
-                                    @Override
-                                    public void onFailure(int i, String s) {
-                                        Log.i("card_fragment", "点赞失败");
-                                    }
-                                });
-                            }
-                        }
-
-                        @Override
-                        public void onError(int code, String msg) {
-                            Log.i("life", "查询失败：" + code + "-" + msg);
-                        }
-                    });
-                }
-            });
-            //设置评论按钮
-            final Button comment = ViewHolder.get(convertView, R.id.add_comment);
-            comment.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.setClass(getActivity(), CardItemActivityElinc.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("cardId", data.getCard().getObjectId());
-                    intent.putExtras(bundle);
-                    startAnimActivity(intent);
-                    refreshList();
-                }
-            });
-            return convertView;
-        }
     }
 }

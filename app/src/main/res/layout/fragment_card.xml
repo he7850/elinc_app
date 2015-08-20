@@ -3,17 +3,379 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+    android:elevation="0dp"
     tools:context="com.bmob.im.demo.ui.fragment.CardFragment">
     <!--  list View -->
-    <com.bmob.im.demo.view.xlist.XListView
-        android:id="@+id/card_list"
-        android:divider="@drawable/base_horizontal_line"
-        android:dividerHeight="1dp"
-        android:fastScrollEnabled="true"
+    <ScrollView
+        android:elevation="0dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
-    </com.bmob.im.demo.view.xlist.XListView>
-    <!--  评论输入栏，一般隐藏，评论时弹出 -->
-    <!--<include layout="@layout/include_comment_bottom_bar"/>-->
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:elevation="0dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.CardView
+                android:id="@+id/goal1"
+                android:shape="rectangle"
+                android:elevation="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:baselineAligned="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_weight="8"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/title1"
+                            android:textSize="24sp"
+                            android:text="搞定微三"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textSize="12sp"
+                            android:id="@+id/tag1"
+                            android:text="标签 微积分 自习"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textSize="16sp"
+                            android:id="@+id/claim1"
+                            android:text="微积分 誓死必过誓死必过"
+                            android:layout_marginBottom="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@drawable/elinc_clock"
+                                android:layout_width="16dp"
+                                android:layout_height="16dp" />
+                            <TextView
+                                android:id="@+id/date1"
+                                android:textSize="16sp"
+                                android:text=" 15.7.4 - 15.8.4"
+                                android:layout_marginBottom="6dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="24dp">
+                                <ImageView
+                                    android:src="@drawable/elinc_sun"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp" />
+                                <TextView
+                                    android:id="@+id/fight_num1"
+                                    android:textSize="16sp"
+                                    android:text="15"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <ImageView
+                                    android:layout_marginLeft="24dp"
+                                    android:src="@drawable/elinc_comment"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp" />
+                                <TextView
+                                    android:id="@+id/comment_num1"
+                                    android:textSize="16sp"
+                                    android:text="28"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <TextView
+                                android:id="@+id/btn_card1"
+                                android:background="@drawable/card1_stroke"
+                                android:paddingTop="4dp"
+                                android:paddingBottom="4dp"
+                                android:paddingLeft="12dp"
+                                android:paddingRight="12dp"
+                                android:shape="rectangle"
+                                android:textColor="#ffaeae"
+                                android:gravity="center_horizontal"
+                                android:text="打卡"
+                                android:layout_alignParentRight="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:background="#FF7171"
+                        android:orientation="horizontal"
+                        android:layout_width="32dp"
+                        android:layout_height="match_parent">
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/goal2"
+                android:shape="rectangle"
+                android:elevation="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:baselineAligned="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_weight="8"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/title2"
+                            android:textSize="24sp"
+                            android:text="搞定微三"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textSize="12sp"
+                            android:id="@+id/tag2"
+                            android:text="标签 微积分 自习"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textSize="16sp"
+                            android:id="@+id/claim2"
+                            android:text="微积分 誓死必过誓死必过"
+                            android:layout_marginBottom="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@drawable/elinc_clock"
+                                android:layout_width="16dp"
+                                android:layout_height="16dp" />
+                            <TextView
+                                android:id="@+id/date2"
+                                android:textSize="16sp"
+                                android:text=" 15.7.4 - 15.8.4"
+                                android:layout_marginBottom="6dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="24dp">
+                                <ImageView
+                                    android:src="@drawable/elinc_sun"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp" />
+                                <TextView
+                                    android:id="@+id/fight_num2"
+                                    android:textSize="16sp"
+                                    android:text="15"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <ImageView
+                                    android:layout_marginLeft="24dp"
+                                    android:src="@drawable/elinc_comment"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp" />
+                                <TextView
+                                    android:id="@+id/comment_num2"
+                                    android:textSize="16sp"
+                                    android:text="28"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <TextView
+                                android:id="@+id/btn_card2"
+                                android:background="@drawable/card2_stroke"
+                                android:paddingTop="4dp"
+                                android:paddingBottom="4dp"
+                                android:paddingLeft="12dp"
+                                android:paddingRight="12dp"
+                                android:shape="rectangle"
+                                android:textColor="#FFEA00"
+                                android:gravity="center_horizontal"
+                                android:text="打卡"
+                                android:layout_alignParentRight="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:background="#FFEA00"
+                        android:orientation="horizontal"
+                        android:layout_width="32dp"
+                        android:layout_height="match_parent">
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/goal3"
+                android:shape="rectangle"
+                android:elevation="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:baselineAligned="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_weight="8"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/title3"
+                            android:textSize="24sp"
+                            android:text="搞定微三"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textSize="12sp"
+                            android:id="@+id/tag3"
+                            android:text="标签 微积分 自习"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textSize="16sp"
+                            android:id="@+id/claim3"
+                            android:text="微积分 誓死必过誓死必过"
+                            android:layout_marginBottom="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@drawable/elinc_clock"
+                                android:layout_width="16dp"
+                                android:layout_height="16dp" />
+                            <TextView
+                                android:id="@+id/date3"
+                                android:textSize="16sp"
+                                android:text=" 15.7.4 - 15.8.4"
+                                android:layout_marginBottom="6dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="24dp">
+                                <ImageView
+                                    android:src="@drawable/elinc_sun"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp" />
+                                <TextView
+                                    android:id="@+id/fight_num3"
+                                    android:textSize="16sp"
+                                    android:text="15"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <ImageView
+                                    android:layout_marginLeft="24dp"
+                                    android:src="@drawable/elinc_comment"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp" />
+                                <TextView
+                                    android:id="@+id/comment_num3"
+                                    android:textSize="16sp"
+                                    android:text="28"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <TextView
+                                android:id="@+id/btn_card3"
+                                android:background="@drawable/card3_stroke"
+                                android:paddingTop="4dp"
+                                android:paddingBottom="4dp"
+                                android:paddingLeft="12dp"
+                                android:paddingRight="12dp"
+                                android:shape="rectangle"
+                                android:textColor="#66CC99"
+                                android:gravity="center_horizontal"
+                                android:text="打卡"
+                                android:layout_alignParentRight="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:background="#66CC99"
+                        android:orientation="horizontal"
+                        android:layout_width="32dp"
+                        android:layout_height="match_parent">
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/btn_new_goal"
+                android:background="#66CC99"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:text="新建目标"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

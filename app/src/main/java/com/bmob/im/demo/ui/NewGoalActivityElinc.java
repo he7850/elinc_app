@@ -33,6 +33,7 @@ public class NewGoalActivityElinc extends ActivityBase {
     private RadioButton type1,type2,type3,type4;
     private RadioGroup type_choose;
     private List<String> tags;
+    private int day;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,7 @@ public class NewGoalActivityElinc extends ActivityBase {
         /*type4= (RadioButton) findViewById(R.id.type4);*/
         /*type1.setChecked(true);*/
         type ="英语";
+        type1.setChecked(true);
         type_choose.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == type1.getId()) {
@@ -69,11 +71,22 @@ public class NewGoalActivityElinc extends ActivityBase {
                     Goal goal = new Goal();
                     EditText goal_content = (EditText) findViewById(R.id.goal_content_new_goal);
                     EditText claim = (EditText) findViewById(R.id.claim_new_goal);
+                    EditText day = (EditText) findViewById(R.id.day);
                     goal.setGoalContent(goal_content.getText().toString());
+                    if (goal_content.getText().equals("")){
+                        return;
+                    }
+                    if (claim.getText().equals("")){
+                        return;
+                    }
+                    if (day.getText().equals("")){
+                        return;
+                    }
                     goal.setClaim(claim.getText().toString());
                     goal.setOut(false);
                     goal.setType(type);
                     goal.setAuthor(me);
+                    goal.setDay(Integer.parseInt(day.getText().toString()));
                     /*这段查询 比较长~~~~~~~~~~~  比较复杂，请耐心听我给你讲
                     * 首先是把填写好的东西写入数据库，新建了一个目标，
                     * 然后查询数据库里面所有该用户的有效的目标
@@ -85,9 +98,8 @@ public class NewGoalActivityElinc extends ActivityBase {
                         public void onSuccess() {
                             BmobUserManager bmobUserManager = BmobUserManager.getInstance(NewGoalActivityElinc.this);
                             final User me = bmobUserManager.getCurrentUser(User.class);
-                            Goal goal = new Goal();
-                            BmobQuery<Goal> query= new BmobQuery<Goal>();
-                            query.addWhereEqualTo("author",me);
+                            BmobQuery<Goal> query= new BmobQuery<>();
+                            query.addWhereEqualTo("author", me);
                             query.addWhereNotEqualTo("out", true);
                             query.findObjects(NewGoalActivityElinc.this, new FindListener<Goal>() {
                                 @Override
@@ -103,7 +115,7 @@ public class NewGoalActivityElinc extends ActivityBase {
                                     u.update(NewGoalActivityElinc.this, new UpdateListener() {
                                         @Override
                                         public void onSuccess() {
-                                            Tool.alert(NewGoalActivityElinc.this, "目标设置成功，小林会好好的监督你的！加油！");
+                                            Tool.alert(NewGoalActivityElinc.this, "目标设置成功，郁小林会好好的监督你的！加油！");
                                             finish();
                                         }
 

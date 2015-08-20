@@ -63,9 +63,6 @@ public class MyGoalActivityElinc extends ActivityBase {
     private void initList(){
         listView = (ListView)findViewById(R.id.my_goal_list);
         goal = new Goal[3];
-        BmobUserManager bmobUserManager = BmobUserManager.getInstance(MyGoalActivityElinc.this);
-        User me = bmobUserManager.getCurrentUser(User.class);
-
         userManager.queryUser(username, new FindListener<User>() {
 
             @Override

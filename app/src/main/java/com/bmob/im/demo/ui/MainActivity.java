@@ -162,7 +162,7 @@ public class MainActivity extends ActivityBase implements EventListener{
 			ImageLoader.getInstance().displayImage(avatar, civNavUserAvantar,
 					ImageLoadOptions.getOptions());
 		}else{
-			Glide.with(this).load(R.drawable.ic_launcher).fitCenter().into(civNavUserAvantar);
+			Glide.with(this).load(R.drawable.head).fitCenter().into(civNavUserAvantar);
 		}
 		civNavUserAvantar.setOnClickListener(new View.OnClickListener() {
 			@Override

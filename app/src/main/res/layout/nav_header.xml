@@ -9,10 +9,10 @@
     android:orientation="horizontal">
 
     <com.bmob.im.demo.view.CircleImageView
-        android:layout_width="100pt"
-        android:layout_height="100pt"
-        android:paddingLeft="30pt"
-        android:paddingRight="30pt"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:id="@+id/civUserAvantar"
         android:layout_gravity="center_vertical"
         />
