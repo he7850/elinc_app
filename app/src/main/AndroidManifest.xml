@@ -169,7 +169,8 @@
         </activity>
         <activity
             android:name=".ui.QuestionItemActivityElinc"
-            android:label="QuestionItemActivity" />
+            android:label="QuestionItemActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
         <activity
             android:name=".ui.SettingActivity"
             android:label="@string/title_activity_setting" >
