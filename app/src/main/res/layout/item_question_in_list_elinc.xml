@@ -59,7 +59,7 @@
                                 android:textSize="12sp"
                                 android:typeface="sans"
                                 android:background="@drawable/corner_bg"
-                                android:layout_marginRight="45dp"
+                                android:layout_marginRight="20dp"
 
                                 />
 
