@@ -4,19 +4,19 @@
     tools:context="com.bmob.im.demo.ui.MainActivity"
     >
 
-    <item android:id="@+id/action_add_aim" android:title="设定目标"
-        android:orderInCategory="80"
+    <item android:id="@+id/action_add_aim" android:title="学伴推荐"
+        android:orderInCategory="70"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/new_target_e"
+        android:icon="@drawable/match_elinc"
         />
 
-    <item android:id="@+id/action_add_contact" android:title="寻找学伴"
+    <item android:id="@+id/action_add_contact" android:title="添加学伴"
         android:orderInCategory="90"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/new_friend_e"/>
+        android:icon="@drawable/add_friend_elinc"/>
 
-    <item android:id="@+id/action_add_question" android:title="学习问题"
-        android:orderInCategory="90"
+    <item android:id="@+id/action_add_question" android:title="提问"
+        android:orderInCategory="60"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/new_question_e"/>
+        android:icon="@drawable/new_question_elinc"/>
 </menu>

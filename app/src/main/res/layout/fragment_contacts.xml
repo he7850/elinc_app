@@ -15,27 +15,12 @@
         android:background="@color/base_bg"
         android:orientation="vertical" >
 
-        <com.bmob.im.demo.view.ClearEditText
-            android:id="@+id/et_msg_search"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/base_action_bar_height"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/base_edit_input"
-            android:drawableLeft="@drawable/icon_msg_search"
-            android:drawablePadding="10dp"
-            android:hint="@string/message_search_hint"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:singleLine="true" />
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/et_msg_search"
+            android:layout_alignParentTop="true"
             android:layout_gravity="top"
             android:background="@drawable/user_add_top_bg"
             android:orientation="horizontal" >

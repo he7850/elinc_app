@@ -2,14 +2,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.bmob.im.demo.ui.MainActivity">
-
+    <item android:id="@+id/action_find" android:title="搜索问题"
+        android:orderInCategory="70"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/find_elinc"/>
     <item android:id="@+id/action_chat" android:title="@string/chat"
         android:orderInCategory="80"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/icon_chatting"/>
+        android:icon="@drawable/no_msg_elinc"/>
 
-    <item android:id="@+id/action_add" android:title="添加"
+    <item android:id="@+id/action_add" android:title="更多"
         android:orderInCategory="90"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/icon_add"/>
+        android:icon="@drawable/more_elinc"/>
 </menu>
