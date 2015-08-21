@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import cn.bmob.im.BmobChatManager;
 import cn.bmob.im.config.BmobConfig;
-import cn.bmob.push.a.name;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.CountListener;
 import cn.bmob.v3.listener.PushListener;
