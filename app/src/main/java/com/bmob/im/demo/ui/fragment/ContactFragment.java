@@ -62,7 +62,7 @@ import com.bmob.im.demo.view.dialog.DialogTips;
 @SuppressLint("DefaultLocale")
 public class ContactFragment extends FragmentBase implements OnItemClickListener,OnItemLongClickListener{
 
-	ClearEditText mClearEditText;
+	//ClearEditText mClearEditText;
 
 	TextView dialog;
 
@@ -113,10 +113,10 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 //				});
 		initListView();
 		initRightLetterView();
-		initEditText();
+		//initEditText();
 	}
 
-	private void initEditText() {
+/*	private void initEditText() {
 		mClearEditText = (ClearEditText)findViewById(R.id.et_msg_search);
 		// 根据输入框输入值的改变来过滤搜索
 		mClearEditText.addTextChangedListener(new TextWatcher() {
@@ -139,7 +139,7 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 				
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * 根据输入框中的值来过滤数据并更新ListView
