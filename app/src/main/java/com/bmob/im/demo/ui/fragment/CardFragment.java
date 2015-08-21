@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Outline;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,11 @@ import com.bmob.im.demo.ui.NewGoalActivityElinc;
 import com.bmob.im.demo.view.EmoticonsTextView;
 import com.bmob.im.demo.view.xlist.XListView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +52,7 @@ public class CardFragment extends FragmentBase{
     private Goal[] goal;
     private int goalNum;
     private CardView goal1,goal2,goal3;
+    private TextView tag1,tag2,tag3;
     private TextView title1,title2,title3;
     private TextView claim1,claim2,claim3;
     private TextView date1,date2,date3;
@@ -79,6 +85,9 @@ public class CardFragment extends FragmentBase{
         title1 = (TextView) findViewById(R.id.title1);
         title2 = (TextView) findViewById(R.id.title2);
         title3 = (TextView) findViewById(R.id.title3);
+        tag1 = (TextView) findViewById(R.id.tag1);
+        tag2 = (TextView) findViewById(R.id.tag2);
+        tag3 = (TextView) findViewById(R.id.tag3);
         claim1 = (TextView) findViewById(R.id.claim1);
         claim2 = (TextView) findViewById(R.id.claim2);
         claim3 = (TextView) findViewById(R.id.claim3);
@@ -127,10 +136,29 @@ public class CardFragment extends FragmentBase{
                     goal3.setVisibility(View.GONE);
                     btn_add_goal.setBackgroundColor(Color.parseColor("#FF7171"));
                     title1.setText(list.get(0).getGoalContent());
+                    tag1.setText(list.get(0).getType());
                     claim1.setText(list.get(0).getClaim());
-                    date1.setText(list.get(0).getDay().toString());
-                    comment_num1.setText("3");
-                    fight_num1.setText("4");
+                    try {
+                        Calendar calendar = Calendar.getInstance();
+                        Calendar calendarNow = Calendar.getInstance();
+                        calendarNow.setTime(new Date());
+                        String createdAt = list.get(0).getCreatedAt();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        Date date = sdf.parse(createdAt);
+                        calendar.setTime(date);
+                        long t1 = calendar.getTimeInMillis();
+                        long t2 = calendarNow.getTimeInMillis();
+                        long passedDays = (t2 - t1) / (24 * 60 * 60 * 1000);
+                        if (list.get(0).getDay()>passedDays){
+                            date1.setText("只剩 "+(list.get(0).getDay()-passedDays)+"天了");
+                        }else{
+                            date1.setText("过期了呢");
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    //comment_num1.setText("0");
+                    //fight_num1.setText("0");
                     card1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -144,8 +172,27 @@ public class CardFragment extends FragmentBase{
                     goal3.setVisibility(View.GONE);
                     btn_add_goal.setBackgroundColor(Color.parseColor("#FFEA00"));
                     title2.setText(list.get(1).getGoalContent());
+                    tag2.setText(list.get(0).getType());
                     claim2.setText(list.get(1).getClaim());
-                    date2.setText(list.get(1).getDay());
+                    try {
+                        Calendar calendar = Calendar.getInstance();
+                        Calendar calendarNow = Calendar.getInstance();
+                        calendarNow.setTime(new Date());
+                        String createdAt = list.get(0).getCreatedAt();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        Date date = sdf.parse(createdAt);
+                        calendar.setTime(date);
+                        long t1 = calendar.getTimeInMillis();
+                        long t2 = calendarNow.getTimeInMillis();
+                        long passedDays = (t2 - t1) / (24 * 60 * 60 * 1000);
+                        if (list.get(0).getDay()>passedDays){
+                            date1.setText("只剩 "+(list.get(0).getDay()-passedDays)+"天了");
+                        }else{
+                            date1.setText("过期了呢");
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     comment_num2.setText("3");
                     fight_num2.setText("4");
                 }
@@ -155,11 +202,31 @@ public class CardFragment extends FragmentBase{
                     goal3.setVisibility(View.VISIBLE);
                     btn_add_goal.setBackgroundColor(Color.parseColor("#66CC99"));
                     title3.setText(list.get(2).getGoalContent());
+                    tag3.setText(list.get(0).getType());
                     claim3.setText(list.get(2).getClaim());
-                    date3.setText(list.get(2).getDay());
+                    try {
+                        Calendar calendar = Calendar.getInstance();
+                        Calendar calendarNow = Calendar.getInstance();
+                        calendarNow.setTime(new Date());
+                        String createdAt = list.get(0).getCreatedAt();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        Date date = sdf.parse(createdAt);
+                        calendar.setTime(date);
+                        long t1 = calendar.getTimeInMillis();
+                        long t2 = calendarNow.getTimeInMillis();
+                        long passedDays = (t2 - t1) / (24 * 60 * 60 * 1000);
+                        if (list.get(0).getDay()>passedDays){
+                            date1.setText("只剩 "+(list.get(0).getDay()-passedDays)+"天了");
+                        }else{
+                            date1.setText("过期了呢");
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     comment_num3.setText("3");
                     fight_num3.setText("4");
                 }
+                btn_add_goal.setVisibility(View.VISIBLE);
 
             }
 

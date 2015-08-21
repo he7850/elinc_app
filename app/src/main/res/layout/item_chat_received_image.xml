@@ -21,6 +21,7 @@
             android:id="@+id/iv_avatar"
             android:layout_width="@dimen/base_scrollview_top_height"
             android:layout_height="@dimen/base_scrollview_top_height"
+            android:layout_marginTop="35dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:contentDescription="@string/add_avator"
@@ -41,7 +42,7 @@
             android:layout_toRightOf="@id/iv_avatar"
             android:adjustViewBounds="true"
             android:contentDescription="@string/add_avator"
-            android:background="@drawable/chat_left_qp"
+            android:background="@drawable/elinc_char_left"
             android:scaleType="fitXY" />
         
         <ProgressBar
