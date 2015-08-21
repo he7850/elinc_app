@@ -42,7 +42,7 @@
             android:layout_toRightOf="@id/iv_avatar"
             android:adjustViewBounds="true"
             android:contentDescription="@string/add_avator"
-            android:background="@drawable/elinc_char_left"
+            android:background="@drawable/elinc_chat_left"
             android:scaleType="fitXY" />
         
         <ProgressBar
