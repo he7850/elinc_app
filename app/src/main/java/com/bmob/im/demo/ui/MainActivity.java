@@ -77,9 +77,8 @@ public class MainActivity extends ActivityBase implements EventListener{
 		//开启广播接收器
 		initNewMessageBroadCast();
 		initTagMessageBroadCast();
-		BmobUserManager bmobUserManager = BmobUserManager.getInstance(MainActivity.this);
-		me = bmobUserManager.getCurrentUser(User.class);
 		initView();
+		Log.i("test","main created");
 	}
 
 	private void initView(){
@@ -87,7 +86,7 @@ public class MainActivity extends ActivityBase implements EventListener{
 		 * 设置ToolBar
 		 */
 		View itemView = findViewById(R.id.action_add);
-		
+		me = BmobUserManager.getInstance(MainActivity.this).getCurrentUser(User.class);
 
 		Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
 		toolbar.setTitle("郁林");
@@ -300,7 +299,12 @@ public class MainActivity extends ActivityBase implements EventListener{
 		adapter.addFragment(fragments[2], "目标");
 		viewPager.setAdapter(adapter);
 	}
-	
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		initView();
+	}
 
 	@Override
 	protected void onResume() {
