@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -32,11 +34,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import cn.bmob.im.bean.BmobChatUser;
 import cn.bmob.im.db.BmobDB;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.UpdateListener;
 
 import com.bmob.im.demo.CustomApplcation;
 import com.bmob.im.demo.R;
 import com.bmob.im.demo.adapter.UserFriendAdapter;
+import com.bmob.im.demo.bean.Question;
+import com.bmob.im.demo.bean.Tool;
 import com.bmob.im.demo.bean.User;
 import com.bmob.im.demo.ui.AddFriendActivity;
 import com.bmob.im.demo.ui.FragmentBase;
@@ -363,10 +369,33 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 			long arg3) {
 		// TODO Auto-generated method stub
 		User user = (User) userAdapter.getItem(position-1);
-		showDeleteDialog(user);
+		dialog(user);
 		return true;
 	}
+	protected void dialog(final User user) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setMessage("确认删除学伴吗？");
+		builder.setTitle("删除学伴");
+		builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				deleteContact(user);
+			}
+		});
+		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		builder.create().show();
+	}
 	
+	
+	/* 以下是自带的 dialogTips，
+	   已经被改成上面的dialog方法。
+
 	public void showDeleteDialog(final User user) {
 		DialogTips dialog = new DialogTips(getActivity(),user.getUsername(),"删除联系人", "确定",true,true);
 		// 设置成功事件
@@ -378,7 +407,7 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 		// 显示确认对话框
 		dialog.show();
 	}
-	
+	*/
 	 /** 删除联系人
 	  * deleteContact
 	  * @return void
