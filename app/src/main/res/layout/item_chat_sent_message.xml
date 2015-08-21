@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_chat_top" >
 
-        <ImageView
+        <com.bmob.im.demo.view.CircleImageView
             android:id="@+id/iv_avatar"
             android:contentDescription="@string/add_avator"
             android:layout_width="@dimen/base_scrollview_top_height"
@@ -25,8 +25,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="@dimen/margin_chat_top"
-            android:background="@drawable/head1"
-            android:scaleType="fitXY" />
+             />
 
         <TextView
             android:id="@+id/tv_message"

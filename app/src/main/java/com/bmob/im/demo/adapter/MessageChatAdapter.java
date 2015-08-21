@@ -30,6 +30,7 @@ import com.bmob.im.demo.ui.SetMyInfoActivity;
 import com.bmob.im.demo.util.FaceTextUtils;
 import com.bmob.im.demo.util.ImageLoadOptions;
 import com.bmob.im.demo.util.TimeUtil;
+import com.bmob.im.demo.view.CircleImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
@@ -137,7 +138,7 @@ public class MessageChatAdapter extends BaseListAdapter<BmobMsg> {
 			convertView = createViewByType(item, position);
 		}
 		//文本类型
-		ImageView iv_avatar = ViewHolder.get(convertView, R.id.iv_avatar);
+		CircleImageView iv_avatar = ViewHolder.get(convertView, R.id.iv_avatar);
 		final ImageView iv_fail_resend = ViewHolder.get(convertView, R.id.iv_fail_resend);//失败重发
 		final TextView tv_send_status = ViewHolder.get(convertView, R.id.tv_send_status);//发送状态
 		TextView tv_time = ViewHolder.get(convertView, R.id.tv_time);

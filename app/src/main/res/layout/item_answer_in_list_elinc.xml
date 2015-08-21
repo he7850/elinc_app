@@ -14,8 +14,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <com.bmob.im.demo.view.CircleImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginRight="10dp"
                 android:id="@+id/avatar_for_responder"
                 />
@@ -26,8 +26,9 @@
                 <TextView
                     android:id="@+id/answer_responder"
                     android:text="@string/loading"
-                    android:textSize="10sp"
+                    android:textSize="8sp"
                     android:fontFamily="微软雅黑"
+                    android:layout_marginTop="1dp"
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -35,9 +36,9 @@
                     />
                 <TextView
                     android:id="@+id/answer_date"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="1dp"
                     android:text="@string/loading"
-                    android:textSize="10sp"
+                    android:textSize="8sp"
                     android:textColor="#757575"
                     android:fontFamily="微软雅黑"
                     android:layout_gravity="center_vertical"
@@ -62,11 +63,11 @@
                 />
             <ImageView
                 android:id="@+id/avatar_for_answer_iv"
-                android:layout_width="120dp"
-                android:layout_height="80dp"
-                android:layout_marginLeft="20dp"
-                android:layout_alignParentRight="true"
-                android:visibility="gone"/>
+                android:layout_width="80dp"
+                android:layout_height="60dp"
+                android:layout_gravity="left"
+                android:visibility="gone"
+                android:scaleType="fitXY"/>
         </LinearLayout>
         <RelativeLayout
             android:layout_width="wrap_content"
