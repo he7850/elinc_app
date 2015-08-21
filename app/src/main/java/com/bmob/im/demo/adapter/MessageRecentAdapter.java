@@ -20,6 +20,7 @@ import com.bmob.im.demo.adapter.base.ViewHolder;
 import com.bmob.im.demo.util.FaceTextUtils;
 import com.bmob.im.demo.util.ImageLoadOptions;
 import com.bmob.im.demo.util.TimeUtil;
+import com.bmob.im.demo.view.CircleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /** 会话适配器
@@ -48,7 +49,7 @@ public class MessageRecentAdapter extends ArrayAdapter<BmobRecent> implements Fi
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.item_conversation, parent, false);
 		}
-		ImageView iv_recent_avatar = ViewHolder.get(convertView, R.id.iv_recent_avatar);
+		CircleImageView iv_recent_avatar = ViewHolder.get(convertView, R.id.iv_recent_avatar);
 		TextView tv_recent_name = ViewHolder.get(convertView, R.id.tv_recent_name);
 		TextView tv_recent_msg = ViewHolder.get(convertView, R.id.tv_recent_msg);
 		TextView tv_recent_time = ViewHolder.get(convertView, R.id.tv_recent_time);

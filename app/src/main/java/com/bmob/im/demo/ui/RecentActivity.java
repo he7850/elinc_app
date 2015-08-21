@@ -1,4 +1,4 @@
-package com.bmob.im.demo.ui;
+﻿package com.bmob.im.demo.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -41,7 +41,7 @@ public class RecentActivity extends ActivityBase implements AdapterView.OnItemCl
     }
 
     private void initView(){
-		initTopBarForLeft("会话");
+		initTopBarForLeft("消息");
         listview = (ListView)findViewById(R.id.list);
         listview.setOnItemClickListener(this);
         listview.setOnItemLongClickListener(this);
