@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="客官给个标题呗:"
+            android:text="说说您遇到的bug或者对我们的建议"
             android:id="@+id/textView" />
 
         <EditText
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="再给个描述把:"
+            android:text="联系方式"
             android:id="@+id/textView2" />
 
         <EditText
