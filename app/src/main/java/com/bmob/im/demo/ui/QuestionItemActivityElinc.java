@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -100,6 +101,7 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
     LinearLayout layout_all_of_question_detail;
     TextView author_in_question_list;
     ImageView avatar_for_author_in_question_list;
+    TextView question_date_in_question_list;
     String author_name;
     Question question;
     ImageButton follow;
@@ -132,6 +134,7 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
         manager = BmobChatManager.getInstance(this);
 
         author_in_question_list= (TextView) findViewById(R.id.author_in_question_list);
+
         avatar_for_author_in_question_list= (ImageView) findViewById(R.id.avatar_for_author_in_question_list);
         submit_answer_avatar= (Button) findViewById(R.id.submit_answer_avatar);
         submit_answer_avatar.setOnClickListener(new View.OnClickListener() {
@@ -140,6 +143,7 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
                 showAvatarPop();
             }
         });
+
         answer_iv = (ImageView) findViewById(R.id.answer_iv);
         author_in_question_list.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,8 +213,10 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
                 titleTV.setText(object.getTitle());
                 TextView contentTV = (TextView) findViewById(R.id.question_item_question_content);
                 contentTV.setText(object.getQuestionContent());
-
-
+                question_date_in_question_list = (TextView) findViewById(R.id.question_date_in_question_list);
+                question_date_in_question_list.setText(object.getCreatedAt());
+                TextView question_detail_tags= (TextView) findViewById(R.id.question_detail_tags);
+                question_detail_tags.setText(object.getTags().toString());
                 author_in_question_list.setText(object.getAuthor().getUsername());
                 author = object.getAuthor();
                 author_name = object.getAuthor().getUsername();
@@ -832,10 +838,9 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
         mainQuery.count(QuestionItemActivityElinc.this, Question.class, new CountListener() {
             @Override
             public void onSuccess(int i) {
-                if(i==1){
+                if (i == 1) {
                     follow.setBackgroundResource(R.drawable.remove_favorite_e);
-                }
-                else{
+                } else {
                     follow.setBackgroundResource(R.drawable.add_favorite_e);
                 }
             }
@@ -845,5 +850,19 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
 
             }
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
