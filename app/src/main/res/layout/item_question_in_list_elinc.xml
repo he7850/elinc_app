@@ -7,6 +7,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         >
         <LinearLayout
             android:layout_marginTop="10dp"
@@ -16,7 +18,7 @@
             <com.bmob.im.demo.view.CircleImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
+
                 android:layout_marginRight="10dp"
 
                 android:id="@+id/avatar_for_question"
@@ -59,7 +61,6 @@
                                 android:textSize="12sp"
                                 android:typeface="sans"
                                 android:background="@drawable/corner_bg"
-                                android:layout_marginRight="20dp"
 
                                 />
 
@@ -100,8 +101,6 @@
                 android:text="@string/loading"
                 android:fontFamily="微软雅黑"
                 android:textSize="18sp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="6dp"
                 android:textColor="#424142"
@@ -114,8 +113,6 @@
             <TextView
                 android:text="加载中"
                 android:fontFamily="微软雅黑"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
                 android:lineSpacingExtra="3dp"
                 android:paddingBottom="5dp"
                 android:id="@+id/question_content"
