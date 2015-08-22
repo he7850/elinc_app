@@ -1,8 +1,6 @@
 package com.bmob.im.demo.ui;
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -44,11 +42,8 @@ public class RecentActivity extends ActivityBase implements AdapterView.OnItemCl
     }
 
     private void initView(){
-<<<<<<< Updated upstream
-        initTopBarForLeft("l");
-=======
         initTopBarForLeft("123");
->>>>>>> Stashed changes
+        initTopBarForLeft("消息");
         listview = (ListView)findViewById(R.id.list);
         listview.setOnItemClickListener(this);
         listview.setOnItemLongClickListener(this);

@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
     >
 
     <TextView
@@ -14,94 +13,114 @@
         android:textSize="18sp"
         android:textColor="@color/guide_color" 
         />
-
-    <com.bmob.im.demo.view.CircleImageView
-        android:id="@+id/img_friend_avatar"
-        android:layout_width="54dp"
-        android:layout_height="54dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/alpha"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dip"
-        android:padding="5dp"
-        android:src="@drawable/head1" />
     <RelativeLayout
-        android:id="@+id/above_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/img_friend_avatar"
+        android:id="@+id/content"
         android:layout_below="@id/alpha"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/img_friend_avatar">
-        <TextView
-            android:id="@+id/tv_friend_name"
-            style="@style/Smile.TextView._Black"
-            android:text="ss"
-            android:gravity="left"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
-            android:singleLine="true"
-            android:textSize="24sp" />
-        <ImageView
-            android:layout_alignBottom="@+id/tv_friend_name"
-            android:id="@+id/gender"
-            android:layout_toRightOf="@+id/tv_friend_name"
-            android:layout_gravity="bottom"
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
-        <TextView
-            android:layout_marginRight="20sp"
-            android:textSize="20sp"
-            android:layout_alignParentRight="true"
-            android:text="xq"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/img_friend_avatar"
-        android:layout_below="@+id/above_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/tag1"
-            android:textSize="12sp"
-            android:text="eng"
-            android:paddingBottom="1dp"
-            android:layout_marginTop="4dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:background="@drawable/corner_bg"
+        <com.bmob.im.demo.view.CircleImageView
+            android:id="@+id/img_friend_avatar"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:src="@drawable/head1" />
+        <RelativeLayout
+            android:gravity="top"
+            android:id="@+id/above_layout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_toRightOf="@+id/tag1"
-            android:id="@+id/tag2"
-            android:textSize="12sp"
-            android:text="eng"
-            android:paddingBottom="1dp"
-            android:layout_marginTop="4dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:layout_marginLeft="6dp"
-            android:background="@drawable/corner_bg"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tags"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignBottom="@+id/img_friend_avatar"
+            android:layout_toRightOf="@id/img_friend_avatar">
+            <TextView
+                android:layout_alignParentTop="true"
+                android:id="@+id/tv_friend_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Smile.TextView._Black"
+                android:text="SS"
+                android:gravity="bottom"
+                android:layout_marginTop="0dp"
+                android:paddingRight="3dp"
+                android:singleLine="true"
+                android:textSize="18sp" />
+            <ImageView
+                android:gravity="top"
+                android:layout_alignBottom="@+id/tv_friend_name"
+                android:id="@+id/gender"
+                android:layout_toRightOf="@+id/tv_friend_name"
+                android:layout_gravity="bottom"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:id="@+id/campus"
+                android:gravity="top"
+                android:layout_gravity="top"
+                android:layout_marginRight="20sp"
+                android:textSize="20sp"
+                android:layout_alignParentRight="true"
+                android:text="xq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/tags"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@id/img_friend_avatar"
+            android:layout_alignBottom="@+id/img_friend_avatar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_toRightOf="@+id/tag2"
-            android:id="@+id/tag3"
-            android:gravity="center"
-            android:textSize="12sp"
-            android:text="god"
-            android:background="@drawable/corner_bg"
-            android:paddingBottom="1dp"
-            android:layout_marginTop="4dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:layout_marginLeft="6dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tag1"
+                android:textSize="12sp"
+                android:text="还未设置目标"
+                android:paddingBottom="1dp"
+                android:layout_marginTop="4dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:background="@drawable/corner_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_toRightOf="@+id/tag1"
+                android:id="@+id/tag2"
+                android:textSize="12sp"
+                android:text=""
+                android:paddingBottom="1dp"
+                android:layout_marginTop="4dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:layout_marginLeft="6dp"
+                android:background="@drawable/corner_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_toRightOf="@+id/tag2"
+                android:id="@+id/tag3"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:text=""
+                android:background="@drawable/corner_bg"
+                android:paddingBottom="1dp"
+                android:layout_marginTop="4dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:layout_marginLeft="6dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
     </RelativeLayout>
-
+    <TextView
+        android:id="@+id/blank"
+        android:padding="2dp"
+        android:layout_below="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
 
 </RelativeLayout>
