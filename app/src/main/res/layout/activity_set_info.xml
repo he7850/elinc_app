@@ -9,6 +9,11 @@
     <include
         android:id="@+id/common_actionbar"
         layout="@layout/include_action_bar" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
 
     <RelativeLayout
         android:id="@+id/layout_head"
@@ -16,8 +21,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/about_top_bg"
         android:minHeight="80dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" >
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp" >
 
         <TextView
             style="@style/Smile.TextView._Black"
@@ -54,7 +59,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/about_mid_bg"
-        android:padding="10dp" >
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        >
 
         <TextView
             style="@style/Smile.TextView._Black"
@@ -89,7 +98,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/about_mid_bg"
-        android:padding="10dp" >
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" >
 
         <TextView
             style="@style/Smile.TextView._Black"
@@ -119,7 +131,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/about_mid_bg"
-        android:padding="10dp" >
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
 
         <TextView
             style="@style/Smile.TextView._Black"
@@ -151,13 +166,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/about_mid_bg"
-        android:padding="10dp" >
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" >
 
         <TextView
             style="@style/Smile.TextView._Black"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:text="签名" />
+            android:text="状态" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -180,7 +198,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/about_mid_bg"
-        android:padding="10dp" >
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" >
 
         <TextView
             style="@style/Smile.TextView._Black"
@@ -253,4 +274,5 @@
             android:textSize="14sp" />
     </RelativeLayout>
 
+    </LinearLayout>
 </LinearLayout>

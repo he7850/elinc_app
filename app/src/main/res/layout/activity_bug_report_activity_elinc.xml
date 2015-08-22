@@ -22,32 +22,46 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="说说您遇到的bug或者对我们的建议"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:id="@+id/textView" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/et_bug_title" />
+            android:background="@drawable/border"
+            android:padding="5dp"
+            android:gravity="top"
+            android:id="@+id/et_bug_title"
+            android:lines="4" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="联系方式"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:id="@+id/textView2" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
+            android:padding="5dp"
             android:ems="10"
+            android:background="@drawable/border"
             android:id="@+id/et_bug_content" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="发给郁小林解决把"
+            android:text="提交"
+            android:textSize="16dp"
             android:id="@+id/btn_send_bug"
+            android:background="@drawable/green_button_selector"
             android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
