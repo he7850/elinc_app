@@ -99,4 +99,5 @@
     <string name="title_activity_find_question">FindQuestion</string>
     <drawable name="green_normal">#66cc99</drawable>
     <drawable name="green_pressed">#5bb285</drawable>
+    <string name="title_activity_my_tree">MyTreeActivity</string>
 </resources>

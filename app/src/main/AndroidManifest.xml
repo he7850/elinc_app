@@ -170,7 +170,7 @@
         <activity
             android:name=".ui.QuestionItemActivityElinc"
             android:label="QuestionItemActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".ui.SettingActivity"
             android:label="@string/title_activity_setting" >
@@ -229,6 +229,10 @@
         <activity
             android:name=".ui.FindQuestion"
             android:label="@string/title_activity_find_question" >
+        </activity>
+        <activity
+            android:name=".ui.MyTreeActivity"
+            android:label="@string/title_activity_my_tree" >
         </activity>
     </application>
 
