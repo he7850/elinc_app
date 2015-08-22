@@ -58,8 +58,10 @@
             android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="提交"
-            android:textSize="16dp"
+            android:text="@string/bold_submit"
+            android:textColor="#ffffff"
+            android:textSize="18dp"
+
             android:id="@+id/btn_send_bug"
             android:background="@drawable/green_button_selector"
             android:layout_gravity="center_horizontal" />

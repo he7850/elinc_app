@@ -22,6 +22,7 @@ public class BugReportActivityElinc extends ActivityBase {
         setContentView(R.layout.activity_bug_report_activity_elinc);
         initTopBarForLeft("用户反馈");
         Button btn_send_bug= (Button) findViewById(R.id.btn_send_bug);
+
         final EditText et_bug_title= (EditText) findViewById(R.id.et_bug_title);
         final EditText et_bug_content= (EditText) findViewById(R.id.et_bug_content);
         btn_send_bug.setOnClickListener(new View.OnClickListener() {
