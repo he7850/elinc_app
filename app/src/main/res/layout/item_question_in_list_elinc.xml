@@ -18,9 +18,7 @@
             <com.bmob.im.demo.view.CircleImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-
                 android:layout_marginRight="10dp"
-
                 android:id="@+id/avatar_for_question"
                 />
             <LinearLayout

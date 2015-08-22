@@ -5,6 +5,7 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.bmob.im.demo.R;
 import com.bmob.im.demo.bean.User;
+import com.bmob.im.demo.util.CollectionUtils;
 import com.bmob.im.demo.util.ImageLoadOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -74,10 +76,12 @@ public class UserFriendAdapter extends BaseAdapter implements SectionIndexer {
 					R.layout.item_user_friend, null);
 			viewHolder = new ViewHolder();
 			viewHolder.alpha = (TextView) convertView.findViewById(R.id.alpha);
-			viewHolder.name = (TextView) convertView
-					.findViewById(R.id.tv_friend_name);
-			viewHolder.avatar = (ImageView) convertView
-					.findViewById(R.id.img_friend_avatar);
+			viewHolder.name = (TextView) convertView.findViewById(R.id.tv_friend_name);
+			viewHolder.campus = (TextView) convertView.findViewById(R.id.campus);
+			viewHolder.tag1 = (TextView) convertView.findViewById(R.id.tag1);
+			viewHolder.tag2 = (TextView) convertView.findViewById(R.id.tag2);
+			viewHolder.tag3 = (TextView) convertView.findViewById(R.id.tag3);
+			viewHolder.avatar = (ImageView) convertView.findViewById(R.id.img_friend_avatar);
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
@@ -93,6 +97,27 @@ public class UserFriendAdapter extends BaseAdapter implements SectionIndexer {
 			viewHolder.avatar.setImageDrawable(ct.getResources().getDrawable(R.drawable.head));
 		}
 		viewHolder.name.setText(name);
+		viewHolder.campus.setText(friend.getCampus());
+		if (CollectionUtils.isNotNull(friend.getTags())) {
+			if (friend.getTags().size() > 0) {
+				viewHolder.tag1.setText(friend.getTags().get(0));
+			}
+			if (friend.getTags().size() > 1) {
+				viewHolder.tag2.setText(friend.getTags().get(1));
+			} else {
+				viewHolder.tag2.setVisibility(View.GONE);
+			}
+			if (friend.getTags().size() > 2) {
+				viewHolder.tag3.setText(friend.getTags().get(2));
+			} else {
+				viewHolder.tag3.setVisibility(View.GONE);
+			}
+		}else {
+			viewHolder.tag2.setVisibility(View.GONE);
+			viewHolder.tag3.setVisibility(View.GONE);
+		}
+		viewHolder.campus.setText(friend.getCampus());
+
 
 		// 根据position获取分类的首字母的Char ascii值
 		int section = getSectionForPosition(position);
@@ -109,6 +134,10 @@ public class UserFriendAdapter extends BaseAdapter implements SectionIndexer {
 
 	static class ViewHolder {
 		TextView alpha;// 首字母提示
+		TextView campus;
+		TextView tag1;
+		TextView tag2;
+		TextView tag3;
 		ImageView avatar;
 		TextView name;
 	}

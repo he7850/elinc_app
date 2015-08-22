@@ -40,7 +40,7 @@ public class RecentActivity extends ActivityBase implements AdapterView.OnItemCl
     }
 
     private void initView(){
-        initTopBarForLeft("l");
+        initTopBarForLeft("消息");
         listview = (ListView)findViewById(R.id.list);
         listview.setOnItemClickListener(this);
         listview.setOnItemLongClickListener(this);
