@@ -14,6 +14,7 @@ import com.bmob.im.demo.R;
 import com.bmob.im.demo.adapter.base.BaseListAdapter;
 import com.bmob.im.demo.adapter.base.ViewHolder;
 import com.bmob.im.demo.bean.User;
+import com.bmob.im.demo.util.CollectionUtils;
 import com.bmob.im.demo.util.ImageLoadOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -39,10 +40,30 @@ public class NearPeopleAdapter extends BaseListAdapter<User> {
 			convertView = mInflater.inflate(R.layout.item_near_people, null);
 		}
 		final User contract = getList().get(arg0);
-		TextView tv_name = ViewHolder.get(convertView, R.id.tv_name);
-		TextView tv_distance = ViewHolder.get(convertView, R.id.tv_distance);
-		TextView tv_logintime = ViewHolder.get(convertView, R.id.tv_logintime);
-		ImageView iv_avatar = ViewHolder.get(convertView, R.id.iv_avatar);
+		TextView tv_name = ViewHolder.get(convertView, R.id.tv_friend_name);
+		TextView campus = ViewHolder.get(convertView, R.id.campus);
+		ImageView iv_avatar = ViewHolder.get(convertView, R.id.img_friend_avatar);
+		TextView tag1 = ViewHolder.get(convertView, R.id.tag1);
+		TextView tag2 = ViewHolder.get(convertView, R.id.tag2);
+		TextView tag3 = ViewHolder.get(convertView, R.id.tag3);
+		if (CollectionUtils.isNotNull(contract.getTags())) {
+			if (contract.getTags().size() > 0) {
+				tag1.setText(contract.getTags().get(0));
+			}
+			if (contract.getTags().size() > 1) {
+				tag2.setText(contract.getTags().get(1));
+			} else {
+				tag2.setVisibility(View.GONE);
+			}
+			if (contract.getTags().size() > 2) {
+				tag3.setText(contract.getTags().get(2));
+			} else {
+				tag3.setVisibility(View.GONE);
+			}
+		}else {
+			tag2.setVisibility(View.GONE);
+			tag3.setVisibility(View.GONE);
+		}
 		String avatar = contract.getAvatar();
 		if (avatar != null && !avatar.equals("")) {
 			ImageLoader.getInstance().displayImage(avatar, iv_avatar,
@@ -53,15 +74,8 @@ public class NearPeopleAdapter extends BaseListAdapter<User> {
 		BmobGeoPoint location = contract.getLocation();
 		String currentLat = CustomApplcation.getInstance().getLatitude();
 		String currentLong = CustomApplcation.getInstance().getLongtitude();
-		if(location!=null && !currentLat.equals("") && !currentLong.equals("")){
-			double distance = DistanceOfTwoPoints(Double.parseDouble(currentLat),Double.parseDouble(currentLong),contract.getLocation().getLatitude(), 
-					contract.getLocation().getLongitude());
-			tv_distance.setText(String.valueOf(distance)+"米");
-		}else{
-			tv_distance.setText("未知");
-		}
+		campus.setText(contract.getCampus());
 		tv_name.setText(contract.getUsername());
-		tv_logintime.setText("最近登录时间:"+contract.getUpdatedAt());
 		return convertView;
 	}
 
