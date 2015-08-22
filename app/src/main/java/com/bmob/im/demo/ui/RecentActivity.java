@@ -1,4 +1,8 @@
 package com.bmob.im.demo.ui;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -31,7 +35,7 @@ public class RecentActivity extends ActivityBase implements AdapterView.OnItemCl
     ListView listview;
 
     MessageRecentAdapter adapter;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +44,11 @@ public class RecentActivity extends ActivityBase implements AdapterView.OnItemCl
     }
 
     private void initView(){
+<<<<<<< Updated upstream
         initTopBarForLeft("l");
+=======
+        initTopBarForLeft("123");
+>>>>>>> Stashed changes
         listview = (ListView)findViewById(R.id.list);
         listview.setOnItemClickListener(this);
         listview.setOnItemLongClickListener(this);
@@ -71,7 +79,7 @@ public class RecentActivity extends ActivityBase implements AdapterView.OnItemCl
 
     /** 删除会话
      * deleteRecent
-     * @param @param recent 
+     * @param @param recent
      * @return void
      * @throws
      */

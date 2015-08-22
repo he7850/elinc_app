@@ -86,12 +86,11 @@ import static com.bmob.im.demo.R.drawable.remove_favorite_e;
 public class QuestionItemActivityElinc extends ActivityBase  implements View.OnClickListener,XListView.IXListViewListener,AdapterView.OnItemClickListener {
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
     Bundle bundle;
-    List<Map<String,String>> mapList;
-    SimpleAdapter questionAdapter;
     List<Answer> answer = new ArrayList<Answer>();
     XListView mListView;
     AnswerListAdapter adapter;
     int curPage = 0;
+    private final int pageCapacity=4;
     ProgressDialog progress;
     String url;
     ImageView detail_question;
@@ -254,6 +253,7 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
         BmobQuery<Answer> bmobQuery = new BmobQuery<Answer>();
         bmobQuery.addWhereEqualTo("questionId", bundle.getString("questionId"));
         bmobQuery.include("responder,questionId");
+        bmobQuery.setLimit(pageCapacity);
         bmobQuery.order("-createdAt");
         bmobQuery.findObjects(QuestionItemActivityElinc.this, new FindListener<Answer>() {
             @Override
@@ -299,19 +299,24 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
         BmobQuery<Answer> bmobQuery = new BmobQuery<Answer>();
         bmobQuery.addWhereEqualTo("questionId", bundle.getString("questionId"));
         bmobQuery.include("questionId,responder");
+        bmobQuery.setSkip((curPage + 1) * pageCapacity);
+        curPage++;
+        bmobQuery.setLimit(pageCapacity);
         bmobQuery.order("-createdAt");
         bmobQuery.findObjects(QuestionItemActivityElinc.this, new FindListener<Answer>() {
             @Override
             public void onSuccess(List<Answer> list) {
                 // TODO Auto-generated method stub
-                if (list.size() > answer.size()) {
-                    curPage++;
-                    queryMoreSearchList(curPage);
-                } else {
-                   // ShowToast("数据加载完成");
-                    mListView.setPullLoadEnable(false);
-                    refreshLoad();
+                if (CollectionUtils.isNotNull(list)) {
+                    if (list.size() < pageCapacity) {
+                        mListView.setPullLoadEnable(false);
+                        //ShowToast("问题加载完成!");
+                    } else {
+                        mListView.setPullLoadEnable(true);
+                    }
+                    adapter.addAll(list);
                 }
+                refreshLoad();
             }
 
             @Override
@@ -323,10 +328,28 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
 
     }
 
-    private void queryMoreSearchList(int page){
+    private void refreshLoad(){
+        if (mListView.getPullLoading()) {
+            mListView.stopLoadMore();
+        }
+    }
+
+    private void refreshPull(){
+        if (mListView.getPullRefreshing()) {
+            mListView.stopRefresh();
+        }
+    }
+    public void onRefresh() {
+        refreshList();
+
+    }
+
+    public void refreshList(){
+        curPage=0;
         BmobQuery<Answer> bmobQuery = new BmobQuery<Answer>();
         bmobQuery.addWhereEqualTo("questionId", bundle.getString("questionId"));
         bmobQuery.include("questionId,responder");
+        bmobQuery.setLimit(pageCapacity);
         bmobQuery.order("-createdAt");
         bmobQuery.findObjects(QuestionItemActivityElinc.this, new FindListener<Answer>() {
             @Override
@@ -335,6 +358,13 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
                 if (CollectionUtils.isNotNull(arg0)) {
                     answer.clear();
                     adapter.addAll(arg0);
+                    if (arg0.size() < pageCapacity) {
+                        mListView.setPullLoadEnable(false);
+                        //ShowToast("问题加载完成!");
+                    } else {
+                        mListView.setPullLoadEnable(true);
+                    }
+                    mListView.stopRefresh();
                 }
                 refreshLoad();
             }
@@ -344,7 +374,9 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
                 // TODO Auto-generated method stub
                 ShowLog("搜索更多用户出错:" + arg1);
                 mListView.setPullLoadEnable(false);
+                mListView.stopRefresh();
                 refreshLoad();
+
             }
 
         });
@@ -431,15 +463,6 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
         });
 
 
-
-
-
-
-
-
-
-
-
         //==============
 
     }
@@ -493,51 +516,7 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
         return res.toString();
     }
 
-    private void refreshLoad(){
-        if (mListView.getPullLoading()) {
-            mListView.stopLoadMore();
-        }
-    }
 
-    private void refreshPull(){
-        if (mListView.getPullRefreshing()) {
-            mListView.stopRefresh();
-        }
-    }
-    public void onRefresh() {
-        refreshList();
-
-    }
-
-    public void refreshList(){
-        BmobQuery<Answer> bmobQuery = new BmobQuery<Answer>();
-        bmobQuery.addWhereEqualTo("questionId", bundle.getString("questionId"));
-        bmobQuery.include("questionId,responder");
-        bmobQuery.order("-createdAt");
-        bmobQuery.findObjects(QuestionItemActivityElinc.this, new FindListener<Answer>() {
-            @Override
-            public void onSuccess(List<Answer> arg0) {
-                // TODO Auto-generated method stub
-                if (CollectionUtils.isNotNull(arg0)) {
-                    answer.clear();
-                    adapter.addAll(arg0);
-                    mListView.stopRefresh();
-                }
-                refreshLoad();
-            }
-
-            @Override
-            public void onError(int arg0, String arg1) {
-                // TODO Auto-generated method stub
-                ShowLog("搜索更多用户出错:" + arg1);
-                mListView.setPullLoadEnable(false);
-                mListView.stopRefresh();
-                refreshLoad();
-
-            }
-
-        });
-    }
     @Override
     public void onClick(View v) {
 

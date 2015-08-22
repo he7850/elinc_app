@@ -46,7 +46,7 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
     QuestionListAdapter adapter;
     private View view;
     String searchName ="";
-    private final int pageCapacity=10;
+    private final int pageCapacity=5;
     int curPage = 0;
     ProgressDialog progress ;
 
@@ -67,7 +67,7 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
 
         initXListView();
         initAdapter();
-        refreshList();
+        //refreshList();
 
     }
 
@@ -119,7 +119,9 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
     @Override
     public void onLoadMore() {
         BmobQuery<Question> mainQuery = new BmobQuery<Question>();
+
         mainQuery.setSkip((curPage + 1) * pageCapacity);
+        curPage++;
         mainQuery.setLimit(pageCapacity);
         mainQuery.include("author");
         mainQuery.order("-createdAt");
@@ -128,7 +130,12 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
             public void onSuccess(List<Question> list) {
                 // TODO Auto-generated method stub
                 if (CollectionUtils.isNotNull(list)) {
-                    question.clear();
+                    if (list.size() < pageCapacity) {
+                        mListView.setPullLoadEnable(false);
+                        //ShowToast("问题加载完成!");
+                    } else {
+                        mListView.setPullLoadEnable(true);
+                    }
                     adapter.addAll(list);
                 }
                 refreshLoad();
@@ -168,9 +175,9 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
                 if (CollectionUtils.isNotNull(list)) {
                     question.clear();
                     adapter.addAll(list);
-                    if (list.size() < BRequest.QUERY_LIMIT_COUNT) {
+                    if (list.size() < pageCapacity) {
                         mListView.setPullLoadEnable(false);
-                        ShowToast("问题加载完成!");
+                        //ShowToast("问题加载完成!");
                     } else {
                         mListView.setPullLoadEnable(true);
                     }
@@ -205,7 +212,7 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
         });
     }
     private void refreshList(){
-
+        curPage =0;
         BmobQuery<Question> mainQuery = new BmobQuery<Question>();
         mainQuery.include("author");
         mainQuery.order("-createdAt");
@@ -217,6 +224,12 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
                 if (CollectionUtils.isNotNull(list)) {
                     question.clear();
                     adapter.addAll(list);
+                    if (list.size() < pageCapacity) {
+                        mListView.setPullLoadEnable(false);
+                        //ShowToast("问题加载完成!");
+                    } else {
+                        mListView.setPullLoadEnable(true);
+                    }
                     mListView.stopRefresh();
                 }
                 refreshLoad();

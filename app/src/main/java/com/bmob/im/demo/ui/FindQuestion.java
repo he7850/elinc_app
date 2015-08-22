@@ -58,11 +58,15 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
     QuestionListAdapter adapter;
     private View view;
     String searchName ="";
-    final int pageCapacity=2;
+    private final int pageCapacity=5;
+    int curPage = 0;
+    ProgressDialog progress ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_question);
+        initView();
     }
 
     @Override
@@ -89,13 +93,12 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
 
 
     private void initView(){
-        //initTopBarForLeft("查找问题");
+        initTopBarForLeft("查找问题");
         et_search_question = (EditText)findViewById(R.id.et_search_question);
         btn_search_question = (Button)findViewById(R.id.btn_search_question);
         btn_search_question.setOnClickListener(this);
         initXListView();
         initAdapter();
-        refreshList();
 
     }
 
@@ -117,8 +120,7 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
 
     }
 
-    int curPage = 0;
-    ProgressDialog progress ;
+
     private void initSearchList(final boolean isUpdate){
         if(!isUpdate){
             progress = new ProgressDialog(FindQuestion.this);
@@ -137,6 +139,8 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
         queries.add(eq2);
         queries.add(eq3);
         BmobQuery<Question> mainQuery = new BmobQuery<Question>();
+        mainQuery.setLimit(pageCapacity);
+        mainQuery.order("-createdAt");
         mainQuery.include("author");
         mainQuery.or(queries);
         mainQuery.findObjects(FindQuestion.this, new FindListener<Question>() {
@@ -148,7 +152,7 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
                         question.clear();
                     }
                     adapter.addAll(list);
-                    if (list.size() < BRequest.QUERY_LIMIT_COUNT) {
+                    if (list.size() < pageCapacity) {
                         mListView.setPullLoadEnable(false);
                         ShowToast("问题搜索完成!");
                     } else {
@@ -192,8 +196,8 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
      * @param @param page
      * @return void
      * @throws
-     */
-    private void queryMoreSearchList(int page){
+     *//*
+    private void onLoadMore(int page){
         BmobQuery<Question> eq1 = new BmobQuery<Question>();
         eq1.addWhereContains("title", et_search_question.getText().toString());
         BmobQuery<Question> eq2 = new BmobQuery<Question>();
@@ -206,6 +210,9 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
         queries.add(eq3);
         BmobQuery<Question> mainQuery = new BmobQuery<Question>();
         mainQuery.include("author");
+        mainQuery.setSkip((curPage + 1) * pageCapacity);
+        mainQuery.setLimit(pageCapacity);
+        mainQuery.order("-createdAt");
         mainQuery.or(queries);
         mainQuery.findObjects(FindQuestion.this, new FindListener<Question>() {
             @Override
@@ -227,7 +234,7 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
             }
         });
     }
-
+*/
     @Override
     public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
         Intent intent = new Intent();
@@ -280,14 +287,23 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
         queries.add(eq3);
         BmobQuery<Question> mainQuery = new BmobQuery<Question>();
         mainQuery.include("author");
+        mainQuery.setSkip((curPage + 1) * pageCapacity);
+        curPage++;
+        mainQuery.setLimit(pageCapacity);
+        mainQuery.order("-createdAt");
         mainQuery.or(queries);
         mainQuery.findObjects(FindQuestion.this, new FindListener<Question>() {
             @Override
             public void onSuccess(List<Question> list) {
                 // TODO Auto-generated method stub
                 if (CollectionUtils.isNotNull(list)) {
-                    question.clear();
                     adapter.addAll(list);
+                    if (list.size() < pageCapacity) {
+                        mListView.setPullLoadEnable(false);
+                        ShowToast("问题搜索完成!");
+                    } else {
+                        mListView.setPullLoadEnable(true);
+                    }
                 }
                 refreshLoad();
             }
@@ -317,6 +333,8 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
     public void initAdapter(){
         BmobQuery<Question> allQuery = new BmobQuery<Question>();
         allQuery.include("author");
+        allQuery.setLimit(pageCapacity);
+        allQuery.order("-createdAt");
         allQuery.findObjects(FindQuestion.this, new FindListener<Question>() {
             @Override
             public void onSuccess(List<Question> list) {
@@ -324,9 +342,9 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
                 if (CollectionUtils.isNotNull(list)) {
                     question.clear();
                     adapter.addAll(list);
-                    if (list.size() < BRequest.QUERY_LIMIT_COUNT) {
+                    if (list.size() < pageCapacity) {
                         mListView.setPullLoadEnable(false);
-                        ShowToast("问题加载完成!");
+                        //ShowToast("问题加载完成!");
                     } else {
                         mListView.setPullLoadEnable(true);
                     }
@@ -361,6 +379,7 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
         });
     }
     private void refreshList(){
+        curPage = 0;
         BmobQuery<Question> eq1 = new BmobQuery<Question>();
         eq1.addWhereContains("title", et_search_question.getText().toString());
         BmobQuery<Question> eq2 = new BmobQuery<Question>();
@@ -372,6 +391,8 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
         queries.add(eq2);
         queries.add(eq3);
         BmobQuery<Question> mainQuery = new BmobQuery<Question>();
+        mainQuery.setLimit(pageCapacity);
+        mainQuery.order("-createdAt");
         mainQuery.include("author");
         mainQuery.or(queries);
         mainQuery.findObjects(FindQuestion.this, new FindListener<Question>() {
@@ -381,6 +402,13 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
                 if (CollectionUtils.isNotNull(list)) {
                     question.clear();
                     adapter.addAll(list);
+                    if (list.size() < pageCapacity) {
+                        mListView.setPullLoadEnable(false);
+                        //ShowToast("问题加载完成!");
+                    } else {
+                        mListView.setPullLoadEnable(true);
+                    }
+
                     mListView.stopRefresh();
                 }
                 refreshLoad();

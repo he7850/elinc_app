@@ -106,6 +106,9 @@ public class MainActivity extends ActivityBase implements EventListener{
 					case R.id.action_chat:
 						startAnimActivity(RecentActivity.class);
 						break;
+					case R.id.action_find:
+						startAnimActivity(FindQuestion.class);
+						break;
 					case R.id.action_add:
 						PopupMenu popupMenu = new PopupMenu(context,findViewById(R.id.action_add));
 						popupMenu.inflate(R.menu.menu_popup);
@@ -301,15 +304,10 @@ public class MainActivity extends ActivityBase implements EventListener{
 	}
 
 	@Override
-	protected void onRestart() {
-		super.onRestart();
-		initView();
-	}
-
-	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		initView();
 		//小圆点提示
 //		if(BmobDB.create(this).hasUnReadMsg()){
 //			iv_recent_tips.setVisibility(View.VISIBLE);
