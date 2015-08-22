@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -32,10 +33,15 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import cn.bmob.im.BmobUserManager;
 import cn.bmob.im.bean.BmobChatUser;
 import cn.bmob.im.db.BmobDB;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobRelation;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 import com.bmob.im.demo.CustomApplcation;
@@ -317,9 +323,33 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 			userAdapter = new UserFriendAdapter(getActivity(), friends);
 			list_friends.setAdapter(userAdapter);
 		}else{
-			userAdapter.notifyDataSetChanged();
+			for (int i = 0;i<friends.size();i++){
+				if (CollectionUtils.isNotNull(friends.get(i).getTags())){
+					Log.i("2",friends.get(i).getTags().get(0));
+				}else{
+
+				}
+			}
+			//userAdapter.notifyDataSetChanged();
 		}
 
+		BmobQuery<User> bmobQuery = new BmobQuery<>();
+		bmobQuery.addWhereRelatedTo("contacts", new BmobPointer(BmobUserManager.getInstance(getActivity()).getCurrentUser()));
+		bmobQuery.findObjects(getActivity(), new FindListener<User>() {
+			@Override
+			public void onSuccess(List<User> object) {
+				Log.i("life", "查询个数：" + object.size());
+				friends.clear();
+				friends.addAll(object);
+				userAdapter.notifyDataSetChanged();
+			}
+
+			@Override
+			public void onError(int code, String msg) {
+				userAdapter.notifyDataSetChanged();
+				Log.i("life", "查询失败：" + code + "-" + msg);
+			}
+		});
 	}
 	
 	private boolean hidden;

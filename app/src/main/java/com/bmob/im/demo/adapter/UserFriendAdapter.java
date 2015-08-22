@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.bmob.im.demo.R;
 import com.bmob.im.demo.bean.User;
+import com.bmob.im.demo.util.CharacterParser;
 import com.bmob.im.demo.util.CollectionUtils;
 import com.bmob.im.demo.util.ImageLoadOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -82,6 +83,7 @@ public class UserFriendAdapter extends BaseAdapter implements SectionIndexer {
 			viewHolder.tag2 = (TextView) convertView.findViewById(R.id.tag2);
 			viewHolder.tag3 = (TextView) convertView.findViewById(R.id.tag3);
 			viewHolder.avatar = (ImageView) convertView.findViewById(R.id.img_friend_avatar);
+			viewHolder.gender = (ImageView) convertView.findViewById(R.id.gender);
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
@@ -96,6 +98,11 @@ public class UserFriendAdapter extends BaseAdapter implements SectionIndexer {
 		} else {
 			viewHolder.avatar.setImageDrawable(ct.getResources().getDrawable(R.drawable.head));
 		}
+//		if (friend.getSex()){
+//			viewHolder.gender.setImageResource(R.drawable.male);
+//		}else {
+//			viewHolder.gender.setImageResource(R.drawable.female);
+//		}
 		viewHolder.name.setText(name);
 		viewHolder.campus.setText(friend.getCampus());
 		if (CollectionUtils.isNotNull(friend.getTags())) {
@@ -124,7 +131,7 @@ public class UserFriendAdapter extends BaseAdapter implements SectionIndexer {
 		// 如果当前位置等于该分类首字母的Char的位置 ，则认为是第一次出现
 		if (position == getPositionForSection(section)) {
 			viewHolder.alpha.setVisibility(View.VISIBLE);
-			viewHolder.alpha.setText(friend.getSortLetters());
+			viewHolder.alpha.setText(CharacterParser.getInstance().getSelling(friend.getNick()).toUpperCase().substring(0, 1));
 		} else {
 			viewHolder.alpha.setVisibility(View.GONE);
 		}
@@ -139,6 +146,7 @@ public class UserFriendAdapter extends BaseAdapter implements SectionIndexer {
 		TextView tag2;
 		TextView tag3;
 		ImageView avatar;
+		ImageView gender;
 		TextView name;
 	}
 
@@ -146,7 +154,7 @@ public class UserFriendAdapter extends BaseAdapter implements SectionIndexer {
 	 * 根据ListView的当前位置获取分类的首字母的Char ascii值
 	 */
 	public int getSectionForPosition(int position) {
-		return data.get(position).getSortLetters().charAt(0);
+		return CharacterParser.getInstance().getSelling(data.get(position).getNick()).toUpperCase().charAt(0);
 	}
 
 	/**
@@ -155,7 +163,7 @@ public class UserFriendAdapter extends BaseAdapter implements SectionIndexer {
 	@SuppressLint("DefaultLocale")
 	public int getPositionForSection(int section) {
 		for (int i = 0; i < getCount(); i++) {
-			String sortStr = data.get(i).getSortLetters();
+			String sortStr = CharacterParser.getInstance().getSelling(data.get(i).getNick());
 			char firstChar = sortStr.toUpperCase().charAt(0);
 			if (firstChar == section){
 				return i;

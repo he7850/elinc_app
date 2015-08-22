@@ -102,7 +102,6 @@ public class NearPeopleActivity extends ActivityBase implements IXListViewListen
 //
 //				@Override
 //				public void onSuccess(List<User> arg0) {
-//					// TODO Auto-generated method stub
 //					if (CollectionUtils.isNotNull(arg0)) {
 //						if(isUpdate){
 //							nears.clear();
@@ -127,7 +126,6 @@ public class NearPeopleActivity extends ActivityBase implements IXListViewListen
 //
 //				@Override
 //				public void onError(int arg0, String arg1) {
-//					// TODO Auto-generated method stub
 //					ShowToast("附近没有人T_T");
 //					mListView.setPullLoadEnable(false);
 //					if(!isUpdate){
@@ -166,7 +164,6 @@ public class NearPeopleActivity extends ActivityBase implements IXListViewListen
 
 				@Override
 				public void onSuccess(List<User> arg0) {
-					// TODO Auto-generated method stub
 					if (CollectionUtils.isNotNull(arg0)) {
 						if(isUpdate){
 							nears.clear();
@@ -203,7 +200,6 @@ public class NearPeopleActivity extends ActivityBase implements IXListViewListen
 
 				@Override
 				public void onError(int arg0, String arg1) {
-					// TODO Auto-generated method stub
 					ShowToast("没有匹配到人T_T");
 					mListView.setPullLoadEnable(false);
 					if(!isUpdate){
@@ -232,7 +228,6 @@ public class NearPeopleActivity extends ActivityBase implements IXListViewListen
 
 			@Override
 			public void onSuccess(List<User> arg0) {
-				// TODO Auto-generated method stub
 				if (CollectionUtils.isNotNull(arg0)) {
 					adapter.addAll(arg0);
 				}
@@ -241,7 +236,6 @@ public class NearPeopleActivity extends ActivityBase implements IXListViewListen
 			
 			@Override
 			public void onError(int arg0, String arg1) {
-				// TODO Auto-generated method stub
 				ShowLog("查询更多附近的人出错:"+arg1);
 				mListView.setPullLoadEnable(false);
 				refreshLoad();
@@ -252,7 +246,6 @@ public class NearPeopleActivity extends ActivityBase implements IXListViewListen
 	
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-		// TODO Auto-generated method stub
 		User user = (User) adapter.getItem(position-1);
 		Intent intent =new Intent(this,SetMyInfoActivity.class);
 		intent.putExtra("from", "add");
@@ -262,7 +255,6 @@ public class NearPeopleActivity extends ActivityBase implements IXListViewListen
 
 	@Override
 	public void onRefresh() {
-		// TODO Auto-generated method stub
 		initNearByList(true);
 	}
 
@@ -279,7 +271,6 @@ public class NearPeopleActivity extends ActivityBase implements IXListViewListen
 	}
 	@Override
 	public void onLoadMore() {
-		// TODO Auto-generated method stub
 		double latitude = Double.parseDouble(mApplication.getLatitude());
 		double longtitude = Double.parseDouble(mApplication.getLongtitude());
 		//这是查询10公里范围内的性别为女用户总数
@@ -289,7 +280,6 @@ public class NearPeopleActivity extends ActivityBase implements IXListViewListen
 			
 			@Override
 			public void onSuccess(int arg0) {
-				// TODO Auto-generated method stub
 				if(arg0 >nears.size()){
 					curPage++;
 					queryMoreNearList(curPage);
