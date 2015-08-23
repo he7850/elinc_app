@@ -198,7 +198,7 @@ public class MainActivity extends ActivityBase implements EventListener{
 							bundle.putString("from", "add");
 						}
 						intent.putExtras(bundle);
-						intent.setClass(context, MyGoalActivityElinc.class);
+						intent.setClass(MainActivity.this, MyTreeActivity.class);
 						startAnimActivity(intent);
 						break;
 					case R.id.nav_messages:

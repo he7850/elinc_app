@@ -4,34 +4,64 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="40dp"
         android:layout_gravity="center_horizontal">
-
-
         <TextView
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="6dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2015.2.3"
             android:id="@+id/date_of_tree"/>
         <ImageView
-            android:layout_width="40px"
-            android:layout_height="40px"
+            android:layout_marginRight="6dp"
+            android:layout_gravity="bottom"
+            android:src="@drawable/elinc_sun"
+            android:layout_width="14dp"
+            android:layout_height="14dp" />
+        <ImageView
+            android:layout_marginRight="4dp"
+            android:layout_width="80px"
+            android:layout_height="80px"
             android:id="@+id/leaf_of_tree"
-            android:background="@color/elinc_green"
+            android:background="@drawable/leaf_large"
             />
         <TextView
+            android:layout_marginRight="6dp"
+            android:layout_gravity="bottom"
             android:id="@+id/goal_of_tree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Fighting !!!!!"/>
+        <ImageView
+            android:layout_marginRight="6dp"
+            android:layout_gravity="bottom"
+            android:src="@drawable/elinc_sun"
+            android:layout_width="14dp"
+            android:layout_height="14dp" />
         <TextView
+            android:layout_gravity="bottom"
+            android:background="@drawable/corner_bg"
             android:id="@+id/water_of_tree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="21"
             />
+    </LinearLayout>
+    <View
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/msg_emote_divider">
+    </View>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/card_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     </LinearLayout>
 </LinearLayout>

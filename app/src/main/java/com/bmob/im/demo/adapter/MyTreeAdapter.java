@@ -4,19 +4,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bmob.im.demo.R;
 import com.bmob.im.demo.adapter.base.BaseListAdapter;
 import com.bmob.im.demo.adapter.base.ViewHolder;
 import com.bmob.im.demo.bean.Answer;
+import com.bmob.im.demo.bean.Card;
 import com.bmob.im.demo.bean.Goal;
 import com.bmob.im.demo.bean.User;
 import com.bmob.im.demo.ui.ImageBrowserActivity;
+import com.bmob.im.demo.ui.MyTreeActivity;
 import com.bmob.im.demo.ui.SetMyInfoActivity;
 import com.bmob.im.demo.util.ImageLoadOptions;
 import com.bmob.im.demo.view.CircleImageView;
@@ -25,10 +30,15 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
@@ -40,9 +50,72 @@ import cn.bmob.v3.listener.UpdateListener;
 /**
  * Created by zheruicao on 15/8/23.
  */
-public class MyTreeAdapter extends BaseListAdapter<Goal>{
-    Context context;
+public class MyTreeAdapter extends RecyclerView.Adapter{
+    private Context context;
+    private List<MyTreeActivity.GoalRecord> goalRecordList;
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+
+    public MyTreeAdapter(List<MyTreeActivity.GoalRecord> goalRecordList){
+        this.goalRecordList = goalRecordList;
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_my_tree_elinc, null);
+        context = viewGroup.getContext();
+        return new MyViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
+        MyViewHolder myViewHolder = (MyViewHolder)viewHolder;
+        String createdAt = goalRecordList.get(i).getGoal().getCreatedAt();
+        try {
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+            Date date = sdf.parse(createdAt);
+            calendar.setTime(date);
+            String dateStr = "";
+            dateStr+=calendar.get(Calendar.YEAR)+"."+calendar.get(Calendar.MONTH)+"."+calendar.get(Calendar.DATE);
+            myViewHolder.date_of_tree.setText(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        myViewHolder.goal_of_tree.setText(goalRecordList.get(i).getGoal().getGoalContent());
+        myViewHolder.water_of_tree.setText("233");
+        myViewHolder.card_list.removeAllViews();
+        List<Card> cardList = goalRecordList.get(i).getCardList();
+        for (int j = 0; j < cardList.size(); j++) {
+            LinearLayout cardLayout = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.card_in_tree_elinc,null);
+            CardViewHolder cardViewHolder = new CardViewHolder(cardLayout);
+            cardViewHolder.card_date.setText(cardList.get(j).getCreatedAt());
+            cardViewHolder.card_claim.setText(cardList.get(j).getCardClaim()+" 233");
+            cardViewHolder.card_emotion.setImageResource(R.drawable.elinc_sun);
+            myViewHolder.card_list.addView(cardLayout);
+        }
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return goalRecordList.size();
+    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder{
+        public TextView date_of_tree;
+        public TextView goal_of_tree;
+        public TextView water_of_tree;
+        //public ImageView
+        public LinearLayout card_list;
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            date_of_tree = (TextView) itemView.findViewById(R.id.date_of_tree);
+            goal_of_tree = (TextView) itemView.findViewById(R.id.goal_of_tree);
+            water_of_tree = (TextView) itemView.findViewById(R.id.water_of_tree);
+            card_list = (LinearLayout) itemView.findViewById(R.id.card_list);
+        }
+    }
+
     private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {
 
         static final List<String> displayedImages = Collections.synchronizedList(new LinkedList<String>());
@@ -59,71 +132,14 @@ public class MyTreeAdapter extends BaseListAdapter<Goal>{
             }
         }
     }
-    public MyTreeAdapter(Context context, List<Goal> list) {
-        super(context, list);
-        this.context=context;
-        // TODO Auto-generated constructor stub
-    }
-    @Override
-    public View bindView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.item_my_tree_elinc, null);
-            TextView date_of_tree = ViewHolder.get(convertView,R.id.date_of_tree);
-            TextView goal_of_tree= ViewHolder.get(convertView,R.id.goal_of_tree);
-            TextView water_of_tree=ViewHolder.get(convertView,R.id.water_of_tree);
-            Goal contract=getList().get(position);
 
-            date_of_tree.setText(contract.getCreatedAt());
-            goal_of_tree.setText(contract.getGoalContent());
+    public class CardViewHolder{
+        TextView card_date,card_claim;
+        ImageView card_emotion;
+        public CardViewHolder(View itemView) {
+            card_date = (TextView) itemView.findViewById(R.id.card_date);
+            card_claim = (TextView) itemView.findViewById(R.id.card_claim);
+            card_emotion = (ImageView) itemView.findViewById(R.id.card_emotion);
         }
-        return convertView;
     }
 }
-
-
-/*
-public class AnswerListAdapter extends BaseListAdapter<Answer> {
-
-
-    @Override
-    public View bindView(int arg0, View convertView, ViewGroup arg2) {
-        // TODO Auto-generated method stub
-        if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.item_answer_in_list_elinc, null);
-        }
-        final Answer contract = getList().get(arg0);
-        final Integer[] like_number = new Integer[1];
-        final TextView answer_number= ViewHolder.get(convertView, R.id.answer_number);
-
-        refreshNumber(contract,answer_number);
-
-        TextView answer_content = ViewHolder.get(convertView, R.id.answer_content);
-        TextView answer_date  =ViewHolder.get(convertView,R.id.answer_date);
-        final TextView answer_responder = ViewHolder.get(convertView, R.id.answer_responder);
-        CircleImageView avatar_for_responder= ViewHolder.get(convertView,R.id.avatar_for_responder);
-        ImageView avatar_for_answer_iv = ViewHolder.get(convertView, R.id.avatar_for_answer_iv);
-        answer_content.setText(contract.getAnswerContent());
-        answer_responder.setText(contract.getResponder().getUsername());
-        answer_date.setText(contract.getCreatedAt());
-        String avatar=contract.getResponder().getAvatar();
-        ImageView like_answer;
-        like_answer = ViewHolder.get(convertView,R.id.like_answer);
-
-
-        //=======================================================================
-        if(avatar!=null && !avatar.equals("")){//加载头像-为了不每次都加载头像
-            ImageLoader.getInstance().displayImage(avatar, avatar_for_responder, ImageLoadOptions.getOptions(),animateFirstListener);
-        }else {
-            avatar_for_responder.setImageResource(R.drawable.head);
-        }
-
-        final String answeravatar=contract.getAnswerAvatar();
-        if(answeravatar!=null && !answeravatar.equals("")){//加载头像-为了不每次都加载头像
-            ImageLoader.getInstance().displayImage(answeravatar, avatar_for_answer_iv, ImageLoadOptions.getOptions(), animateFirstListener);
-            avatar_for_answer_iv.setVisibility(View.VISIBLE);
-        }
-
-        return convertView;
-    }
-}
-*/
