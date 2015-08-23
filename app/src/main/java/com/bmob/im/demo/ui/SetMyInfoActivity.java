@@ -79,7 +79,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 public class SetMyInfoActivity extends ActivityBase implements OnClickListener {
 
 	TextView  tv_set_nick, tv_set_gender,tv_set_campus,tv_set_sign,tv_set_goal;
-	ImageView iv_set_avator, iv_arraw, iv_nickarraw;
+	ImageView iv_set_avator, iv_arraw;
+	Button iv_nickarraw;
 	LinearLayout layout_all;
 
 	Button btn_chat, btn_back, btn_add_friend;
@@ -109,7 +110,7 @@ public class SetMyInfoActivity extends ActivityBase implements OnClickListener {
 		layout_all = (LinearLayout) findViewById(R.id.layout_all);
 		iv_set_avator = (ImageView) findViewById(R.id.iv_set_avator);
 		iv_arraw = (ImageView) findViewById(R.id.iv_arraw);
-		iv_nickarraw = (ImageView) findViewById(R.id.iv_nickarraw);
+		iv_nickarraw = (Button) findViewById(R.id.iv_nickarraw);
 		//tv_set_name = (TextView) findViewById(R.id.tv_set_name);
 		tv_set_nick = (TextView) findViewById(R.id.tv_set_nick);
 		layout_head = (RelativeLayout) findViewById(R.id.layout_head);

@@ -84,12 +84,7 @@
                 style="@style/Smile.TextView._Black"
                 android:drawablePadding="10dp" />
 
-            <ImageView
-                android:id="@+id/iv_nickarraw"
-                style="@style/Smile.ImageView"
-                android:layout_width="20dp"
-                android:contentDescription="@string/action_settings"
-                android:src="@drawable/register_bottom_arrow" />
+
         </LinearLayout>
     </RelativeLayout>
 
@@ -225,10 +220,23 @@
                 android:drawablePadding="10dp" />
 
         </LinearLayout>
+
     </RelativeLayout>
+    <Button
+        style="@style/Smile.Button.theme"
+        android:id="@+id/iv_nickarraw"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:contentDescription="@string/action_settings"
+        android:background="@drawable/green_button_selector"
+        android:text="编辑资料"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
     <Button
         android:id="@+id/btn_add_friend"
         style="@style/Smile.Button.theme"
+        android:background="@drawable/green_button_selector"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
@@ -243,6 +251,7 @@
         android:id="@+id/btn_chat"
         style="@style/Smile.Button.theme"
         android:layout_width="match_parent"
+        android:background="@drawable/green_button_selector"
         android:layout_height="45dp"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
@@ -254,6 +263,7 @@
         style="@style/Smile.Button.logout"
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:background="@drawable/green_button_selector"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
