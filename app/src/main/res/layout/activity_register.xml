@@ -39,10 +39,9 @@
             <TextView
                 style="@style/Smile.TextView._Black"
                 android:layout_height="match_parent"
-                android:layout_width="wrap_content"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
-                android:text="手机"
+                android:text="验证码"
                 android:textStyle="bold" />
             <EditText style="@style/Register_Edit"
                 android:singleLine="true"
@@ -56,8 +55,11 @@
         <Button
             android:id="@+id/btn_verify_code"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="46dp"
             android:text="发送验证码"
+            android:padding="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/green_button_selector"
             android:layout_marginTop="@dimen/register_margin"
             android:textColor="@color/base_color_text_white"
             android:textSize="@dimen/text_size_large" />
@@ -81,7 +83,7 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/base_action_bar_height"
         android:layout_margin="@dimen/activity_vertical_margin"
-        android:background="@drawable/btn_login_selector"
+        android:background="@drawable/green_button_selector"
         android:text="@string/register"
         android:textColor="@color/base_color_text_white"
         android:textSize="@dimen/text_size_large" />

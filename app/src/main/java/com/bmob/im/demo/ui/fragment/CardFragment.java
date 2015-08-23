@@ -1,6 +1,8 @@
 package com.bmob.im.demo.ui.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Outline;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +25,7 @@ import com.bmob.im.demo.adapter.base.ViewHolder;
 import com.bmob.im.demo.bean.Card;
 import com.bmob.im.demo.bean.CardReply;
 import com.bmob.im.demo.bean.Goal;
+import com.bmob.im.demo.bean.Question;
 import com.bmob.im.demo.bean.Tool;
 import com.bmob.im.demo.bean.User;
 import com.bmob.im.demo.ui.CardItemActivityElinc;
@@ -162,6 +166,18 @@ public class CardFragment extends FragmentBase{
                     card1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            dialog();
+                        }
+                    });
+                    card2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+                    card3.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
                         }
                     });
@@ -235,5 +251,69 @@ public class CardFragment extends FragmentBase{
                 Toast.makeText(getActivity(), "无法获取目标！", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
+    protected void dialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_hit_card, null);
+        //    设置我们自己定义的布局文件作为弹出框的Content
+        builder.setView(view);
+        builder.setTitle("取消关注");
+        AlertDialog.Builder 确认 = builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final EditText et = (EditText) view.findViewById(R.id.dialog_message);
+                ShowToast(et.getText().toString());
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
+
 }
+
+
+/*
+button5.setOnClickListener(new OnClickListener()
+        {
+@Override
+public void onClick(View v)
+        {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("请输入用户名和密码");
+        //    通过LayoutInflater来加载一个xml的布局文件作为一个View对象
+        View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog, null);
+        //    设置我们自己定义的布局文件作为弹出框的Content
+        builder.setView(view);
+
+final EditText username = (EditText)view.findViewById(R.id.username);
+final EditText password = (EditText)view.findViewById(R.id.password);
+
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+        {
+@Override
+public void onClick(DialogInterface dialog, int which)
+        {
+        String a = username.getText().toString().trim();
+        String b = password.getText().toString().trim();
+        //    将输入的用户名和密码打印出来
+        Toast.makeText(MainActivity.this, "用户名: " + a + ", 密码: " + b, Toast.LENGTH_SHORT).show();
+        }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
+        {
+@Override
+public void onClick(DialogInterface dialog, int which)
+        {
+
+        }
+        });
+        builder.show();
+        }
+        });*/

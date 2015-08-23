@@ -1,28 +1,46 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="com.bmob.im.demo.ui.FirstUpdateInfoElinc"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/common_actionbar"
+        layout="@layout/include_action_bar" />
+    <LinearLayout
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <LinearLayout style="@style/Register_Input" >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_nick"
+            android:gravity="center_horizontal"
+            android:background="@drawable/base_edit_input"
+            android:hint="请输入您的用户名（不可随意更改）" />
+        </LinearLayout>
+ <LinearLayout style="@style/Register_Input" >
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:inputType="textPassword"
+         android:background="@drawable/base_edit_input"
+         android:ems="10"
+         android:id="@+id/et_password"
+         android:hint="输入您的密码"/>
+</LinearLayout>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/et_password"
-        android:hint="输入您的密码"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
+        android:background="@drawable/base_edit_input"
         android:ems="10"
         android:hint="确认密码"
         android:id="@+id/et_password_again" />
@@ -30,22 +48,17 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/et_nick"
-        android:hint="请输入您的用户名（不可随意更改）"
-        android:layout_gravity="center_horizontal" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:background="@drawable/base_edit_input"
         android:id="@+id/et_uni"
         android:text="浙江大学"/>
 
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:textSize="18dp"
         android:text="校区"/>
     <RadioGroup
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/first_select_campus">
 
@@ -53,8 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="紫金港"
-            android:id="@+id/first_zjg"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/first_zjg" />
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -65,34 +77,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="西溪"
-            android:id="@+id/first_xx"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/first_xx" />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="华家池"
-            android:id="@+id/first_hjc"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/first_hjc"/>
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="之江"
-            android:id="@+id/first_zj"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/first_zj"/>
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="舟山"
-            android:id="@+id/first_zs"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/first_zs" />
     </RadioGroup>
-<TextView
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:text="性别"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+    <TextView
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:text="性别"/>
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
         android:id="@+id/sex">
 
         <RadioButton
@@ -109,13 +126,15 @@
             android:id="@+id/sex_man"
             android:layout_gravity="center_horizontal" />
     </RadioGroup>
-
+        </LinearLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="确定"
+        android:background="@drawable/green_button_selector"
         android:id="@+id/confirm_first_info"
         android:layout_gravity="center_horizontal" />
 
+    </LinearLayout>
 
 </LinearLayout>

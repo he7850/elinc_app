@@ -33,6 +33,7 @@ public class FindPassword extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_password);
+        initTopBarForLeft("找回密码");
         et_find_password= (EditText) findViewById(R.id.et_find_password);
         et_find_password_again= (EditText) findViewById(R.id.et_find_password_again);
         et_verify_code_for_pwd= (EditText) findViewById(R.id.et_verify_code_for_pwd);
