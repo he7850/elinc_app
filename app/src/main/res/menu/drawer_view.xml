@@ -20,7 +20,7 @@
         <item
             android:id="@+id/nav_my_goal"
             android:icon="@drawable/ic_my_goal"
-            android:title="我的目标" />
+            android:title="成长树" />
         <item
             android:id="@+id/nav_recommend"
             android:icon="@drawable/ic_friend_recommand"

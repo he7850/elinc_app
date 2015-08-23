@@ -62,7 +62,7 @@
             android:layout_weight="1.0"
             android:background="@color/transparent"
             android:gravity="center_vertical"
-            android:hint="输入你的校区..."
+            android:hint="请输入你的校区"
             />
     </LinearLayout>
     <LinearLayout

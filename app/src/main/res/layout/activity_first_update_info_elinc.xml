@@ -17,82 +17,131 @@
         android:layout_height="wrap_content">
 
         <LinearLayout style="@style/Register_Input" >
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/et_nick"
-            android:gravity="center_horizontal"
-            android:background="@drawable/base_edit_input"
-            android:hint="请输入您的用户名（不可随意更改）" />
+            <TextView
+                style="@style/Smile.TextView._Black"
+                android:layout_height="match_parent"
+                android:layout_width="70dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="用户名"
+                android:textStyle="bold" />
+            <EditText
+                android:singleLine="true"
+                android:id="@+id/et_nick"
+                style="@style/Register_Edit"
+                android:hint="请输入用户名（不允许更改）" />
         </LinearLayout>
- <LinearLayout style="@style/Register_Input" >
-     <EditText
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:inputType="textPassword"
-         android:background="@drawable/base_edit_input"
-         android:ems="10"
-         android:id="@+id/et_password"
-         android:hint="输入您的密码"/>
-</LinearLayout>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:background="@drawable/base_edit_input"
-        android:ems="10"
-        android:hint="确认密码"
-        android:id="@+id/et_password_again" />
+        <LinearLayout style="@style/Register_Input" >
+            <TextView
+                style="@style/Smile.TextView._Black"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_width="70dp"
+                android:paddingLeft="10dp"
+                android:text="密码"
+                android:textStyle="bold" />
+            <EditText
+                android:singleLine="true"
+                android:id="@+id/et_password"
+                style="@style/Register_Edit"
+                android:hint="请输入密码" />
+        </LinearLayout>
+        <LinearLayout style="@style/Register_Input" >
+            <TextView
+                style="@style/Smile.TextView._Black"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:layout_width="70dp"
+                android:text="确认"
+                android:textStyle="bold" />
+            <EditText
+                android:singleLine="true"
+                android:id="@+id/et_password_again"
+                style="@style/Register_Edit"
+                android:hint="请再输一遍" />
+        </LinearLayout>
+        <LinearLayout style="@style/Register_Input" >
+            <TextView
+                style="@style/Smile.TextView._Black"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:layout_width="70dp"
+                android:text="学校"
+                android:textStyle="bold" />
+            <EditText
+                android:singleLine="true"
+                android:id="@+id/et_uni"
+                android:text="浙江大学"
+                style="@style/Register_Edit"
+                android:hint="@string/login_username_hint" />
+        </LinearLayout>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/base_edit_input"
-        android:id="@+id/et_uni"
-        android:text="浙江大学"/>
 
     <TextView
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        style="@style/Smile.TextView._Black"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textSize="18dp"
+        android:textStyle="bold"
         android:text="校区"/>
     <RadioGroup
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/first_select_campus">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="紫金港"
+        android:id="@+id/first_zjg" />
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="紫金港"
-            android:id="@+id/first_zjg" />
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="玉泉"
+        android:layout_centerInParent="true"
+        android:id="@+id/first_yq" />
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="西溪"
+        android:layout_alignParentRight="true"
+        android:id="@+id/first_xx" />
+</RelativeLayout>
+      <RelativeLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="玉泉"
-            android:id="@+id/first_yq" />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="西溪"
-            android:id="@+id/first_xx" />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="华家池"
-            android:id="@+id/first_hjc"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="之江"
-            android:id="@+id/first_zj"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="舟山"
-            android:id="@+id/first_zs" />
+
+          <RadioButton
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="华家池"
+              android:id="@+id/first_hjc"/>
+          <RadioButton
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentRight="true"
+              android:text="之江"
+              android:id="@+id/first_zj"/>
+          <RadioButton
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerInParent="true"
+              android:text="舟山"
+              android:id="@+id/first_zs" />
+      </RelativeLayout>
+
     </RadioGroup>
 
         <LinearLayout
@@ -100,15 +149,18 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
     <TextView
+        android:layout_marginLeft="16dp"
+        android:padding="10dp"
+        style="@style/Smile.TextView._Black"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
+        android:textStyle="bold"
         android:text="性别"/>
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center"
         android:layout_gravity="center"
         android:id="@+id/sex">
 

@@ -36,7 +36,7 @@ public class PicDragZoomActivityElinc extends ActivityBase {
         if (pic_address!=null && !pic_address.equals("")) {
             Glide.with(this).load(pic_address).fitCenter().into(iv_detail_pic);
         }else {
-            iv_detail_pic.setImageResource(R.drawable.test_image);
+            iv_detail_pic.setImageResource(R.drawable.default_head);
         }
         iv_detail_pic.setOnTouchListener(new TouchListener());
 
