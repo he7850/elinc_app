@@ -112,7 +112,7 @@ public class MyTreeActivity extends ActivityBase {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MyTreeActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         goalRecordList = new ArrayList<>();
-        myTreeAdapter = new MyTreeAdapter(goalRecordList);
+        myTreeAdapter = new MyTreeAdapter(MyTreeActivity.this,goalRecordList);
         recyclerView.setAdapter(myTreeAdapter);
 
         //recyclerView.setHasFixedSize(true);

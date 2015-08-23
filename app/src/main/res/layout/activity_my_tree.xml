@@ -1,63 +1,80 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.bmob.im.demo.ui.MyTreeActivity">
-    <include
-        android:id="@+id/common_actionbar"
-        layout="@layout/include_action_bar" />
-    <LinearLayout
-        android:background="@drawable/ic_menu_bg"
-        android:gravity="center"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="140dp">
+    <LinearLayout  android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#FFFFFF">
+        <include
+            android:id="@+id/common_actionbar"
+            layout="@layout/include_action_bar" />
         <LinearLayout
-            android:paddingTop="20dp"
-            android:gravity="right"
-            android:paddingRight="20dp"
+            android:background="@drawable/tree_above"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
-            <com.bmob.im.demo.view.CircleImageView
-                android:id="@+id/avatar"
-                android:src="@drawable/head"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                />
+            android:layout_width="match_parent"
+            android:layout_height="140dp">
+            <LinearLayout
+                android:paddingTop="20dp"
+                android:gravity="right"
+                android:paddingRight="20dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <com.bmob.im.demo.view.CircleImageView
+                    android:id="@+id/avatar"
+                    android:src="@drawable/head"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingTop="40dp"
+                android:paddingLeft="20dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginBottom="2dp"
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ElincBaby" />
+                <TextView
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:background="@drawable/corner_bg"
+                    android:id="@+id/user_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fighting!"/>
+
+            </LinearLayout>
+
         </LinearLayout>
 
-        <LinearLayout
-            android:paddingTop="40dp"
-            android:paddingLeft="20dp"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:layout_marginBottom="2dp"
-                android:id="@+id/user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ElincBaby" />
-            <TextView
-                android:background="@drawable/corner_bg"
-                android:id="@+id/user_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fighting!"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/tree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        </LinearLayout>
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/tree"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </android.support.v7.widget.RecyclerView>
-
-</LinearLayout>
+        android:layout_height="match_parent">
+            <ImageView
+                android:layout_alignParentBottom="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/tree_below"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+    </RelativeLayout>
+</FrameLayout>

@@ -1,9 +1,7 @@
 package com.bmob.im.demo.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,43 +9,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bmob.im.demo.R;
-import com.bmob.im.demo.adapter.base.BaseListAdapter;
-import com.bmob.im.demo.adapter.base.ViewHolder;
-import com.bmob.im.demo.bean.Answer;
 import com.bmob.im.demo.bean.Card;
-import com.bmob.im.demo.bean.Goal;
-import com.bmob.im.demo.bean.User;
-import com.bmob.im.demo.ui.ImageBrowserActivity;
 import com.bmob.im.demo.ui.MyTreeActivity;
-import com.bmob.im.demo.ui.SetMyInfoActivity;
-import com.bmob.im.demo.util.ImageLoadOptions;
-import com.bmob.im.demo.view.CircleImageView;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.datatype.BmobPointer;
-import cn.bmob.v3.datatype.BmobRelation;
-import cn.bmob.v3.listener.CountListener;
-import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by zheruicao on 15/8/23.
@@ -57,7 +38,8 @@ public class MyTreeAdapter extends RecyclerView.Adapter{
     private List<MyTreeActivity.GoalRecord> goalRecordList;
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
-    public MyTreeAdapter(List<MyTreeActivity.GoalRecord> goalRecordList){
+    public MyTreeAdapter(Context context,List<MyTreeActivity.GoalRecord> goalRecordList){
+        this.context = context;
         this.goalRecordList = goalRecordList;
     }
 
@@ -88,6 +70,7 @@ public class MyTreeAdapter extends RecyclerView.Adapter{
         if (goalRecordList.get(i).getGoal().getOut()) {
             myViewHolder.leaf.setImageResource(R.drawable.fruit);
         }
+        myViewHolder.triangle.setRotation(90);
 
         myViewHolder.card_list.removeAllViews();
         List<Card> cardList = goalRecordList.get(i).getCardList();
@@ -109,20 +92,39 @@ public class MyTreeAdapter extends RecyclerView.Adapter{
             myViewHolder.card_list.addView(cardLayout);
         }
 
-        if (!myViewHolder.isDisplay){
+        if (!myViewHolder.display){
             myViewHolder.card_list.setVisibility(View.GONE);
         }else {
             myViewHolder.card_list.setVisibility(View.VISIBLE);
         }
-        myViewHolder.triangle.setOnClickListener(new View.OnClickListener() {
+        myViewHolder.goal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("1","click");
-                if (!myViewHolder.isDisplay)
-                    myViewHolder.card_list.setVisibility(View.VISIBLE);
                 AlphaAnimation alphaAnimation;
-                if (myViewHolder.isDisplay) {
+                Animation rotateAnimation;
+                if (myViewHolder.display) {//隐藏
+                    //旋转动画
+                    rotateAnimation = AnimationUtils.loadAnimation(context, R.anim.rectangle_tree_revert);
+                    myViewHolder.triangle.setVisibility(View.INVISIBLE);
+                    myViewHolder.triangle.setRotation(90);
+                    rotateAnimation.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                            myViewHolder.triangle.setVisibility(View.VISIBLE);
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+                    //淡出动画
                     alphaAnimation = new AlphaAnimation(1, 0);
+                    alphaAnimation.setDuration(500);
                     alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
                         @Override
                         public void onAnimationStart(Animation animation) {
@@ -131,6 +133,7 @@ public class MyTreeAdapter extends RecyclerView.Adapter{
 
                         @Override
                         public void onAnimationEnd(Animation animation) {
+                            myViewHolder.triangle.clearAnimation();
                             myViewHolder.card_list.setVisibility(View.GONE);
                         }
 
@@ -139,13 +142,35 @@ public class MyTreeAdapter extends RecyclerView.Adapter{
 
                         }
                     });
-                    myViewHolder.isDisplay = false;
-                }else{
+                    myViewHolder.display = false;
+                }else{//显示
+                    //旋转动画
+                    rotateAnimation = AnimationUtils.loadAnimation(context, R.anim.rectangle_tree);
+                    myViewHolder.triangle.setVisibility(View.INVISIBLE);
+                    myViewHolder.triangle.setRotation(180);
+                    rotateAnimation.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                            myViewHolder.triangle.setVisibility(View.VISIBLE);
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+                    //淡出动画
                     alphaAnimation = new AlphaAnimation(0, 1);
-                    myViewHolder.isDisplay = true;
+                    alphaAnimation.setDuration(500);
+                    myViewHolder.card_list.setVisibility(View.VISIBLE);
+                    myViewHolder.display = true;
                 }
-                alphaAnimation.setDuration(500);
                 myViewHolder.card_list.startAnimation(alphaAnimation);
+                myViewHolder.triangle.startAnimation(rotateAnimation);
             }
         });
 
@@ -157,12 +182,12 @@ public class MyTreeAdapter extends RecyclerView.Adapter{
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
-        public boolean isDisplay;
+        public boolean display;
         public TextView date_of_tree;
         public TextView goal_of_tree;
         public TextView water_of_tree;
         public ImageView leaf,triangle,water;
-        public LinearLayout card_list;
+        public LinearLayout card_list,goal;
         public MyViewHolder(View itemView) {
             super(itemView);
             date_of_tree = (TextView) itemView.findViewById(R.id.date_of_tree);
@@ -170,9 +195,10 @@ public class MyTreeAdapter extends RecyclerView.Adapter{
             water_of_tree = (TextView) itemView.findViewById(R.id.water_of_tree);
             card_list = (LinearLayout) itemView.findViewById(R.id.card_list);
             leaf = (ImageView) itemView.findViewById(R.id.leaf_of_tree);
-            triangle = (ImageView) itemView.findViewById(R.id.triangle);
+            triangle = (ImageView) itemView.findViewById(R.id.rectangle);
             water = (ImageView) itemView.findViewById(R.id.water);
-            isDisplay = false;
+            goal = (LinearLayout) itemView.findViewById(R.id.goal);
+            display = false;
         }
     }
 
