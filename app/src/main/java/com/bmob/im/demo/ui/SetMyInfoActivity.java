@@ -157,7 +157,7 @@ public class SetMyInfoActivity extends ActivityBase implements OnClickListener {
 			btn_add_friend.setVisibility(View.GONE);
 		} else {
 			initTopBarForLeft("详细资料");
-			iv_nickarraw.setVisibility(View.INVISIBLE);
+			iv_nickarraw.setVisibility(View.GONE);
 			iv_arraw.setVisibility(View.INVISIBLE);
 			//不管对方是不是你的好友，均可以发送消息--BmobIM_V1.1.2修改
 			btn_chat.setVisibility(View.VISIBLE);
