@@ -147,23 +147,23 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
             @Override
             public void onSuccess(List<Question> list) {
                 // TODO Auto-generated method stub
+                if (list.size() < pageCapacity) {
+                    mListView.setPullLoadEnable(false);
+                    ShowToast("问题搜索完成!");
+                } else {
+                    mListView.setPullLoadEnable(true);
+                }
                 if (CollectionUtils.isNotNull(list)) {
                     if (isUpdate) {
                         question.clear();
                     }
                     adapter.addAll(list);
-                    if (list.size() < pageCapacity) {
-                        mListView.setPullLoadEnable(false);
-                        ShowToast("问题搜索完成!");
-                    } else {
-                        mListView.setPullLoadEnable(true);
-                    }
                 } else {
                     BmobLog.i("查询成功:无返回值");
                     if (question != null) {
                         question.clear();
                     }
-                    ShowToast("没有您要找的问题，去提问吧");
+                    ShowToast("没有您需要的问题，去提问吧");
                 }
                 if (!isUpdate) {
                     progress.dismiss();
@@ -180,7 +180,7 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
                 if (question != null) {
                     question.clear();
                 }
-                ShowToast("问题不存在");
+                ShowToast("奇怪，怎么没网了呢？");
                 mListView.setPullLoadEnable(false);
                 refreshPull();
                 //这样能保证每次查询都是从头开始
@@ -196,7 +196,7 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
      * @param @param page
      * @return void
      * @throws
-     *//*
+     */
     private void onLoadMore(int page){
         BmobQuery<Question> eq1 = new BmobQuery<Question>();
         eq1.addWhereContains("title", et_search_question.getText().toString());
@@ -218,9 +218,15 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
             @Override
             public void onSuccess(List<Question> list) {
                 // TODO Auto-generated method stub
+                if (list.size() < pageCapacity) {
+                    mListView.setPullLoadEnable(false);
+                    ShowToast("问题搜索完成!");
+                } else {
+                    mListView.setPullLoadEnable(true);
+                }
                 if (CollectionUtils.isNotNull(list)) {
-                    question.clear();
                     adapter.addAll(list);
+
                 }
                 refreshLoad();
             }
@@ -228,13 +234,13 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
             @Override
             public void onError(int i, String s) {
                 // TODO Auto-generated method stub
-                ShowLog("搜索更多问题出错:" + s);
+                ShowLog("打开WIFI会死啊！根本就没网，臣妾做不到！");
                 mListView.setPullLoadEnable(false);
                 refreshLoad();
             }
         });
     }
-*/
+
     @Override
     public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
         Intent intent = new Intent();
@@ -260,7 +266,7 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
                 }else{
                     ShowToast("请输入搜索内容");
                 }
-                ShowToast(searchName);
+                /*ShowToast(searchName);*/
                 break;
 
             default:
@@ -296,14 +302,14 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
             @Override
             public void onSuccess(List<Question> list) {
                 // TODO Auto-generated method stub
+                if (list.size() < pageCapacity) {
+                    mListView.setPullLoadEnable(false);
+                    //ShowToast("问题加载完成!");
+                } else {
+                    mListView.setPullLoadEnable(true);
+                }
                 if (CollectionUtils.isNotNull(list)) {
                     adapter.addAll(list);
-                    if (list.size() < pageCapacity) {
-                        mListView.setPullLoadEnable(false);
-                        ShowToast("问题搜索完成!");
-                    } else {
-                        mListView.setPullLoadEnable(true);
-                    }
                 }
                 refreshLoad();
             }
@@ -354,6 +360,7 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
                         question.clear();
                     }
                     ShowToast("没有您要找的问题，去提问吧");
+                    mListView.setPullLoadEnable(false);
                 }
                 if (!true) {
                     progress.dismiss();
@@ -399,15 +406,15 @@ public class FindQuestion extends ActivityBase implements View.OnClickListener,X
             @Override
             public void onSuccess(List<Question> list) {
                 // TODO Auto-generated method stub
+                if (list.size() < pageCapacity) {
+                    mListView.setPullLoadEnable(false);
+                    //ShowToast("问题加载完成!");
+                } else {
+                    mListView.setPullLoadEnable(true);
+                }
                 if (CollectionUtils.isNotNull(list)) {
                     question.clear();
                     adapter.addAll(list);
-                    if (list.size() < pageCapacity) {
-                        mListView.setPullLoadEnable(false);
-                        //ShowToast("问题加载完成!");
-                    } else {
-                        mListView.setPullLoadEnable(true);
-                    }
 
                     mListView.stopRefresh();
                 }

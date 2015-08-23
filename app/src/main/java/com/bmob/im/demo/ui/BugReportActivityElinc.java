@@ -29,7 +29,7 @@ public class BugReportActivityElinc extends ActivityBase {
             @Override
             public void onClick(View v) {
                 Bug bug=new Bug();
-                bug.setContent(et_bug_content.getText().toString());
+                //bug.setContent(et_bug_content.getText().toString());
                 bug.setTitle(et_bug_title.getText().toString());
                 bug.setSender(BmobUser.getCurrentUser(BugReportActivityElinc.this, User.class));
                 bug.save(BugReportActivityElinc.this, new SaveListener() {

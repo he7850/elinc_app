@@ -9,7 +9,50 @@
         android:id="@+id/common_actionbar"
         layout="@layout/include_action_bar" />
 
+
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/base_scrollview_top_height"
+        android:orientation="horizontal"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" >
+
+
+
+        <EditText
+            android:id="@+id/et_find_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_weight="1.0"
+            android:hint="用户名"
+            android:gravity="left"
+            android:layout_gravity="center"
+            android:background="@drawable/base_edit_input"
+            android:singleLine="true"
+            android:padding="5dp" />
+
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:background="@drawable/find_elinc_green"
+            android:gravity="center"
+            android:textColor="@color/base_color_text_black" >
+        </Button>
+
+    </LinearLayout>
+
+
+
+
+
+
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
@@ -37,7 +80,7 @@
             android:background="@drawable/btn_login_selector"
             android:text="@string/search"
             android:textSize="14sp" />
-    </LinearLayout>
+    </LinearLayout>-->
 
     <com.bmob.im.demo.view.xlist.XListView
         android:id="@+id/list_search"
