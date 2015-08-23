@@ -5,12 +5,13 @@
     android:background="@null"
     android:minWidth="300dp"
     android:orientation="vertical" >
-
-        <EditText
-            android:layout_height="wrap_content"
-            android:id="@+id/dialog_message"
-
-            android:layout_width="match_parent"
-            android:gravity="left|center"
-            android:hint="说点什么吧，记录你的成长"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+    <EditText
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_message"
+        android:layout_width="match_parent"
+        android:gravity="left|center"
+        android:hint="说点什么吧，记录你的成长"/>
 </LinearLayout>

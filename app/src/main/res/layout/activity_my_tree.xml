@@ -49,8 +49,6 @@
                 android:layout_height="wrap_content"
                 android:text="Fighting!"/>
 
-
-
         </LinearLayout>
 
     </LinearLayout>

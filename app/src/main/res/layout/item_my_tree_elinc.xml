@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -17,11 +18,13 @@
             android:text="2015.2.3"
             android:id="@+id/date_of_tree"/>
         <ImageView
+            android:id="@+id/triangle"
+            android:layout_marginBottom="1dp"
             android:layout_marginRight="6dp"
             android:layout_gravity="bottom"
             android:src="@drawable/elinc_sun"
             android:layout_width="14dp"
-            android:layout_height="14dp" />
+            android:layout_height="16dp" />
         <ImageView
             android:layout_marginRight="4dp"
             android:layout_width="80px"
@@ -37,11 +40,14 @@
             android:layout_height="wrap_content"
             android:text="Fighting !!!!!"/>
         <ImageView
+            android:id="@+id/water"
+            android:layout_marginLeft="30dp"
             android:layout_marginRight="6dp"
             android:layout_gravity="bottom"
             android:src="@drawable/elinc_sun"
+            android:layout_marginBottom="1dp"
             android:layout_width="14dp"
-            android:layout_height="14dp" />
+            android:layout_height="16dp" />
         <TextView
             android:layout_gravity="bottom"
             android:background="@drawable/corner_bg"
@@ -53,7 +59,6 @@
     </LinearLayout>
     <View
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/msg_emote_divider">

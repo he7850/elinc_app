@@ -1,17 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/card_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <ImageView
-        android:id="@+id/card_emotion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/card_claim"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginLeft="40dp"
+            android:text="15.07.23"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/card_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:background="@color/material_blue_grey_900"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"></View>
+        <ImageView
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/face"
+            android:layout_marginRight="10dp"
+            android:id="@+id/card_emotion"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:text="评论"
+            android:textSize="20sp"
+            android:id="@+id/card_claim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:background="#F0F0F0"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"></View>
+
 </LinearLayout>

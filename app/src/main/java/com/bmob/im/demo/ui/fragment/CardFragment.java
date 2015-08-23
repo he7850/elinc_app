@@ -126,35 +126,39 @@ public class CardFragment extends FragmentBase{
         query.findObjects(getActivity(), new FindListener<Goal>() {
             @Override
             public void onSuccess(final List<Goal> list) {
-                goalNum = list.size();
+                int length = 0;
+                for (int i = 0; i < list.size() && length < 3; i++) {
+                    if (!list.get(i).getOut()){
+                        goal[length++] = list.get(i);
+                    }
+                }
+                goalNum = length;
                 Log.i("goalNum", goalNum + "");
+                goal1.setVisibility(View.GONE);
+                goal2.setVisibility(View.GONE);
+                goal3.setVisibility(View.GONE);
                 if (goalNum == 0 ){
-                    goal1.setVisibility(View.GONE);
-                    goal2.setVisibility(View.GONE);
-                    goal3.setVisibility(View.GONE);
                     btn_add_goal.setBackgroundColor(Color.parseColor("#FF7171"));
                 }
                 if (goalNum > 0){
                     goal1.setVisibility(View.VISIBLE);
-                    goal2.setVisibility(View.GONE);
-                    goal3.setVisibility(View.GONE);
                     btn_add_goal.setBackgroundColor(Color.parseColor("#FF7171"));
-                    title1.setText(list.get(0).getGoalContent());
-                    tag1.setText(list.get(0).getType());
-                    claim1.setText(list.get(0).getClaim());
+                    title1.setText(goal[0].getGoalContent());
+                    tag1.setText(goal[0].getType());
+                    claim1.setText(goal[0].getClaim());
                     try {
                         Calendar calendar = Calendar.getInstance();
                         Calendar calendarNow = Calendar.getInstance();
                         calendarNow.setTime(new Date());
-                        String createdAt = list.get(0).getCreatedAt();
+                        String createdAt = goal[0].getCreatedAt();
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         Date date = sdf.parse(createdAt);
                         calendar.setTime(date);
                         long t1 = calendar.getTimeInMillis();
                         long t2 = calendarNow.getTimeInMillis();
                         long passedDays = (t2 - t1) / (24 * 60 * 60 * 1000);
-                        if (list.get(0).getDay()>passedDays){
-                            date1.setText("只剩 "+(list.get(0).getDay()-passedDays)+"天了");
+                        if (goal[0].getDay()>passedDays){
+                            date1.setText("只剩 "+(goal[0].getDay()-passedDays)+"天了");
                         }else{
                             date1.setText("过期了呢");
                         }
@@ -166,81 +170,79 @@ public class CardFragment extends FragmentBase{
                     card1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            dialog();
-                        }
-                    });
-                    card2.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                        }
-                    });
-                    card3.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
+                            dialog(0);
                         }
                     });
                 }
                 if (goalNum > 1){
-                    goal1.setVisibility(View.VISIBLE);
                     goal2.setVisibility(View.VISIBLE);
-                    goal3.setVisibility(View.GONE);
                     btn_add_goal.setBackgroundColor(Color.parseColor("#FFEA00"));
-                    title2.setText(list.get(1).getGoalContent());
-                    tag2.setText(list.get(0).getType());
-                    claim2.setText(list.get(1).getClaim());
+                    title2.setText(goal[1].getGoalContent());
+                    tag2.setText(goal[1].getType());
+                    claim2.setText(goal[1].getClaim());
                     try {
                         Calendar calendar = Calendar.getInstance();
                         Calendar calendarNow = Calendar.getInstance();
                         calendarNow.setTime(new Date());
-                        String createdAt = list.get(0).getCreatedAt();
+                        String createdAt = goal[1].getCreatedAt();
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         Date date = sdf.parse(createdAt);
                         calendar.setTime(date);
                         long t1 = calendar.getTimeInMillis();
                         long t2 = calendarNow.getTimeInMillis();
                         long passedDays = (t2 - t1) / (24 * 60 * 60 * 1000);
-                        if (list.get(0).getDay()>passedDays){
-                            date1.setText("只剩 "+(list.get(0).getDay()-passedDays)+"天了");
+                        if (goal[1].getDay()>passedDays){
+                            date2.setText("只剩 "+(goal[1].getDay()-passedDays)+"天了");
                         }else{
-                            date1.setText("过期了呢");
+                            date2.setText("过期了呢");
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                     comment_num2.setText("3");
                     fight_num2.setText("4");
+                    card2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog(1);
+                        }
+                    });
                 }
                 if (goalNum > 2){
                     goal1.setVisibility(View.VISIBLE);
                     goal2.setVisibility(View.VISIBLE);
                     goal3.setVisibility(View.VISIBLE);
                     btn_add_goal.setBackgroundColor(Color.parseColor("#66CC99"));
-                    title3.setText(list.get(2).getGoalContent());
-                    tag3.setText(list.get(0).getType());
-                    claim3.setText(list.get(2).getClaim());
+                    title3.setText(goal[2].getGoalContent());
+                    tag3.setText(goal[2].getType());
+                    claim3.setText(goal[2].getClaim());
                     try {
                         Calendar calendar = Calendar.getInstance();
                         Calendar calendarNow = Calendar.getInstance();
                         calendarNow.setTime(new Date());
-                        String createdAt = list.get(0).getCreatedAt();
+                        String createdAt = goal[2].getCreatedAt();
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         Date date = sdf.parse(createdAt);
                         calendar.setTime(date);
                         long t1 = calendar.getTimeInMillis();
                         long t2 = calendarNow.getTimeInMillis();
                         long passedDays = (t2 - t1) / (24 * 60 * 60 * 1000);
-                        if (list.get(0).getDay()>passedDays){
-                            date1.setText("只剩 "+(list.get(0).getDay()-passedDays)+"天了");
+                        if (goal[2].getDay()>passedDays){
+                            date3.setText("只剩 "+(goal[2].getDay()-passedDays)+"天了");
                         }else{
-                            date1.setText("过期了呢");
+                            date3.setText("过期了呢");
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                     comment_num3.setText("3");
                     fight_num3.setText("4");
+                    card3.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog(2);
+                        }
+                    });
                 }
                 btn_add_goal.setVisibility(View.VISIBLE);
 
@@ -253,17 +255,37 @@ public class CardFragment extends FragmentBase{
         });
 
     }
-    protected void dialog() {
+    private void dialog(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         final View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_hit_card, null);
-        //    设置我们自己定义的布局文件作为弹出框的Content
+        //设置我们自己定义的布局文件作为弹出框的Content
         builder.setView(view);
-        builder.setTitle("取消关注");
-        AlertDialog.Builder 确认 = builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+        builder.setTitle("今日打卡");
+        AlertDialog.Builder request = builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 final EditText et = (EditText) view.findViewById(R.id.dialog_message);
-                ShowToast(et.getText().toString());
+                if (et.getText().toString().equals("")) {
+                    ShowToast("还没有说一句话呢");
+                } else {
+                    Card card = new Card();
+                    card.setGoal(goal[position]);
+                    card.setLikedBy(new BmobRelation());
+                    card.setLikedByNum(0);
+                    card.setReply(new BmobRelation());
+                    card.setCardClaim(et.getText().toString());
+                    card.save(getContext(), new SaveListener() {
+                        @Override
+                        public void onSuccess() {
+                            ShowToast("打卡成功");
+                        }
+
+                        @Override
+                        public void onFailure(int i, String s) {
+                            ShowToast("打卡失败");
+                        }
+                    });
+                }
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -277,43 +299,3 @@ public class CardFragment extends FragmentBase{
 
 
 }
-
-
-/*
-button5.setOnClickListener(new OnClickListener()
-        {
-@Override
-public void onClick(View v)
-        {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("请输入用户名和密码");
-        //    通过LayoutInflater来加载一个xml的布局文件作为一个View对象
-        View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog, null);
-        //    设置我们自己定义的布局文件作为弹出框的Content
-        builder.setView(view);
-
-final EditText username = (EditText)view.findViewById(R.id.username);
-final EditText password = (EditText)view.findViewById(R.id.password);
-
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
-        {
-@Override
-public void onClick(DialogInterface dialog, int which)
-        {
-        String a = username.getText().toString().trim();
-        String b = password.getText().toString().trim();
-        //    将输入的用户名和密码打印出来
-        Toast.makeText(MainActivity.this, "用户名: " + a + ", 密码: " + b, Toast.LENGTH_SHORT).show();
-        }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
-        {
-@Override
-public void onClick(DialogInterface dialog, int which)
-        {
-
-        }
-        });
-        builder.show();
-        }
-        });*/

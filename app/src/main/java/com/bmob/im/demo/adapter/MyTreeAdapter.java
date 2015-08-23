@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -67,8 +69,8 @@ public class MyTreeAdapter extends RecyclerView.Adapter{
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
-        MyViewHolder myViewHolder = (MyViewHolder)viewHolder;
+    public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, int i) {
+        final MyViewHolder myViewHolder = (MyViewHolder)viewHolder;
         String createdAt = goalRecordList.get(i).getGoal().getCreatedAt();
         try {
             Calendar calendar = Calendar.getInstance();
@@ -82,17 +84,70 @@ public class MyTreeAdapter extends RecyclerView.Adapter{
             e.printStackTrace();
         }
         myViewHolder.goal_of_tree.setText(goalRecordList.get(i).getGoal().getGoalContent());
-        myViewHolder.water_of_tree.setText("233");
+        myViewHolder.water_of_tree.setText("0");
+        if (goalRecordList.get(i).getGoal().getOut()) {
+            myViewHolder.leaf.setImageResource(R.drawable.fruit);
+        }
+
         myViewHolder.card_list.removeAllViews();
         List<Card> cardList = goalRecordList.get(i).getCardList();
         for (int j = 0; j < cardList.size(); j++) {
             LinearLayout cardLayout = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.card_in_tree_elinc,null);
             CardViewHolder cardViewHolder = new CardViewHolder(cardLayout);
-            cardViewHolder.card_date.setText(cardList.get(j).getCreatedAt());
-            cardViewHolder.card_claim.setText(cardList.get(j).getCardClaim()+" 233");
-            cardViewHolder.card_emotion.setImageResource(R.drawable.elinc_sun);
+            try {
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+                Date date = sdf.parse(cardList.get(j).getCreatedAt());
+                calendar.setTime(date);
+                String dateStr = calendar.get(Calendar.YEAR)+"."+calendar.get(Calendar.MONTH)+"."+calendar.get(Calendar.DATE);
+                cardViewHolder.card_date.setText(dateStr);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            cardViewHolder.card_claim.setText(cardList.get(j).getCardClaim());
+            //cardViewHolder.card_emotion.setImageResource(R.drawable.face);
             myViewHolder.card_list.addView(cardLayout);
         }
+
+        if (!myViewHolder.isDisplay){
+            myViewHolder.card_list.setVisibility(View.GONE);
+        }else {
+            myViewHolder.card_list.setVisibility(View.VISIBLE);
+        }
+        myViewHolder.triangle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("1","click");
+                if (!myViewHolder.isDisplay)
+                    myViewHolder.card_list.setVisibility(View.VISIBLE);
+                AlphaAnimation alphaAnimation;
+                if (myViewHolder.isDisplay) {
+                    alphaAnimation = new AlphaAnimation(1, 0);
+                    alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            myViewHolder.card_list.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+                    myViewHolder.isDisplay = false;
+                }else{
+                    alphaAnimation = new AlphaAnimation(0, 1);
+                    myViewHolder.isDisplay = true;
+                }
+                alphaAnimation.setDuration(500);
+                myViewHolder.card_list.startAnimation(alphaAnimation);
+            }
+        });
 
     }
 
@@ -102,10 +157,11 @@ public class MyTreeAdapter extends RecyclerView.Adapter{
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
+        public boolean isDisplay;
         public TextView date_of_tree;
         public TextView goal_of_tree;
         public TextView water_of_tree;
-        //public ImageView
+        public ImageView leaf,triangle,water;
         public LinearLayout card_list;
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -113,6 +169,10 @@ public class MyTreeAdapter extends RecyclerView.Adapter{
             goal_of_tree = (TextView) itemView.findViewById(R.id.goal_of_tree);
             water_of_tree = (TextView) itemView.findViewById(R.id.water_of_tree);
             card_list = (LinearLayout) itemView.findViewById(R.id.card_list);
+            leaf = (ImageView) itemView.findViewById(R.id.leaf_of_tree);
+            triangle = (ImageView) itemView.findViewById(R.id.triangle);
+            water = (ImageView) itemView.findViewById(R.id.water);
+            isDisplay = false;
         }
     }
 
