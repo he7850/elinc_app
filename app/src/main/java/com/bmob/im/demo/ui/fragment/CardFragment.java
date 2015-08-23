@@ -119,6 +119,9 @@ public class CardFragment extends FragmentBase{
 
     private void initList(){
         goal = new Goal[3];
+        goal1.setVisibility(View.GONE);
+        goal2.setVisibility(View.GONE);
+        goal3.setVisibility(View.GONE);
         BmobQuery<Goal> query = new BmobQuery<>();
         //用此方式可以构造一个BmobPointer对象。只需要设置objectId就行
         query.addWhereEqualTo("author", new BmobPointer(me));
@@ -134,9 +137,7 @@ public class CardFragment extends FragmentBase{
                 }
                 goalNum = length;
                 Log.i("goalNum", goalNum + "");
-                goal1.setVisibility(View.GONE);
-                goal2.setVisibility(View.GONE);
-                goal3.setVisibility(View.GONE);
+                btn_add_goal.setVisibility(View.VISIBLE);
                 if (goalNum == 0 ){
                     btn_add_goal.setBackgroundColor(Color.parseColor("#FF7171"));
                 }
@@ -209,8 +210,6 @@ public class CardFragment extends FragmentBase{
                     });
                 }
                 if (goalNum > 2){
-                    goal1.setVisibility(View.VISIBLE);
-                    goal2.setVisibility(View.VISIBLE);
                     goal3.setVisibility(View.VISIBLE);
                     btn_add_goal.setBackgroundColor(Color.parseColor("#66CC99"));
                     title3.setText(goal[2].getGoalContent());
@@ -243,8 +242,8 @@ public class CardFragment extends FragmentBase{
                             dialog(2);
                         }
                     });
+                    btn_add_goal.setVisibility(View.GONE);
                 }
-                btn_add_goal.setVisibility(View.VISIBLE);
 
             }
 
