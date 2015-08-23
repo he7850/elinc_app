@@ -51,6 +51,12 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
     ProgressDialog progress ;
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initData();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_question, container, false);
         /*listView = (ListView)view.findViewById(R.id.question_list);*/
@@ -59,16 +65,8 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initView();
-    }
-
-    private void initView(){
-        //initTopBarForLeft("查找问题");
-
         initXListView();
         initAdapter();
-        //refreshList();
-
     }
 
     private void initXListView() {
@@ -113,6 +111,11 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
 
     @Override
     public void onRefresh() {
+        refreshList();
+    }
+
+    @Override
+    public void onResume() {
         refreshList();
     }
 
@@ -163,7 +166,7 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
         }
     }
 
-    public void initAdapter(){
+    public void initData () {
         BmobQuery<Question> allQuery = new BmobQuery<Question>();
         allQuery.include("author");
         allQuery.order("-createdAt");
@@ -174,24 +177,12 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
                 // TODO Auto-generated method stub
                 if (CollectionUtils.isNotNull(list)) {
                     question.clear();
-                    adapter.addAll(list);
-                    if (list.size() < pageCapacity) {
-                        mListView.setPullLoadEnable(false);
-                        //ShowToast("问题加载完成!");
-                    } else {
-                        mListView.setPullLoadEnable(true);
-                    }
+                    question.addAll(list);
                 } else {
                     BmobLog.i("查询成功:无返回值");
                     if (question != null) {
                         question.clear();
                     }
-                    ShowToast("没有您要找的问题，去提问吧");
-                }
-                if (!true) {
-                    progress.dismiss();
-                } else {
-                    refreshPull();
                 }
                 //这样能保证每次查询都是从头开始
                 curPage = 0;
@@ -203,13 +194,27 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
                 if (question != null) {
                     question.clear();
                 }
-                ShowToast("问题不存在");
-                mListView.setPullLoadEnable(false);
-                refreshPull();
                 //这样能保证每次查询都是从头开始
                 curPage = 0;
             }
         });
+    }
+
+
+    public void initAdapter(){
+        if (CollectionUtils.isNotNull(question)) {
+            if (question.size() < pageCapacity) {
+                mListView.setPullLoadEnable(false);
+                //ShowToast("问题加载完成!");
+            } else {
+                mListView.setPullLoadEnable(true);
+            }
+        } else {
+            mListView.setPullLoadEnable(false);
+            refreshPull();
+            ShowToast("没有您要找的问题，去提问吧");
+        }
+        refreshPull();
     }
     private void refreshList(){
         curPage =0;

@@ -183,9 +183,9 @@ public class MainActivity extends ActivityBase implements EventListener{
 					case R.id.nav_settings:
 						startAnimActivity(SettingActivity.class);
 						break;
-					case R.id.nav_recommend:
+					/*case R.id.nav_recommend:
 						startAnimActivity(NearPeopleActivity.class);
-						break;
+						break;*/
 					case R.id.nav_my_goal:
 
 						Intent intent = new Intent();

@@ -115,8 +115,8 @@ public class NewQuestionActivityElinc extends ActivityBase {
             @Override
             public void onClick(View v) {
                 String a=et_input_tags.getText().toString();
-                if(!a.equals("") && a!=null){a=a+",生活";}
-                else{a="生活";}
+                if(!a.equals("") && a!=null){a=a+",旅行";}
+                else{a="旅行";}
                 et_input_tags.setText(a);
             }
         });
