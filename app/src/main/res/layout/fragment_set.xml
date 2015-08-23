@@ -54,12 +54,13 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
+            android:gravity="top"
             android:text="@string/set_notify" />
 
         <ImageView
             android:id="@+id/iv_open_notification"
-            android:layout_width="54dp"
-            android:layout_height="32dp"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
@@ -68,8 +69,8 @@
 
         <ImageView
             android:id="@+id/iv_close_notification"
-            android:layout_width="54dp"
-            android:layout_height="32dp"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
@@ -95,13 +96,14 @@
             android:layout_width="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_height="wrap_content"
+            android:gravity="top"
             android:layout_centerVertical="true"
             android:text="@string/set_voice" />
 
         <ImageView
             android:id="@+id/iv_open_voice"
-            android:layout_width="54dp"
-            android:layout_height="32dp"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
@@ -110,8 +112,8 @@
 
         <ImageView
             android:id="@+id/iv_close_voice"
-            android:layout_width="54dp"
-            android:layout_height="32dp"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
@@ -139,12 +141,13 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
+            android:gravity="top"
             android:text="@string/set_vibrate" />
 
         <ImageView
             android:id="@+id/iv_open_vibrate"
-            android:layout_width="54dp"
-            android:layout_height="32dp"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
@@ -153,8 +156,8 @@
 
         <ImageView
             android:id="@+id/iv_close_vibrate"
-            android:layout_width="54dp"
-            android:layout_height="32dp"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
@@ -181,6 +184,7 @@
             android:layout_marginLeft="16dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
+            android:gravity="top"
             android:text="@string/set_blacklist" />
 
         <TextView

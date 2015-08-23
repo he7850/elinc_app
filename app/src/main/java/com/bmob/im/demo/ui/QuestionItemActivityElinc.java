@@ -258,24 +258,23 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
         bmobQuery.findObjects(QuestionItemActivityElinc.this, new FindListener<Answer>() {
             @Override
             public void onSuccess(List<Answer> list) {
-
+                if (list.size() < pageCapacity) {
+                    mListView.setPullLoadEnable(false);
+                    //ShowToast("问题搜索完成!");
+                } else {
+                    mListView.setPullLoadEnable(true);
+                }
                 // TODO Auto-generated method stub
                 if (CollectionUtils.isNotNull(list)) {
                     answer.clear();
-
                     adapter.addAll(list);
-                    if (list.size() < BRequest.QUERY_LIMIT_COUNT) {
-                        mListView.setPullLoadEnable(false);
-                        //ShowToast("问题搜索完成!");
-                    } else {
-                        mListView.setPullLoadEnable(true);
-                    }
                 } else {
                     BmobLog.i("查询成功:无返回值");
                     if (answer != null) {
                         answer.clear();
                     }
                     ShowToast("没有答案，添加一个把");
+                    mListView.setPullLoadEnable(false);
                 }
                 if (!true) {
                     progress.dismiss();
@@ -307,13 +306,14 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
             @Override
             public void onSuccess(List<Answer> list) {
                 // TODO Auto-generated method stub
+                if (list.size() < pageCapacity) {
+                    mListView.setPullLoadEnable(false);
+                    //ShowToast("问题加载完成!");
+                } else {
+                    mListView.setPullLoadEnable(true);
+                }
                 if (CollectionUtils.isNotNull(list)) {
-                    if (list.size() < pageCapacity) {
-                        mListView.setPullLoadEnable(false);
-                        //ShowToast("问题加载完成!");
-                    } else {
-                        mListView.setPullLoadEnable(true);
-                    }
+
                     adapter.addAll(list);
                 }
                 refreshLoad();
@@ -355,15 +355,16 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
             @Override
             public void onSuccess(List<Answer> arg0) {
                 // TODO Auto-generated method stub
+                if (arg0.size() < pageCapacity) {
+                    mListView.setPullLoadEnable(false);
+                    //ShowToast("问题加载完成!");
+                } else {
+                    mListView.setPullLoadEnable(true);
+                }
                 if (CollectionUtils.isNotNull(arg0)) {
                     answer.clear();
                     adapter.addAll(arg0);
-                    if (arg0.size() < pageCapacity) {
-                        mListView.setPullLoadEnable(false);
-                        //ShowToast("问题加载完成!");
-                    } else {
-                        mListView.setPullLoadEnable(true);
-                    }
+
                     mListView.stopRefresh();
                 }
                 refreshLoad();
@@ -724,6 +725,7 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
                 }
                 answer_iv.setImageBitmap(bitmap);
                 answer_iv.setVisibility(View.VISIBLE);
+                submit_answer_avatar.setBackgroundResource(R.drawable.added_picture);
                 // 保存图片
                 String filename = new SimpleDateFormat("yyMMddHHmmss")
                         .format(new Date())+".png";

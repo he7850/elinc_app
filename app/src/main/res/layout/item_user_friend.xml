@@ -33,9 +33,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/tags"
-            android:layout_marginBottom="30dp"
             android:layout_marginLeft="10dp"
-            android:layout_alignBottom="@+id/img_friend_avatar"
+            android:layout_marginTop="10dp"
+            android:layout_alignTop="@+id/img_friend_avatar"
             android:layout_toRightOf="@id/img_friend_avatar">
             <TextView
                 android:layout_alignParentTop="true"
@@ -45,10 +45,9 @@
                 style="@style/Smile.TextView._Black"
                 android:text="SS"
                 android:gravity="bottom"
-                android:layout_marginTop="0dp"
                 android:paddingRight="3dp"
                 android:singleLine="true"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
             <ImageView
                 android:gravity="top"
                 android:layout_alignBottom="@+id/tv_friend_name"
@@ -59,10 +58,10 @@
                 android:layout_height="20dp" />
             <TextView
                 android:id="@+id/campus"
-                android:gravity="top"
-                android:layout_gravity="top"
+                android:gravity="bottom"
+                android:layout_gravity="bottom"
                 android:layout_marginRight="20sp"
-                android:textSize="20sp"
+                android:textSize="14sp"
                 android:layout_alignParentRight="true"
                 android:text="xq"
                 android:layout_width="wrap_content"

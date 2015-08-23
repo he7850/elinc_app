@@ -42,7 +42,8 @@
             android:text="联系方式"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:id="@+id/textView2" />
+            android:id="@+id/textView2"
+            android:visibility="gone"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -50,6 +51,7 @@
             android:inputType="textMultiLine"
             android:padding="5dp"
             android:ems="10"
+            android:visibility="gone"
             android:background="@drawable/border"
             android:id="@+id/et_bug_content" />
 

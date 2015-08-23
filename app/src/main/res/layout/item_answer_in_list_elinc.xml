@@ -82,8 +82,8 @@
             <ImageView
                 android:id="@+id/like_answer"
                 android:src="@drawable/like"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_marginLeft="20dp"
                 />
             <TextView
@@ -92,7 +92,7 @@
                 android:text="@string/loading"
                 android:textSize="8sp"
                 android:fontFamily="微软雅黑"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 />

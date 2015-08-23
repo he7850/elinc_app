@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/loading"
                 android:fontFamily="微软雅黑"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:paddingTop="10dp"
                 android:paddingBottom="6dp"
                 android:textColor="#424142"
