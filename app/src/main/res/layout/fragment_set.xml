@@ -49,11 +49,12 @@
         android:padding="10dip" >
 
         <TextView
-            style="@style/Smile.TextView._Black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
+            android:textSize="18sp"
+            android:textColor="@color/base_color_text_black"
             android:gravity="top"
             android:text="@string/set_notify" />
 
@@ -92,9 +93,10 @@
         android:padding="10dip" >
 
         <TextView
-            style="@style/Smile.TextView._Black"
+            android:textColor="@color/base_color_text_black"
             android:layout_width="wrap_content"
             android:layout_marginLeft="16dp"
+            android:textSize="18sp"
             android:layout_height="wrap_content"
             android:gravity="top"
             android:layout_centerVertical="true"
@@ -136,12 +138,13 @@
         android:padding="10dip" >
 
         <TextView
-            style="@style/Smile.TextView._Black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
+            android:textSize="18sp"
             android:gravity="top"
+            android:textColor="@color/base_color_text_black"
             android:text="@string/set_vibrate" />
 
         <ImageView
@@ -180,12 +183,15 @@
         android:padding="10dp" >
 
         <TextView
-            style="@style/Smile.TextView._Black"
             android:layout_marginLeft="16dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:gravity="top"
-            android:text="@string/set_blacklist" />
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/base_color_text_black"
+            android:text="黑名单" />
 
         <TextView
             style="@style/Smile.TextView._Black"

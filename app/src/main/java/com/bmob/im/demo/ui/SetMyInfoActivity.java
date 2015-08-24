@@ -88,6 +88,7 @@ public class SetMyInfoActivity extends ActivityBase implements OnClickListener {
 	String objectId = "";
 	String avatar = "";
 	String from = "";
+	String signature ="";
 	String username = "";
 	User user;
 
@@ -127,6 +128,7 @@ public class SetMyInfoActivity extends ActivityBase implements OnClickListener {
 				bundle.putString("username", username);
 				bundle.putString("objectId", objectId);
 				bundle.putString("avatar", avatar);
+				bundle.putString("signature",signature);
 				if(username.equals(u.getUsername().toString())){
 					bundle.putString("from", "me");
 				}else{
@@ -208,6 +210,7 @@ public class SetMyInfoActivity extends ActivityBase implements OnClickListener {
 				if (arg0 != null && arg0.size() > 0) {
 					user = arg0.get(0);
 					objectId = arg0.get(0).getObjectId();
+					signature =arg0.get(0).getSignature();
 					avatar = arg0.get(0).getAvatar();
 					btn_chat.setEnabled(true);
 					btn_back.setEnabled(true);
