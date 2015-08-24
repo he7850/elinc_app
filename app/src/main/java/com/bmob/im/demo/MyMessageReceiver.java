@@ -68,6 +68,8 @@ public class MyMessageReceiver extends BroadcastReceiver {
 		}
 	}
 
+
+
 	/** 解析Json字符串
 	  * @Title: parseMessage
 	  * @Description: TODO
@@ -112,6 +114,7 @@ public class MyMessageReceiver extends BroadcastReceiver {
 									if(isAllow && currentUser!=null && currentUser.getObjectId().equals(toId)){//当前登陆用户存在并且也等于接收方id
 										mNewNum++;
 										showMsgNotify(context,msg);
+
 									}
 								}
 							}
@@ -187,10 +190,10 @@ public class MyMessageReceiver extends BroadcastReceiver {
 
 			try {
 				jo = new JSONObject(json);
-				BmobLog.i("Json中的author_name",jo.getString("author_name"));
-				BmobLog.i("Json中的current_user_name",currentUser.getUsername());
+				//BmobLog.i("Json中的author_name",jo.getString("author_name"));
+				//BmobLog.i("Json中的current_user_name",currentUser.getUsername());
 				if (jo.getString("author_name").equals(currentUser.getUsername())) {
-					BmobLog.i("到此显示Notification","");
+					//BmobLog.i("到此显示Notification","");
 					showOtherNotify(context,jo.getString("answerer_name"),currentUser.getObjectId(),jo.getString("questionId"),"回答了您的问题",QuestionItemActivityElinc.class);
 				}
 			}catch (JSONException e1) {

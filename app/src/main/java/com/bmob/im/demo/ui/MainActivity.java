@@ -30,7 +30,9 @@ import cn.bmob.im.BmobUserManager;
 import cn.bmob.im.bean.BmobInvitation;
 import cn.bmob.im.bean.BmobMsg;
 import cn.bmob.im.config.BmobConfig;
+import cn.bmob.im.db.BmobDB;
 import cn.bmob.im.inteface.EventListener;
+import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
 
 import com.bmob.im.demo.CustomApplcation;
@@ -269,6 +271,18 @@ public class MainActivity extends ActivityBase implements EventListener{
 	}
 
 	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		super.onPrepareOptionsMenu(menu);
+		MenuItem item = menu.findItem(R.id.action_chat);
+		if (BmobDB.create(this).hasUnReadMsg()) {
+			item.setIcon(R.drawable.new_msg_elinc);
+		} else {
+			item.setIcon(R.drawable.no_msg_elinc);
+		}
+		return super.onPrepareOptionsMenu(menu);
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case android.R.id.home:
@@ -353,6 +367,7 @@ public class MainActivity extends ActivityBase implements EventListener{
 		}
 //		iv_recent_tips.setVisibility(View.VISIBLE);
 //		也要存储起来
+		invalidateOptionsMenu();
 		if(message!=null){
 			BmobChatManager.getInstance(MainActivity.this).saveReceiveMessage(true,message);
 		}
