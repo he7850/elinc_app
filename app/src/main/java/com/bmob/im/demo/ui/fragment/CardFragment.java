@@ -42,7 +42,7 @@ import cn.bmob.v3.listener.UpdateListener;
 public class CardFragment extends FragmentBase{
     private User me;
     private Goal[] goal;
-    private int goalNum;
+    private int goalNum = 3;
     private CardView goal1,goal2,goal3;
     private TextView tag1,tag2,tag3;
     private TextView title1,title2,title3;
