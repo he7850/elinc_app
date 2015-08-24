@@ -82,7 +82,7 @@ public class LocationActivity extends BaseActivity implements
 		Intent intent = getIntent();
 		String type = intent.getStringExtra("type");
 		if (type.equals("select")) {// 选择发送位置
-			initTopBarForBoth("位置", R.drawable.base_action_bar_true_bg_selector,
+			initTopBarForBoth("位置", R.drawable.send_location,
 					new onRightImageButtonClickListener() {
 
 						@Override

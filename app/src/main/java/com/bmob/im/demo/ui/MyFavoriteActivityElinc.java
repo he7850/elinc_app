@@ -55,6 +55,9 @@ public class MyFavoriteActivityElinc extends ActivityBase implements OnClickList
     XListView mListView;
     QuestionListAdapter adapter;
     private View view;
+    private final int pageCapacity=5;
+    int curPage = 0;
+    ProgressDialog progress ;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,7 +77,7 @@ public class MyFavoriteActivityElinc extends ActivityBase implements OnClickList
     private void initXListView() {
         mListView = (XListView) findViewById(R.id.list_question_e);
         // 首先不允许加载更多
-        mListView.setPullLoadEnable(false);
+        mListView.setPullLoadEnable(true);
         // 不允许下拉
         mListView.setPullRefreshEnable(false);
         // 设置监听器
@@ -89,103 +92,6 @@ public class MyFavoriteActivityElinc extends ActivityBase implements OnClickList
 
     }
 
-    int curPage = 0;
-    ProgressDialog progress ;
-    private void initSearchList(final boolean isUpdate){
-        if(!isUpdate){
-            progress = new ProgressDialog(this);
-            progress.setMessage("正在搜索...");
-            progress.setCanceledOnTouchOutside(true);
-            progress.show();
-        }
-
-        BmobQuery<Question> query = new BmobQuery<>();
-        User u = BmobUser.getCurrentUser(this, User.class);
-        query.include("follow");
-        query.addWhereEqualTo("ObjectId", u.getObjectId());
-        query.findObjects(this, new FindListener<Question>() {
-            @Override
-            public void onSuccess(List<Question> list) {
-                // TODO Auto-generated method stub
-                if (CollectionUtils.isNotNull(list)) {
-                    if (isUpdate) {
-                        question.clear();
-                    }
-                    adapter.addAll(list);
-                    if (list.size() < BRequest.QUERY_LIMIT_COUNT) {
-                        mListView.setPullLoadEnable(false);
-                        ShowToast("问题搜索完成!");
-                    } else {
-                        mListView.setPullLoadEnable(true);
-                    }
-                } else {
-                    BmobLog.i("查询成功:无返回值");
-                    if (question != null) {
-                        question.clear();
-                    }
-                    ShowToast("没有您要找的问题，去提问吧");
-                }
-                if (!isUpdate) {
-                    progress.dismiss();
-                } else {
-                    refreshPull();
-                }
-                //这样能保证每次查询都是从头开始
-                curPage = 0;
-            }
-            @Override
-            public void onError(int code, String msg) {
-                // TODO Auto-generated method stub
-                BmobLog.i("查询错误:" + msg);
-                if (question != null) {
-                    question.clear();
-                }
-                ShowToast("问题不存在");
-                mListView.setPullLoadEnable(false);
-                refreshPull();
-                //这样能保证每次查询都是从头开始
-                curPage = 0;
-            }
-        });
-
-    }
-
-    /** 查询更多
-     * @Title: queryMoreNearList
-     * @Description: TODO
-     * @param @param page
-     * @return void
-     * @throws
-     */
-    private void queryMoreSearchList(int page){
-        /*BmobQuery<Question> query = new BmobQuery<>();
-        User u = BmobUser.getCurrentUser(this, User.class);
-        u.setObjectId(u.getObjectId());
-        query.include("author");
-        query.addWhereRelatedTo("follow", new BmobPointer(u));*/
-        BmobQuery<Question> query = new BmobQuery<>();
-        User u = BmobUser.getCurrentUser(this, User.class);
-        query.include("follow");
-        query.addWhereEqualTo("ObjectId",u.getObjectId());
-        query.findObjects(this, new FindListener<Question>() {
-            @Override
-            public void onSuccess(List<Question> list) {
-                // TODO Auto-generated method stub
-                if (CollectionUtils.isNotNull(list)) {
-                    adapter.addAll(list);
-                }
-                refreshLoad();
-            }
-
-            @Override
-            public void onError(int i, String s) {
-                // TODO Auto-generated method stub
-                ShowLog("搜索更多问题出错:" + s);
-                mListView.setPullLoadEnable(false);
-                refreshLoad();
-            }
-        });
-    }
 
     @Override
     public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
@@ -214,15 +120,24 @@ public class MyFavoriteActivityElinc extends ActivityBase implements OnClickList
 
     @Override
     public void onLoadMore() {
-        BmobQuery<Question> query = new BmobQuery<>();
+        BmobQuery<Question> query = new BmobQuery<Question>();
         User u = BmobUser.getCurrentUser(this, User.class);
-        query.include("follow");
-        query.addWhereEqualTo("ObjectId", u.getObjectId());
+        u.setObjectId(u.getObjectId());
+        query.include("author");
+        query.setSkip((curPage + 1) * pageCapacity);
+        curPage++;
+        query.setLimit(pageCapacity);
+        query.addWhereRelatedTo("follow", new BmobPointer(u));
         query.findObjects(this, new FindListener<Question>() {
             @Override
             public void onSuccess(List<Question> list) {
                 // TODO Auto-generated method stub
-                if (CollectionUtils.isNotNull(list)) {
+                if (list.size() < pageCapacity) {
+                    mListView.setPullLoadEnable(false);
+                    //ShowToast("问题搜索完成!");
+                } else {
+                    mListView.setPullLoadEnable(true);
+                }if (CollectionUtils.isNotNull(list)) {
                     adapter.addAll(list);
                 }
                 refreshLoad();
@@ -255,17 +170,24 @@ public class MyFavoriteActivityElinc extends ActivityBase implements OnClickList
         User u = BmobUser.getCurrentUser(this, User.class);
         u.setObjectId(u.getObjectId());
         query.include("author");
+        query.setLimit(pageCapacity);
         query.addWhereRelatedTo("follow", new BmobPointer(u));
         query.findObjects(this, new FindListener<Question>() {
             @Override
             public void onSuccess(List<Question> list) {
                 // TODO Auto-generated method stub
+                if (list.size() < pageCapacity) {
+                    mListView.setPullLoadEnable(false);
+                    //ShowToast("问题搜索完成!");
+                } else {
+                    mListView.setPullLoadEnable(true);
+                }
                 if (CollectionUtils.isNotNull(list)) {
                     question.clear();
                     adapter.addAll(list);
-                    if (list.size() < BRequest.QUERY_LIMIT_COUNT) {
+                    if (list.size() < pageCapacity) {
                         mListView.setPullLoadEnable(false);
-                        ShowToast("问题搜索完成!");
+                        //ShowToast("问题搜索完成!");
                     } else {
                         mListView.setPullLoadEnable(true);
                     }
@@ -274,7 +196,7 @@ public class MyFavoriteActivityElinc extends ActivityBase implements OnClickList
                     if (question != null) {
                         question.clear();
                     }
-                    ShowToast("没有您要找的问题，去提问吧");
+                    ShowToast("没有您收藏问题，去收藏吧");
                 }
                 if (!true) {
                     progress.dismiss();

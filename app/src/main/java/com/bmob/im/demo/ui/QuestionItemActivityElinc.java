@@ -423,14 +423,14 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
                             // TODO Auto-generated method stub
                             refreshButton();
                             Log.i("life", "多对多关联添加成功");
-                            Tool.alert(QuestionItemActivityElinc.this, "取消收藏");
+                            //Tool.alert(QuestionItemActivityElinc.this, "取消收藏");
                         }
 
                         @Override
                         public void onFailure(int arg0, String arg1) {
                             // TODO Auto-generated method stub
                             Log.i("life", "多对多关联添加失败");
-                            Tool.alert(QuestionItemActivityElinc.this, "提交失败，请检查网络");
+                            Tool.alert(QuestionItemActivityElinc.this, "取消收藏失败，请检查网络");
                         }
                     });
                 } else {
@@ -443,14 +443,14 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
                             // TODO Auto-generated method stub
                             refreshButton();
                             Log.i("life", "多对多关联添加成功");
-                            Tool.alert(QuestionItemActivityElinc.this, "收藏成功");
+                            //Tool.alert(QuestionItemActivityElinc.this, "收藏成功");
                         }
 
                         @Override
                         public void onFailure(int arg0, String arg1) {
                             // TODO Auto-generated method stub
                             Log.i("life", "多对多关联添加失败");
-                            Tool.alert(QuestionItemActivityElinc.this, "提交失败，请检查网络");
+                            Tool.alert(QuestionItemActivityElinc.this, "收藏失败，请检查网络");
                         }
                     });
                 }
@@ -486,7 +486,7 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
         new_answer.setAnswerContent(a);
         new_answer.setQuestionId(question);
         new_answer.setResponder(user);
-        Tool.alert(QuestionItemActivityElinc.this, a);
+        //Tool.alert(QuestionItemActivityElinc.this, a);
         new_answer.save(QuestionItemActivityElinc.this, new SaveListener() {
             @Override
             public void onSuccess() {
