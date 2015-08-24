@@ -1,47 +1,33 @@
 package com.bmob.im.demo.ui.fragment;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Outline;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bmob.im.demo.R;
-import com.bmob.im.demo.adapter.base.BaseListAdapter;
-import com.bmob.im.demo.adapter.base.ViewHolder;
 import com.bmob.im.demo.bean.Card;
-import com.bmob.im.demo.bean.CardReply;
 import com.bmob.im.demo.bean.Goal;
-import com.bmob.im.demo.bean.Question;
-import com.bmob.im.demo.bean.Tool;
 import com.bmob.im.demo.bean.User;
-import com.bmob.im.demo.ui.CardItemActivityElinc;
 import com.bmob.im.demo.ui.FragmentBase;
 import com.bmob.im.demo.ui.NewGoalActivityElinc;
-import com.bmob.im.demo.view.EmoticonsTextView;
-import com.bmob.im.demo.view.xlist.XListView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Locale;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
@@ -49,7 +35,6 @@ import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
-import cn.bmob.v3.listener.UpdateListener;
 
 public class CardFragment extends FragmentBase{
     private User me;
@@ -70,8 +55,7 @@ public class CardFragment extends FragmentBase{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_card, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_card, container, false);
     }
 
     @Override
@@ -96,8 +80,8 @@ public class CardFragment extends FragmentBase{
         claim2 = (TextView) findViewById(R.id.claim2);
         claim3 = (TextView) findViewById(R.id.claim3);
         date1 = (TextView) findViewById(R.id.date1);
-        date2 = (TextView) findViewById(R.id.date1);
-        date3 = (TextView) findViewById(R.id.date1);
+        date2 = (TextView) findViewById(R.id.date2);
+        date3 = (TextView) findViewById(R.id.date3);
         fight_num1 = (TextView) findViewById(R.id.fight_num1);
         fight_num2 = (TextView) findViewById(R.id.fight_num2);
         fight_num3 = (TextView) findViewById(R.id.fight_num3);
@@ -152,7 +136,7 @@ public class CardFragment extends FragmentBase{
                         Calendar calendarNow = Calendar.getInstance();
                         calendarNow.setTime(new Date());
                         String createdAt = goal[0].getCreatedAt();
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
                         Date date = sdf.parse(createdAt);
                         calendar.setTime(date);
                         long t1 = calendar.getTimeInMillis();
@@ -166,8 +150,8 @@ public class CardFragment extends FragmentBase{
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    //comment_num1.setText("0");
-                    //fight_num1.setText("0");
+                    comment_num1.setText("0");
+                    fight_num1.setText("0");
                     card1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -186,7 +170,7 @@ public class CardFragment extends FragmentBase{
                         Calendar calendarNow = Calendar.getInstance();
                         calendarNow.setTime(new Date());
                         String createdAt = goal[1].getCreatedAt();
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
                         Date date = sdf.parse(createdAt);
                         calendar.setTime(date);
                         long t1 = calendar.getTimeInMillis();
@@ -200,8 +184,8 @@ public class CardFragment extends FragmentBase{
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    comment_num2.setText("3");
-                    fight_num2.setText("4");
+                    comment_num2.setText("0");
+                    fight_num2.setText("0");
                     card2.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -220,7 +204,7 @@ public class CardFragment extends FragmentBase{
                         Calendar calendarNow = Calendar.getInstance();
                         calendarNow.setTime(new Date());
                         String createdAt = goal[2].getCreatedAt();
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
                         Date date = sdf.parse(createdAt);
                         calendar.setTime(date);
                         long t1 = calendar.getTimeInMillis();
@@ -234,8 +218,8 @@ public class CardFragment extends FragmentBase{
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    comment_num3.setText("3");
-                    fight_num3.setText("4");
+                    comment_num3.setText("0");
+                    fight_num3.setText("0");
                     card3.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

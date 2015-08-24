@@ -1,5 +1,6 @@
 package com.bmob.im.demo.ui;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,27 +38,32 @@ public class MyTreeActivity extends ActivityBase {
     private int goalNum;
     private CircleImageView user_avatar;
     private TextView user_name,user_status;
-    private User user;
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
     private int readyItemNum;
     private MyTreeAdapter myTreeAdapter;
+    private String userId,str_avatar,str_username,str_status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_tree);
-        user = BmobUserManager.getInstance(MyTreeActivity.this).getCurrentUser(User.class);
+        userId = getIntent().getExtras().getString("objectId");
+        str_avatar = getIntent().getExtras().getString("avatar");
+        str_status = getIntent().getExtras().getString("signature");
+        str_username = getIntent().getExtras().getString("username");
+        //user = BmobUserManager.getInstance(MyTreeActivity.this).getCurrentUser(User.class);
         initView();
         initList();
     }
 
     private void initList() {
         BmobQuery<Goal> bmobQuery = new BmobQuery<>();
-        bmobQuery.addWhereEqualTo("author",new BmobPointer(user));
+        User currentUser = new User();
+        currentUser.setObjectId(userId);
+        bmobQuery.addWhereEqualTo("author",new BmobPointer(currentUser));
         bmobQuery.findObjects(MyTreeActivity.this, new FindListener<Goal>() {
             @Override
             public void onSuccess(List<Goal> list) {
-                Log.i("test",list.size()+"");
                 for (int i = 0; i < list.size(); i++) {
                     goalRecordList.add(new GoalRecord(list.get(i)));
                 }
@@ -100,14 +106,14 @@ public class MyTreeActivity extends ActivityBase {
         user_status = (TextView) findViewById(R.id.user_status);
         recyclerView = (RecyclerView) findViewById(R.id.tree);
 
-        if (user.getAvatar() != null && !user.getAvatar().equals("")) {
-            ImageLoader.getInstance().displayImage(user.getAvatar(), user_avatar,
+        if (str_avatar != null && !str_avatar.equals("")) {
+            ImageLoader.getInstance().displayImage(str_avatar, user_avatar,
                     ImageLoadOptions.getOptions(),animateFirstListener);
         }else{
             user_avatar.setImageResource(R.drawable.head);
         }
-        user_name.setText(user.getNick());
-        user_status.setText("fighting");
+        user_name.setText(str_username);
+        user_status.setText(str_status);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MyTreeActivity.this);
         recyclerView.setLayoutManager(layoutManager);
