@@ -99,9 +99,9 @@ public class UserFriendAdapter extends BaseAdapter implements SectionIndexer {
 			viewHolder.avatar.setImageDrawable(ct.getResources().getDrawable(R.drawable.head));
 		}
 		if (friend.getSex()){
-			viewHolder.gender.setBackgroundResource(R.drawable.male);
+			viewHolder.gender.setImageResource(R.drawable.male);
 		}else {
-			viewHolder.gender.setBackgroundResource(R.drawable.female);
+			viewHolder.gender.setImageResource(R.drawable.female);
 		}
 		viewHolder.name.setText(name);
 		viewHolder.campus.setText(friend.getCampus());

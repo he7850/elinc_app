@@ -35,6 +35,7 @@ import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class CardFragment extends FragmentBase{
     private User me;
@@ -49,6 +50,7 @@ public class CardFragment extends FragmentBase{
     private TextView comment_num1,comment_num2,comment_num3;
     private Button btn_add_goal;
     TextView card1,card2,card3;
+    private TextView finish1,finish2,finish3;
 
     public CardFragment() {}
 
@@ -91,6 +93,9 @@ public class CardFragment extends FragmentBase{
         card1 = (TextView) findViewById(R.id.btn_card1);
         card2 = (TextView) findViewById(R.id.btn_card2);
         card3 = (TextView) findViewById(R.id.btn_card3);
+        finish1 = (TextView) findViewById(R.id.finish1);
+        finish2 = (TextView) findViewById(R.id.finish2);
+        finish3 = (TextView) findViewById(R.id.finish3);
         btn_add_goal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,17 +119,17 @@ public class CardFragment extends FragmentBase{
             public void onSuccess(final List<Goal> list) {
                 int length = 0;
                 for (int i = 0; i < list.size() && length < 3; i++) {
-                    if (!list.get(i).getOut()){
+                    if (!list.get(i).getOut()) {
                         goal[length++] = list.get(i);
                     }
                 }
                 goalNum = length;
                 Log.i("goalNum", goalNum + "");
                 btn_add_goal.setVisibility(View.VISIBLE);
-                if (goalNum == 0 ){
+                if (goalNum == 0) {
                     btn_add_goal.setBackgroundColor(Color.parseColor("#FF7171"));
                 }
-                if (goalNum > 0){
+                if (goalNum > 0) {
                     goal1.setVisibility(View.VISIBLE);
                     btn_add_goal.setBackgroundColor(Color.parseColor("#FF7171"));
                     title1.setText(goal[0].getGoalContent());
@@ -141,9 +146,9 @@ public class CardFragment extends FragmentBase{
                         long t1 = calendar.getTimeInMillis();
                         long t2 = calendarNow.getTimeInMillis();
                         long passedDays = (t2 - t1) / (24 * 60 * 60 * 1000);
-                        if (goal[0].getDay()>passedDays){
-                            date1.setText("只剩 "+(goal[0].getDay()-passedDays)+"天了");
-                        }else{
+                        if (goal[0].getDay() > passedDays) {
+                            date1.setText("只剩 " + (goal[0].getDay() - passedDays) + "天了");
+                        } else {
                             date1.setText("过期了呢");
                         }
                     } catch (ParseException e) {
@@ -157,8 +162,14 @@ public class CardFragment extends FragmentBase{
                             dialog(0);
                         }
                     });
+                    finish1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish(0);
+                        }
+                    });
                 }
-                if (goalNum > 1){
+                if (goalNum > 1) {
                     goal2.setVisibility(View.VISIBLE);
                     btn_add_goal.setBackgroundColor(Color.parseColor("#FFEA00"));
                     title2.setText(goal[1].getGoalContent());
@@ -175,9 +186,9 @@ public class CardFragment extends FragmentBase{
                         long t1 = calendar.getTimeInMillis();
                         long t2 = calendarNow.getTimeInMillis();
                         long passedDays = (t2 - t1) / (24 * 60 * 60 * 1000);
-                        if (goal[1].getDay()>passedDays){
-                            date2.setText("只剩 "+(goal[1].getDay()-passedDays)+"天了");
-                        }else{
+                        if (goal[1].getDay() > passedDays) {
+                            date2.setText("只剩 " + (goal[1].getDay() - passedDays) + "天了");
+                        } else {
                             date2.setText("过期了呢");
                         }
                     } catch (ParseException e) {
@@ -191,8 +202,14 @@ public class CardFragment extends FragmentBase{
                             dialog(1);
                         }
                     });
+                    finish2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish(1);
+                        }
+                    });
                 }
-                if (goalNum > 2){
+                if (goalNum > 2) {
                     goal3.setVisibility(View.VISIBLE);
                     btn_add_goal.setBackgroundColor(Color.parseColor("#66CC99"));
                     title3.setText(goal[2].getGoalContent());
@@ -209,9 +226,9 @@ public class CardFragment extends FragmentBase{
                         long t1 = calendar.getTimeInMillis();
                         long t2 = calendarNow.getTimeInMillis();
                         long passedDays = (t2 - t1) / (24 * 60 * 60 * 1000);
-                        if (goal[2].getDay()>passedDays){
-                            date3.setText("只剩 "+(goal[2].getDay()-passedDays)+"天了");
-                        }else{
+                        if (goal[2].getDay() > passedDays) {
+                            date3.setText("只剩 " + (goal[2].getDay() - passedDays) + "天了");
+                        } else {
                             date3.setText("过期了呢");
                         }
                     } catch (ParseException e) {
@@ -223,6 +240,12 @@ public class CardFragment extends FragmentBase{
                         @Override
                         public void onClick(View v) {
                             dialog(2);
+                        }
+                    });
+                    finish3.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish(2);
                         }
                     });
                     btn_add_goal.setVisibility(View.GONE);
@@ -237,13 +260,53 @@ public class CardFragment extends FragmentBase{
         });
 
     }
+
+    private void finish(final int i) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_hit_card, null);
+        //设置我们自己定义的布局文件作为弹出框的Content
+        builder.setView(view);
+        builder.setTitle("完成目标");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final EditText et = (EditText) view.findViewById(R.id.dialog_message);
+                if (et.getText().toString().equals("")) {
+                    ShowToast("还没有说一句话呢");
+                } else {
+                    goal[i].setOut(true);
+                    goal[i].update(getContext(), goal[i].getObjectId(), new UpdateListener() {
+
+                        @Override
+                        public void onSuccess() {
+                            ShowToast("目标完成!成长树将会记录你的轨迹!");
+                            initList();
+                        }
+
+                        @Override
+                        public void onFailure(int i, String s) {
+                            ShowToast("操作失败请重试");
+                        }
+                    });
+                }
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
     private void dialog(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         final View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_hit_card, null);
         //设置我们自己定义的布局文件作为弹出框的Content
         builder.setView(view);
         builder.setTitle("今日打卡");
-        AlertDialog.Builder request = builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 final EditText et = (EditText) view.findViewById(R.id.dialog_message);

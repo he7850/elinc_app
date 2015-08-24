@@ -66,7 +66,7 @@ public class MyTreeAdapter extends RecyclerView.Adapter{
             e.printStackTrace();
         }
         myViewHolder.goal_of_tree.setText(goalRecordList.get(i).getGoal().getGoalContent());
-        myViewHolder.water_of_tree.setText("0");
+        myViewHolder.water_of_tree.setText(goalRecordList.get(i).getCardList().size());
         if (goalRecordList.get(i).getGoal().getOut()) {
             myViewHolder.leaf.setImageResource(R.drawable.fruit);
         }
