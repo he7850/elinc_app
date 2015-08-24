@@ -85,7 +85,8 @@ public class SetMyInfoActivity extends ActivityBase implements OnClickListener {
 
 	Button btn_chat, btn_back, btn_add_friend;
 	RelativeLayout layout_head, layout_nick, layout_gender, layout_goal,layout_black_tips;
-
+	String objectId = "";
+	String avatar = "";
 	String from = "";
 	String username = "";
 	User user;
@@ -124,13 +125,15 @@ public class SetMyInfoActivity extends ActivityBase implements OnClickListener {
 				Bundle bundle = new Bundle();
 				User u= BmobUser.getCurrentUser(SetMyInfoActivity.this, User.class);
 				bundle.putString("username", username);
+				bundle.putString("objectId", objectId);
+				bundle.putString("avatar", avatar);
 				if(username.equals(u.getUsername().toString())){
 					bundle.putString("from", "me");
 				}else{
 					bundle.putString("from", "add");
 				}
 				intent.putExtras(bundle);
-				intent.setClass(SetMyInfoActivity.this, MyGoalActivityElinc.class);
+				intent.setClass(SetMyInfoActivity.this, MyTreeActivity.class);
 				SetMyInfoActivity.this.startActivity(intent);
 			}
 		});
@@ -204,6 +207,8 @@ public class SetMyInfoActivity extends ActivityBase implements OnClickListener {
 				// TODO Auto-generated method stub
 				if (arg0 != null && arg0.size() > 0) {
 					user = arg0.get(0);
+					objectId = arg0.get(0).getObjectId();
+					avatar = arg0.get(0).getAvatar();
 					btn_chat.setEnabled(true);
 					btn_back.setEnabled(true);
 					btn_add_friend.setEnabled(true);

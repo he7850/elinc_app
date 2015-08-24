@@ -1,5 +1,6 @@
 package com.bmob.im.demo.ui;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.bmob.im.demo.R;
 import com.bmob.im.demo.bean.Goal;
@@ -27,54 +29,38 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
-public class NewGoalActivityElinc extends ActivityBase {
+public class NewGoalActivityElinc extends ActivityBase implements View.OnClickListener {
     private Integer numberOfGoal;
     private String type;
-    private RadioButton type1,type2,type3,type4, type5,type6,type7,type8, type9;
-    private RadioGroup type_choose;
+    private TextView[] type1;
+    private TextView tag_tv;
     private List<String> tags;
     private int day;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_goal_activity_elinc);
         initTopBarForLeft("设置新目标");
         pre_process();
-        type_choose= (RadioGroup) findViewById(R.id.select_type);
-        type1= (RadioButton) findViewById(R.id.type1);
-        type2= (RadioButton) findViewById(R.id.type2);
-        type3= (RadioButton) findViewById(R.id.type3);
-        type4= (RadioButton) findViewById(R.id.type4);
-        type5= (RadioButton) findViewById(R.id.type5);
-        type6= (RadioButton) findViewById(R.id.type6);
-        type7= (RadioButton) findViewById(R.id.type7);
-        type8= (RadioButton) findViewById(R.id.type8);
-        type9= (RadioButton) findViewById(R.id.type9);
+        type1 = new TextView[15];
+        tag_tv=(TextView) findViewById(R.id.tag_tv);
+        type1[1]= (TextView) findViewById(R.id.type1);
+        type1[2]= (TextView) findViewById(R.id.type2);
+        type1[3]= (TextView) findViewById(R.id.type3);
+        type1[4]= (TextView) findViewById(R.id.type4);
+        type1[5]= (TextView) findViewById(R.id.type5);
+        type1[6]= (TextView) findViewById(R.id.type6);
+        type1[7]= (TextView) findViewById(R.id.type7);
+        type1[8]= (TextView) findViewById(R.id.type8);
+        type1[9]= (TextView) findViewById(R.id.type9);
+        int i;
+        for(i=1;i<=9;i++){
+            type1[i].setOnClickListener(this);
+        }
         type ="出国考试";
-        type1.setChecked(true);
-        type_choose.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == type1.getId()) {
-                    type = "出国考试";
-                } else if (checkedId == type2.getId()) {
-                    type = "考研";
-                } else if (checkedId == type3.getId()) {
-                    type = "乐器";
-                } else if (checkedId == type4.getId()) {
-                    type = "四六级";
-                } else if (checkedId == type5.getId()) {
-                    type = "课程考试";
-                } else if (checkedId == type6.getId()) {
-                    type = "运动";
-                } else if (checkedId == type7.getId()) {
-                    type = "电脑技能";
-                } else if (checkedId == type8.getId()) {
-                    type = "社会考试";
-                }else {
-                    type = "小语种";
-                }
-            }
-        });
+
         Button button = (Button)findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,5 +193,40 @@ public class NewGoalActivityElinc extends ActivityBase {
             }
         });
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.type1:
+                tag_tv.setText("标签：出国考试");
+                break;
+            case R.id.type2://搜索
+                tag_tv.setText("标签：考研");
+                break;
+            case R.id.type3://搜索
+                tag_tv.setText("标签：乐器");
+                break;
+            case R.id.type4://搜索
+                tag_tv.setText("标签：四六级");
+                break;
+            case R.id.type5://搜索
+                tag_tv.setText("标签：课程考试");
+                break;
+            case R.id.type6://搜索
+                tag_tv.setText("标签：运动");
+                break;
+            case R.id.type7://搜索
+                tag_tv.setText("标签：电脑技能");
+                break;
+            case R.id.type8://搜索
+                tag_tv.setText("标签：社会考试");
+                break;
+            case R.id.type9://搜索
+                tag_tv.setText("标签：小语种");
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:lines="2"
             android:maxLength="20"
-            android:layout_gravity="top"
+            android:gravity="top"
             android:layout_marginBottom="5dp"
             android:id="@+id/claim_new_goal" />
 
@@ -64,21 +64,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="标签"
+            android:text="标签：未选择"
             android:layout_marginBottom="5dp"
-            android:id="@+id/textView9" />
+            android:id="@+id/tag_tv" />
 
 
-        <RadioGroup
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/select_type">
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
             <LinearLayout
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <RadioButton
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="出国考试"
@@ -89,17 +88,17 @@
                     android:id="@+id/type1" />
                 
 
-                <RadioButton
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="考研"
                     android:textColor="#ffffff"
                     android:paddingRight="3dp"
                     android:layout_margin="4dp"
-                    android:background="@drawable/corner_bg_blue"
+                    android:background="@drawable/corner_bg_yellow"
                     android:id="@+id/type2" />
 
-                <RadioButton
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="乐器"
@@ -108,13 +107,8 @@
                     android:layout_margin="4dp"
                     android:background="@drawable/corner_bg_green"
                     android:id="@+id/type3" />
-            </LinearLayout>
-            <LinearLayout
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <RadioButton
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="四六级"
@@ -123,7 +117,7 @@
                     android:layout_margin="4dp"
                     android:background="@drawable/corner_bg_yellow"
                     android:id="@+id/type4" />
-                <RadioButton
+                <TextView
                     android:layout_width="wrap_content"
                     android:paddingRight="3dp"
                     android:layout_margin="4dp"
@@ -132,8 +126,14 @@
                     android:textColor="#ffffff"
                     android:background="@drawable/corner_bg"
                     android:id="@+id/type5" />
+            </LinearLayout>
 
-                <RadioButton
+            <LinearLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="运动"
@@ -142,14 +142,7 @@
                     android:layout_margin="4dp"
                     android:background="@drawable/corner_bg_yellow"
                     android:id="@+id/type6" />
-             
-            </LinearLayout>
-            <LinearLayout
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <RadioButton
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="电脑技能"
@@ -158,16 +151,16 @@
                     android:layout_margin="4dp"
                     android:background="@drawable/corner_bg_blue"
                     android:id="@+id/type7" />
-                <RadioButton
+                <TextView
                     android:layout_width="wrap_content"
                     android:paddingRight="3dp"
                     android:layout_margin="4dp"
                     android:layout_height="wrap_content"
                     android:text="社会考试"
                     android:textColor="#ffffff"
-                    android:background="@drawable/corner_bg_green"
+                    android:background="@drawable/corner_bg"
                     android:id="@+id/type8" />
-                <RadioButton
+                <TextView
                     android:layout_width="wrap_content"
                     android:paddingRight="3dp"
                     android:layout_margin="4dp"
@@ -179,12 +172,13 @@
             </LinearLayout>
 
 
-        </RadioGroup>
+        </LinearLayout>
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="限定天数"/>
 
