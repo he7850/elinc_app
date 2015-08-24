@@ -29,11 +29,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.GetServerTimeListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
@@ -49,6 +51,7 @@ public class CardFragment extends FragmentBase{
     private TextView fight_num1,fight_num2,fight_num3;
     private TextView comment_num1,comment_num2,comment_num3;
     private Button btn_add_goal;
+    private String time1;
     TextView card1,card2,card3;
     private TextView finish1,finish2,finish3;
 
@@ -159,7 +162,41 @@ public class CardFragment extends FragmentBase{
                     card1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            dialog(0);
+                            Bmob.getServerTime(getActivity(), new GetServerTimeListener() {
+                                @Override
+                                public void onSuccess(long time) {
+                                    // TODO Auto-generated method stub
+                                    BmobQuery<Card> query=new BmobQuery<Card>();
+                                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                                    time1 = formatter.format(new Date(time * 1000L));
+                                    Log.i("bmob", "当前服务器时间为:" + time1);
+                                    query.addWhereEqualTo("goal", goal[0]);
+                                    query.order("-createdAt");
+                                    //ShowToast(time1);
+                                    query.findObjects(getActivity(), new FindListener<Card>() {
+                                        @Override
+                                        public void onSuccess(List<Card> list) {
+                                            if (list.size() == 0 || !list.get(0).getCreatedAt().toString().contains(time1)) {
+                                                dialog(0);
+                                            } else {
+                                                ShowToast("一天只能打一次卡");
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onError(int i, String s) {
+                                            ShowToast("没有网，臣妾做不到啊");
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onFailure(int code, String msg) {
+                                    // TODO Auto-generated method stub
+                                    Log.i("bmob", "获取服务器时间失败:" + msg);
+                                }
+                            });
+
                         }
                     });
                     finish1.setOnClickListener(new View.OnClickListener() {
@@ -199,7 +236,42 @@ public class CardFragment extends FragmentBase{
                     card2.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            dialog(1);
+
+                            Bmob.getServerTime(getActivity(), new GetServerTimeListener() {
+                                @Override
+                                public void onSuccess(long time) {
+                                    // TODO Auto-generated method stub
+                                    BmobQuery<Card> query = new BmobQuery<Card>();
+                                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                                    time1 = formatter.format(new Date(time * 1000L));
+                                    Log.i("bmob", "当前服务器时间为:" + time1);
+                                    query.addWhereEqualTo("goal", goal[1]);
+                                    query.order("-createdAt");
+                                    //ShowToast(time1);
+                                    query.findObjects(getActivity(), new FindListener<Card>() {
+                                        @Override
+                                        public void onSuccess(List<Card> list) {
+                                            if (list.size() == 0 || !list.get(0).getCreatedAt().toString().contains(time1)) {
+                                                dialog(1);
+                                            } else {
+                                                ShowToast("一天只能打一次卡");
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onError(int i, String s) {
+                                            ShowToast("没有网，臣妾做不到啊");
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onFailure(int code, String msg) {
+                                    // TODO Auto-generated method stub
+                                    Log.i("bmob", "获取服务器时间失败:" + msg);
+                                }
+                            });
+
                         }
                     });
                     finish2.setOnClickListener(new View.OnClickListener() {
@@ -239,7 +311,41 @@ public class CardFragment extends FragmentBase{
                     card3.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            dialog(2);
+                            Bmob.getServerTime(getActivity(), new GetServerTimeListener() {
+                                @Override
+                                public void onSuccess(long time) {
+                                    // TODO Auto-generated method stub
+                                    BmobQuery<Card> query=new BmobQuery<Card>();
+                                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                                    time1 = formatter.format(new Date(time * 1000L));
+                                    Log.i("bmob", "当前服务器时间为:" + time1);
+                                    query.addWhereEqualTo("goal", goal[2]);
+                                    query.order("-createdAt");
+                                    //ShowToast(time1);
+                                    query.findObjects(getActivity(), new FindListener<Card>() {
+                                        @Override
+                                        public void onSuccess(List<Card> list) {
+                                            if (list.size() == 0 || !list.get(0).getCreatedAt().toString().contains(time1)) {
+                                                dialog(2);
+                                            } else {
+                                                ShowToast("一天只能打一次卡");
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onError(int i, String s) {
+                                            ShowToast("没有网，臣妾做不到啊");
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onFailure(int code, String msg) {
+                                    // TODO Auto-generated method stub
+                                    Log.i("bmob", "获取服务器时间失败:" + msg);
+                                }
+                            });
+
                         }
                     });
                     finish3.setOnClickListener(new View.OnClickListener() {
