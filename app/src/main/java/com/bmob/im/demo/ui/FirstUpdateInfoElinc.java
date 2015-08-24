@@ -119,6 +119,7 @@ public class FirstUpdateInfoElinc extends BaseActivity {
                 u.setNick(et_nick.getText().toString());
                 u.setUsername(et_nick.getText().toString());
                 u.setSex(chosenSex);
+                u.setSignature("Fighting!!");
                 u.setCampus(chosenCampus);
                 u.setUniversity(et_uni.getText().toString());
                 u.setInviter(inviter);
