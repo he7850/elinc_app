@@ -61,6 +61,7 @@
             android:layout_width="251dp"
             android:layout_height="@dimen/base_action_bar_height"
             android:layout_margin="@dimen/activity_vertical_margin"
+            android:layout_gravity="center"
             android:background="@drawable/elinc_radium_button"
             android:gravity="center"
             android:text="@string/login"
@@ -71,10 +72,10 @@
             android:id="@+id/btn_find_pwd_in_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+
             android:gravity="center_vertical"
             android:text="找回密码"
-            android:textColor="@color/color_theme"
+            android:textColor="#ffffff"
             android:textSize="20sp"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
@@ -92,7 +93,7 @@
             android:layout_height="fill_parent"
             android:gravity="center_vertical"
             android:text="@string/register_txt1"
-            android:textColor="@color/base_color_text_white"
+            android:textColor="#ffffff"
             android:textSize="20sp" />
 
         <TextView
@@ -102,7 +103,7 @@
             android:layout_marginLeft="5dp"
             android:gravity="center_vertical"
             android:text="@string/register_txt2"
-            android:textColor="@color/color_theme"
+            android:textColor="#ffffff"
             android:textSize="20sp" />
 
     </LinearLayout>

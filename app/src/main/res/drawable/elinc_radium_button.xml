@@ -6,9 +6,9 @@
         <solid android:color="@color/elinc_green" />
         <!-- 设置按钮的四个角为弧形 -->
         <!-- android:radius 弧形的半径 -->
-        <corners android:radius="5dip" />
+        <corners android:radius="3dip" />
         <stroke
-        android:width="4dp"
+        android:width="2dp"
         android:color="@android:color/white" />
 
         <!-- padding：Button里面的文字与Button边界的间隔 -->
