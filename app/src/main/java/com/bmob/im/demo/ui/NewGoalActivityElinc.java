@@ -73,16 +73,18 @@ public class NewGoalActivityElinc extends ActivityBase implements View.OnClickLi
                     EditText claim = (EditText) findViewById(R.id.claim_new_goal);
                     EditText day = (EditText) findViewById(R.id.day);
                     goal.setGoalContent(goal_content.getText().toString());
-                    if (goal_content.getText().equals("")){
+                    if (goal_content.getText().toString().equals("")){
                         ShowToast("请输入目标");
+                        return;
                     }
-                    if (claim.getText().equals("")){
+                    if (claim.getText().toString().equals("")){
                         ShowToast("请输入宣言");
+                        return;
                     }
-                    if (day.getText().equals("")){
+                    if (day.getText().toString().equals("")){
                         ShowToast("请输入天数");
+                        return;
                     }
-                    if(!goal_content.getText().equals("") && !claim.getText().equals("") && !day.getText().equals(""))
                     goal.setClaim(claim.getText().toString());
                     goal.setOut(false);
                     goal.setType(type);
@@ -186,7 +188,6 @@ public class NewGoalActivityElinc extends ActivityBase implements View.OnClickLi
             @Override
             public void onSuccess(List<Goal> object) {
                 numberOfGoal = object.size();
-                Tool.alert(NewGoalActivityElinc.this,""+object.size());
             }
 
             @Override

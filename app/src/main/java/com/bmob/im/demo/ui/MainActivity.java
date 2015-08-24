@@ -173,6 +173,7 @@ public class MainActivity extends ActivityBase implements EventListener{
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.putExtra("from","me");
+				intent.putExtra("username",me.getUsername());
 				intent.setClass(MainActivity.this,SetMyInfoActivity.class);
 				startAnimActivity(intent);
 			}

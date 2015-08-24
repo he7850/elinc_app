@@ -129,11 +129,6 @@ public class SetMyInfoActivity extends ActivityBase implements OnClickListener {
 				bundle.putString("objectId", objectId);
 				bundle.putString("avatar", avatar);
 				bundle.putString("signature",signature);
-				if(username.equals(u.getUsername().toString())){
-					bundle.putString("from", "me");
-				}else{
-					bundle.putString("from", "add");
-				}
 				intent.putExtras(bundle);
 				intent.setClass(SetMyInfoActivity.this, MyTreeActivity.class);
 				SetMyInfoActivity.this.startActivity(intent);
