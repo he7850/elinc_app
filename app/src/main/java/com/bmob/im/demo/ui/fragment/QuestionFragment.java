@@ -116,6 +116,7 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
 
     @Override
     public void onResume() {
+        super.onResume();
         refreshList();
     }
 
