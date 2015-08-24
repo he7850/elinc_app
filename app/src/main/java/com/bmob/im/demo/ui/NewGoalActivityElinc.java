@@ -74,14 +74,15 @@ public class NewGoalActivityElinc extends ActivityBase implements View.OnClickLi
                     EditText day = (EditText) findViewById(R.id.day);
                     goal.setGoalContent(goal_content.getText().toString());
                     if (goal_content.getText().equals("")){
-                        return;
+                        ShowToast("请输入目标");
                     }
                     if (claim.getText().equals("")){
-                        return;
+                        ShowToast("请输入宣言");
                     }
                     if (day.getText().equals("")){
-                        return;
+                        ShowToast("请输入天数");
                     }
+                    if(!goal_content.getText().equals("") && !claim.getText().equals("") && !day.getText().equals(""))
                     goal.setClaim(claim.getText().toString());
                     goal.setOut(false);
                     goal.setType(type);

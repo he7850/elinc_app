@@ -187,6 +187,8 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
+            android:maxLength="3"
+            android:digits="1234567890"
             android:id="@+id/day" />
 
         <Button
