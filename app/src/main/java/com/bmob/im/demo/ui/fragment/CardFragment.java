@@ -63,7 +63,6 @@ public class CardFragment extends FragmentBase{
         super.onActivityCreated(savedInstanceState);
         me = BmobUser.getCurrentUser(getActivity(), User.class);
         initView();
-        initList();
     }
 
     private void initView() {
@@ -96,7 +95,6 @@ public class CardFragment extends FragmentBase{
             @Override
             public void onClick(View v) {
                 startAnimActivity(new Intent(getActivity(), NewGoalActivityElinc.class));
-                initList();
             }
         });
     }
@@ -281,5 +279,9 @@ public class CardFragment extends FragmentBase{
         builder.create().show();
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        initList();
+    }
 }

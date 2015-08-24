@@ -314,18 +314,17 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 		}
 		//在这里再做一次本地的好友数据库的检查，是为了本地好友数据库中已经添加了对方，但是界面却没有显示出来的问题
 		// 重新设置下内存中保存的好友列表
-		CustomApplcation.getInstance().setContactList(CollectionUtils.list2map(BmobDB.create(getActivity()).getContactList()));
+		//CustomApplcation.getInstance().setContactList(CollectionUtils.list2map(BmobDB.create(getActivity()).getContactList()));
 	
-		Map<String,BmobChatUser> users = CustomApplcation.getInstance().getContactList();
+		//Map<String,BmobChatUser> users = CustomApplcation.getInstance().getContactList();
 		//组装新的User
-		filledData(CollectionUtils.map2list(users));
+		//filledData(CollectionUtils.map2list(users));
 		if(userAdapter==null){
 			userAdapter = new UserFriendAdapter(getActivity(), friends);
 			list_friends.setAdapter(userAdapter);
 		}else{
 			for (int i = 0;i<friends.size();i++){
 				if (CollectionUtils.isNotNull(friends.get(i).getTags())){
-					Log.i("2",friends.get(i).getTags().get(0));
 				}else{
 
 				}

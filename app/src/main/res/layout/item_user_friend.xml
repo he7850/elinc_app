@@ -49,21 +49,24 @@
                 android:singleLine="true"
                 android:textSize="16sp" />
             <ImageView
+                android:scaleType="fitXY"
                 android:gravity="top"
                 android:layout_alignBottom="@+id/tv_friend_name"
                 android:id="@+id/gender"
                 android:layout_toRightOf="@+id/tv_friend_name"
                 android:layout_gravity="bottom"
+                android:layout_marginBottom="4dp"
                 android:layout_width="20dp"
                 android:layout_height="20dp" />
             <TextView
                 android:id="@+id/campus"
                 android:gravity="bottom"
                 android:layout_gravity="bottom"
-                android:layout_marginRight="20sp"
                 android:textSize="14sp"
+                android:layout_marginTop="1sp"
+                android:layout_marginRight="20sp"
                 android:layout_alignParentRight="true"
-                android:text="xq"
+                android:text="玉泉"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>

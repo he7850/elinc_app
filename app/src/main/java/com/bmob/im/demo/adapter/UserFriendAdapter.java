@@ -98,28 +98,42 @@ public class UserFriendAdapter extends BaseAdapter implements SectionIndexer {
 		} else {
 			viewHolder.avatar.setImageDrawable(ct.getResources().getDrawable(R.drawable.head));
 		}
-//		if (friend.getSex()){
-//			viewHolder.gender.setImageResource(R.drawable.male);
-//		}else {
-//			viewHolder.gender.setImageResource(R.drawable.female);
-//		}
+		if (friend.getSex()){
+			viewHolder.gender.setBackgroundResource(R.drawable.male);
+		}else {
+			viewHolder.gender.setBackgroundResource(R.drawable.female);
+		}
 		viewHolder.name.setText(name);
 		viewHolder.campus.setText(friend.getCampus());
 		if (CollectionUtils.isNotNull(friend.getTags())) {
+			if (friend.getTags().size() == 0){
+				viewHolder.tag1.setText("TA还没有设置目标");
+			}
 			if (friend.getTags().size() > 0) {
-				viewHolder.tag1.setText(friend.getTags().get(0));
+				if (friend.getTags().get(0)!=null&&!friend.getTags().get(0).equals("")) {
+					viewHolder.tag1.setText(friend.getTags().get(0));
+				}
 			}
 			if (friend.getTags().size() > 1) {
-				viewHolder.tag2.setText(friend.getTags().get(1));
+				if (friend.getTags().get(1)!=null&&!friend.getTags().get(1).equals("")) {
+					viewHolder.tag2.setText(friend.getTags().get(1));
+				}else{
+					viewHolder.tag2.setVisibility(View.GONE);
+				}
 			} else {
 				viewHolder.tag2.setVisibility(View.GONE);
 			}
 			if (friend.getTags().size() > 2) {
-				viewHolder.tag3.setText(friend.getTags().get(2));
+				if (friend.getTags().get(2)!=null&&!friend.getTags().get(2).equals("")) {
+					viewHolder.tag3.setText(friend.getTags().get(2));
+				}else{
+					viewHolder.tag3.setVisibility(View.GONE);
+				}
 			} else {
 				viewHolder.tag3.setVisibility(View.GONE);
 			}
 		}else {
+			viewHolder.tag1.setText("TA还没有设置目标");
 			viewHolder.tag2.setVisibility(View.GONE);
 			viewHolder.tag3.setVisibility(View.GONE);
 		}
