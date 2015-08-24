@@ -37,6 +37,7 @@ public class UpdateInfoActivityElinc extends ActivityBase {
 		//初始化View
 		initView();
 		//初始化Listener
+		initTopBarForLeft("修改资料");
 		initListener();
 	}
 	private void initView(){

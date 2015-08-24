@@ -301,7 +301,7 @@ public class SetMyInfoActivity extends ActivityBase implements OnClickListener {
 		case R.id.layout_head:
 			showAvatarPop();
 			break;
-		case R.id.layout_nick:
+		case R.id.iv_nickarraw:
 			startAnimActivity(UpdateInfoActivityElinc.class);
 //			addBlog();
 			break;
