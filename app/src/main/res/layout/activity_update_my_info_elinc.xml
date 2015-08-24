@@ -24,7 +24,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical"
-            android:text="学校："
+            android:text="学校"
             android:textSize="20sp" />
 
         <EditText
@@ -52,7 +52,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical"
-            android:text="校区："
+            android:text="校区"
             android:textSize="20sp" />
 
         <EditText
@@ -80,7 +80,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical"
-            android:text="性别："
+            android:text="性别"
             android:textSize="20sp" />
 
         <RadioGroup
@@ -122,7 +122,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical"
-            android:text="签名："
+            android:text="状态"
             android:textSize="20sp" />
 
         <EditText
@@ -132,7 +132,7 @@
             android:layout_weight="1.0"
             android:background="@color/transparent"
             android:gravity="center_vertical"
-            android:hint="输入你的签名..."
+            android:hint="Fighting！"
             />
     </LinearLayout>
     <Button

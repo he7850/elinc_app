@@ -130,6 +130,13 @@ public class NewQuestionActivityElinc extends ActivityBase {
                 String questionTitleText = questionTitle.getText().toString();
 
                 tags= Arrays.asList((et_input_tags.getText().toString().split(",|，| |　",3)));
+                if(questionContentText.length()<5){
+                    ShowToast("内容字数不足");
+                }
+                if(questionTitleText.length()<5){
+                    ShowToast("标题字数不足");
+                }
+                if(questionTitleText.length()>=5 && questionContentText.length()>=5)
                 AddQuestion(questionTitleText, questionContentText);
             }
         });
