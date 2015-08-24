@@ -103,6 +103,7 @@ public class CardFragment extends FragmentBase{
 
     private void initList(){
         goal = new Goal[3];
+        btn_add_goal.setVisibility(View.GONE);
         goal1.setVisibility(View.GONE);
         goal2.setVisibility(View.GONE);
         goal3.setVisibility(View.GONE);

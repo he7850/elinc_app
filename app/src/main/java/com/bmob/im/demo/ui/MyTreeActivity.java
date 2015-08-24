@@ -113,7 +113,11 @@ public class MyTreeActivity extends ActivityBase {
             user_avatar.setImageResource(R.drawable.head);
         }
         user_name.setText(str_username);
-        user_status.setText(str_status);
+        if (str_status==null || str_status.equals("")){
+            user_status.setText("fighting!!!");
+        }else {
+            user_status.setText(str_status);
+        }
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MyTreeActivity.this);
         recyclerView.setLayoutManager(layoutManager);

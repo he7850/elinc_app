@@ -38,11 +38,10 @@ public class RecentActivity extends ActivityBase implements AdapterView.OnItemCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_recent);
-        initView();
+        //initView();
     }
 
     private void initView(){
-        initTopBarForLeft("123");
         initTopBarForLeft("消息");
         listview = (ListView)findViewById(R.id.list);
         listview.setOnItemClickListener(this);
@@ -70,6 +69,12 @@ public class RecentActivity extends ActivityBase implements AdapterView.OnItemCl
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initView();
     }
 
     /** 删除会话

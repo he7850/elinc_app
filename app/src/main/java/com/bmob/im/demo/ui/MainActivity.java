@@ -188,12 +188,14 @@ public class MainActivity extends ActivityBase implements EventListener{
 					/*case R.id.nav_recommend:
 						startAnimActivity(NearPeopleActivity.class);
 						break;*/
-					case R.id.nav_my_goal:
-
+					case R.id.nav_my_tree:
 						Intent intent = new Intent();
 						Bundle bundle = new Bundle();
 						User u= BmobUser.getCurrentUser(context, User.class);
 						bundle.putString("username", u.getUsername());
+						bundle.putString("signature",u.getSignature());
+						bundle.putString("objectId",u.getObjectId());
+						bundle.putString("avatar",u.getAvatar());
 						if(u.getUsername().toString().equals(u.getUsername().toString())){
 							bundle.putString("from", "me");
 						}else{
