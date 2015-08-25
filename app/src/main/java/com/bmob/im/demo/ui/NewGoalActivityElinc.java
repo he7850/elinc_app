@@ -127,19 +127,13 @@ public class NewGoalActivityElinc extends ActivityBase implements View.OnClickLi
 
                                         }
                                     });
-
                                 }
-
                                 @Override
                                 public void onError(int i, String s) {
 
                                 }
                             });
-
-
-
                         }
-
                         @Override
                         public void onFailure(int i, String s) {
 
@@ -202,30 +196,39 @@ public class NewGoalActivityElinc extends ActivityBase implements View.OnClickLi
         switch (view.getId()) {
             case R.id.type1:
                 tag_tv.setText("标签：出国考试");
+                type ="出国考试";
                 break;
             case R.id.type2://搜索
                 tag_tv.setText("标签：考研");
+                type ="考研";
                 break;
             case R.id.type3://搜索
                 tag_tv.setText("标签：乐器");
+                type ="乐器";
                 break;
             case R.id.type4://搜索
                 tag_tv.setText("标签：四六级");
+                type ="四六级";
                 break;
             case R.id.type5://搜索
                 tag_tv.setText("标签：课程考试");
+                type ="课程考试";
                 break;
             case R.id.type6://搜索
                 tag_tv.setText("标签：运动");
+                type ="运动";
                 break;
             case R.id.type7://搜索
                 tag_tv.setText("标签：电脑技能");
+                type ="电脑技能";
                 break;
             case R.id.type8://搜索
                 tag_tv.setText("标签：社会考试");
+                type ="社会考试";
                 break;
             case R.id.type9://搜索
                 tag_tv.setText("标签：小语种");
+                type ="小语种";
                 break;
             default:
                 break;
