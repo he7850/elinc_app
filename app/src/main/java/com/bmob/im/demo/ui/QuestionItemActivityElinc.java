@@ -144,19 +144,7 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
         });
 
         answer_iv = (ImageView) findViewById(R.id.answer_iv);
-        author_in_question_list.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openUserDetail();
-            }
-        });
 
-        avatar_for_author_in_question_list.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openUserDetail();
-            }
-        });
 
 
 
@@ -178,12 +166,7 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
         /*点击按钮收藏*/
         follow= (ImageButton) findViewById(R.id.follow);
 
-        follow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                QuestionItemActivityElinc.this.followQustion();
-            }
-        });
+
         /*点击按钮 提交答案*/
         final Button submit= (Button) findViewById(R.id.submit_answer);
         submit.setOnClickListener(new View.OnClickListener() {
@@ -220,7 +203,26 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
                 author = object.getAuthor();
                 author_name = object.getAuthor().getUsername();
                 String avatar;
+                /*以下是为了防止问题还没加载就点击了不该点击的按钮*/
+                author_in_question_list.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        openUserDetail();
+                    }
+                });
 
+                avatar_for_author_in_question_list.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        openUserDetail();
+                    }
+                });
+                follow.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        QuestionItemActivityElinc.this.followQustion();
+                    }
+                });
                 avatar = object.getAuthor().getAvatar();
                 if (avatar != null && !avatar.equals("")) {//加载头像-为了不每次都加载头像
                     ImageLoader.getInstance().displayImage(avatar, avatar_for_author_in_question_list, ImageLoadOptions.getOptions(), animateFirstListener);
