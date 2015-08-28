@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:elevation="0dp"
-    tools:context="com.bmob.im.demo.ui.fragment.CardFragment">
+    tools:context="com.elinc.im.elinc.ui.fragment.CardFragment">
     <!--  list View -->
     <ScrollView
         android:elevation="0dp"

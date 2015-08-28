@@ -48,7 +48,7 @@
                 android:visibility="invisible" />
         </RelativeLayout>
 
-        <com.bmob.im.demo.view.MyLetterView
+        <com.elinc.im.elinc.view.MyLetterView
             android:id="@+id/right_letter"
             android:layout_width="25dip"
             android:layout_height="match_parent"

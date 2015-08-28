@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_chat_top" >
 
-        <com.bmob.im.demo.view.CircleImageView
+        <com.elinc.im.elinc.view.CircleImageView
             android:id="@+id/iv_avatar"
             android:contentDescription="@string/add_avator"
             android:layout_width="@dimen/base_scrollview_top_height"

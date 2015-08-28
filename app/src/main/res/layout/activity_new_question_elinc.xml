@@ -3,7 +3,7 @@
     android:id="@+id/layout_all_of_new_question"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bmob.im.demo.ui.NewQuestionActivityElinc"
+    tools:context="com.elinc.im.elinc.ui.NewQuestionActivityElinc"
     android:orientation="vertical">
 
     <include

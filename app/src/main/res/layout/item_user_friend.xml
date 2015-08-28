@@ -18,7 +18,7 @@
         android:layout_below="@id/alpha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <com.bmob.im.demo.view.CircleImageView
+        <com.elinc.im.elinc.view.CircleImageView
             android:id="@+id/img_friend_avatar"
             android:layout_width="60dp"
             android:layout_height="60dp"

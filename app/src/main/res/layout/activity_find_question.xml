@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.bmob.im.demo.ui.fragment.QuestionFragment">
+    tools:context="com.elinc.im.elinc.ui.fragment.QuestionFragment">
     <!--    <LinearLayout
             android:id="@+id/wait_bar"
             android:layout_marginTop="10dp"
@@ -129,7 +129,7 @@
 
 
 
-    <com.bmob.im.demo.view.xlist.XListView
+    <com.elinc.im.elinc.view.xlist.XListView
         android:id="@+id/list_question_e"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

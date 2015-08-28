@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bmob.im.demo"
-    android:versionCode="15"
-    android:versionName="1.1.5" >
+    package="com.elinc.im.elinc"
+    android:versionCode="17"
+    android:versionName="2.0.2" >
 
     <uses-sdk
         android:minSdkVersion="15"
@@ -74,13 +74,13 @@
 
     <!-- baidumap 所需的权限 -end -->
     <application
-        android:name=".CustomApplcation"
+        android:name="com.elinc.im.elinc.CustomApplcation"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.DesignDemo" >
         <activity
-            android:name=".ui.SplashActivity"
+            android:name="com.elinc.im.elinc.ui.SplashActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -89,27 +89,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.elinc.im.elinc.ui.MainActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity android:name=".ui.LoginActivityElinc" />
-        <activity android:name=".ui.LocationActivity" />
-        <activity android:name=".ui.BlackListActivity" />
-        <activity android:name=".ui.ImageBrowserActivity" />
+        <activity android:name="com.elinc.im.elinc.ui.LoginActivityElinc" />
+        <activity android:name="com.elinc.im.elinc.ui.LocationActivity" />
+        <activity android:name="com.elinc.im.elinc.ui.BlackListActivity" />
+        <activity android:name="com.elinc.im.elinc.ui.ImageBrowserActivity" />
         <activity
-            android:name=".ui.AddFriendActivity"
+            android:name="com.elinc.im.elinc.ui.AddFriendActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".ui.NewFriendActivity" />
-        <activity android:name=".ui.NearPeopleActivity" />
-        <activity android:name=".ui.UpdateInfoActivityElinc" />
+        <activity android:name="com.elinc.im.elinc.ui.NewFriendActivity" />
+        <activity android:name="com.elinc.im.elinc.ui.NearPeopleActivity" />
+        <activity android:name="com.elinc.im.elinc.ui.UpdateInfoActivityElinc" />
         <activity
-            android:name=".ui.ChatActivity"
+            android:name="com.elinc.im.elinc.ui.ChatActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity android:name=".ui.SetMyInfoActivity" />
+        <activity android:name="com.elinc.im.elinc.ui.SetMyInfoActivity" />
         <activity
-            android:name=".ui.RegisterActivityElinc"
+            android:name="com.elinc.im.elinc.ui.RegisterActivityElinc"
             android:label="@string/app_name" />
 
+        <!-- 更新 -->
+        <activity
+            android:name="cn.bmob.v3.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
         <!-- baidu map -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
@@ -147,7 +152,7 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".MyMessageReceiver" >
+        <receiver android:name="com.elinc.im.elinc.MyMessageReceiver" >
             <intent-filter>
                 <action android:name="cn.bmob.push.action.MESSAGE" />
             </intent-filter>
@@ -164,27 +169,27 @@
         </service>
 
         <activity
-            android:name=".ui.NewQuestionActivityElinc"
+            android:name="com.elinc.im.elinc.ui.NewQuestionActivityElinc"
             android:label="@string/title_activity_new_question" >
         </activity>
         <activity
-            android:name=".ui.QuestionItemActivityElinc"
+            android:name="com.elinc.im.elinc.ui.QuestionItemActivityElinc"
             android:label="QuestionItemActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name=".ui.SettingActivity"
+            android:name="com.elinc.im.elinc.ui.SettingActivity"
             android:label="@string/title_activity_setting" >
         </activity>
         <activity
-            android:name=".ui.RecentActivity"
+            android:name="com.elinc.im.elinc.ui.RecentActivity"
             android:label="@string/title_activity_recent" >
         </activity>
         <activity
-            android:name=".ui.FirstUpdateInfoElinc"
+            android:name="com.elinc.im.elinc.ui.FirstUpdateInfoElinc"
             android:label="@string/title_activity_first_update_info" >
         </activity>
 
-        <receiver android:name=".view.CircleImageView" >
+        <receiver android:name="com.elinc.im.elinc.view.CircleImageView" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -195,43 +200,43 @@
         </receiver>
 
         <activity
-            android:name=".ui.AboutUsActivityElinc"
+            android:name="com.elinc.im.elinc.ui.AboutUsActivityElinc"
             android:label="@string/title_activity_about_us_activity_elinc" >
         </activity>
         <activity
-            android:name=".ui.BugReportActivityElinc"
+            android:name="com.elinc.im.elinc.ui.BugReportActivityElinc"
             android:label="@string/title_activity_bug_report_activity_elinc" >
         </activity>
         <activity
-            android:name=".ui.NewGoalActivityElinc"
+            android:name="com.elinc.im.elinc.ui.NewGoalActivityElinc"
             android:label="@string/title_activity_new_aim_activity_elinc" >
         </activity>
         <activity
-            android:name=".ui.MyFavoriteActivityElinc"
+            android:name="com.elinc.im.elinc.ui.MyFavoriteActivityElinc"
             android:label="@string/title_activity_my_favorite_activity_elinc" >
         </activity>
         <activity
-            android:name=".ui.MyGoalActivityElinc"
+            android:name="com.elinc.im.elinc.ui.MyGoalActivityElinc"
             android:label="@string/title_activity_my_goal_activity_elinc" >
         </activity>
         <activity
-            android:name=".ui.CardItemActivityElinc"
+            android:name="com.elinc.im.elinc.ui.CardItemActivityElinc"
             android:label="@string/title_activity_card_item_activity_elinc" >
         </activity>
         <activity
-            android:name=".ui.FindPassword"
+            android:name="com.elinc.im.elinc.ui.FindPassword"
             android:label="@string/title_activity_find_password" >
         </activity>
         <activity
-            android:name=".ui.PicDragZoomActivityElinc"
+            android:name="com.elinc.im.elinc.ui.PicDragZoomActivityElinc"
             android:label="@string/title_activity_pic_drag_zoom_activity_elinc" >
         </activity>
         <activity
-            android:name=".ui.FindQuestion"
+            android:name="com.elinc.im.elinc.ui.FindQuestion"
             android:label="@string/title_activity_find_question" >
         </activity>
         <activity
-            android:name=".ui.MyTreeActivity"
+            android:name="com.elinc.im.elinc.ui.MyTreeActivity"
             android:label="@string/title_activity_my_tree" >
         </activity>
     </application>

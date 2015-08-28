@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bmob.im.demo.ui.MyTreeActivity">
+    tools:context="com.elinc.im.elinc.ui.MyTreeActivity">
+
+
     <LinearLayout  android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -12,6 +14,7 @@
             android:id="@+id/common_actionbar"
             layout="@layout/include_action_bar" />
         <LinearLayout
+            android:id="@+id/header"
             android:background="@drawable/tree_above"
             android:gravity="center"
             android:orientation="horizontal"
@@ -25,7 +28,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
-                <com.bmob.im.demo.view.CircleImageView
+                <com.elinc.im.elinc.view.CircleImageView
                     android:id="@+id/avatar"
                     android:src="@drawable/head"
                     android:layout_width="80dp"
@@ -60,6 +63,7 @@
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
+
             android:id="@+id/tree"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -67,14 +71,22 @@
         </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
+    <TextView
+        android:id="@+id/trunk"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="110dp"
+        android:background="#f2f2f2"
+        android:layout_width="2dp"
+        android:layout_height="match_parent"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-            <ImageView
-                android:layout_alignParentBottom="true"
-                android:scaleType="fitEnd"
-                android:src="@drawable/tree_below"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_alignParentBottom="true"
+            android:scaleType="fitEnd"
+            android:src="@drawable/tree_below"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </RelativeLayout>
 </FrameLayout>

@@ -12,7 +12,7 @@
         android:paddingBottom="5.0dip"
         android:paddingTop="5.0dip" 
         >
-        <com.bmob.im.demo.view.CircleImageView
+        <com.elinc.im.elinc.view.CircleImageView
             android:id="@+id/iv_recent_avatar"
             android:layout_height="50dp"
             android:layout_width="50dp"

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp">
-        <com.bmob.im.demo.view.CircleImageView
+        <com.elinc.im.elinc.view.CircleImageView
             android:id="@+id/img_friend_avatar"
             android:layout_width="50dp"
             android:layout_height="50dp"

@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.bmob.im.demo.ui.MyFavoriteActivityElinc">
+    tools:context="com.elinc.im.elinc.ui.MyFavoriteActivityElinc">
 
     <include
         android:id="@+id/common_actionbar"
         layout="@layout/include_action_bar" />
-    <com.bmob.im.demo.view.xlist.XListView
+    <com.elinc.im.elinc.view.xlist.XListView
         android:id="@+id/list_question_e"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

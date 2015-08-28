@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.bmob.im.demo.ui.CardItemActivityElinc">
+    tools:context="com.elinc.im.elinc.ui.CardItemActivityElinc">
 
     <include
         android:id="@+id/common_actionbar"
@@ -42,7 +42,7 @@
             android:id="@+id/follow_card_e"
             android:layout_gravity="left" />
     </LinearLayout>
-    <com.bmob.im.demo.view.xlist.XListView
+    <com.elinc.im.elinc.view.xlist.XListView
         android:id="@+id/list_reply_of_card_e"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

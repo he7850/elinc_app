@@ -25,7 +25,7 @@
             android:background="@drawable/btn_chat_emo_selector"
             android:gravity="center" />
 
-        <com.bmob.im.demo.view.EmoticonsEditText
+        <com.elinc.im.elinc.view.EmoticonsEditText
             android:id="@+id/edit_user_comment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
