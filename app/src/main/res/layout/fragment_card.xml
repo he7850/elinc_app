@@ -23,8 +23,8 @@
                 android:shape="rectangle"
                 android:elevation="25dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
@@ -33,31 +33,33 @@
 
                     <LinearLayout
                         android:layout_weight="8"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="14dp"
                         android:layout_marginLeft="24dp"
                         android:layout_marginRight="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="14dp"
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_height="match_parent">
                         <TextView
+                            android:text="0"
                             android:id="@+id/title1"
-                            android:textSize="24sp"
+                            android:textSize="14sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
                             android:text="0"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
                             android:background="@drawable/corner_bg"
                             android:textSize="12sp"
                             android:id="@+id/tag1"
                             android:layout_marginTop="4dp"
-                            android:layout_marginBottom="10dp"
+                            android:layout_marginBottom="4dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
-                            android:textSize="16sp"
+                            android:text="0"
+                            android:textSize="12sp"
                             android:id="@+id/claim1"
                             android:layout_marginBottom="6dp"
                             android:layout_width="wrap_content"
@@ -70,12 +72,13 @@
                             <ImageView
                                 android:gravity="center_vertical"
                                 android:src="@drawable/elinc_clock"
-                                android:layout_width="16dp"
+                                android:layout_width="14dp"
                                 android:layout_height="match_parent" />
                             <TextView
+                                android:text="0"
                                 android:gravity="center_vertical"
                                 android:id="@+id/date1"
-                                android:textSize="16sp"
+                                android:textSize="12sp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
@@ -91,30 +94,32 @@
                                 <ImageView
                                     android:gravity="center_vertical"
                                     android:src="@drawable/elinc_sun"
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp" />
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp" />
                                 <TextView
+                                    android:text="0"
                                     android:gravity="center_vertical"
                                     android:id="@+id/fight_num1"
-                                    android:textSize="16sp"
+                                    android:textSize="12sp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />
                                 <ImageView
                                     android:gravity="center_vertical"
                                     android:layout_marginLeft="24dp"
                                     android:src="@drawable/elinc_comment"
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp" />
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp" />
                                 <TextView
+                                    android:text="0"
                                     android:gravity="center_vertical"
                                     android:id="@+id/comment_num1"
-                                    android:textSize="16sp"
+                                    android:textSize="12sp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
                             <TextView
                                 android:id="@+id/btn_card1"
-                                android:textSize="16sp"
+                                android:textSize="14sp"
                                 android:background="@drawable/card1_stroke"
                                 android:paddingTop="4dp"
                                 android:paddingBottom="4dp"
@@ -129,6 +134,7 @@
                                 android:layout_height="wrap_content" />
 
                             <TextView
+                                android:textSize="14sp"
                                 android:gravity="center"
                                 android:layout_marginRight="12dp"
                                 android:layout_width="wrap_content"
@@ -158,8 +164,8 @@
                 android:shape="rectangle"
                 android:elevation="25dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
@@ -169,30 +175,33 @@
 
                     <LinearLayout
                         android:layout_weight="8"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="14dp"
                         android:layout_marginLeft="24dp"
                         android:layout_marginRight="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="14dp"
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_height="match_parent">
                         <TextView
+                            android:text="0"
                             android:id="@+id/title2"
-                            android:textSize="24sp"
+                            android:textSize="14sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
+                            android:text="0"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
                             android:background="@drawable/corner_bg"
                             android:textSize="12sp"
                             android:id="@+id/tag2"
                             android:layout_marginTop="4dp"
-                            android:layout_marginBottom="10dp"
+                            android:layout_marginBottom="4dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
-                            android:textSize="16sp"
+                            android:text="0"
+                            android:textSize="12sp"
                             android:id="@+id/claim2"
                             android:layout_marginBottom="6dp"
                             android:layout_width="wrap_content"
@@ -204,13 +213,13 @@
                             <ImageView
                                 android:gravity="center_vertical"
                                 android:src="@drawable/elinc_clock"
-                                android:layout_width="16dp"
-                                android:layout_height="16dp" />
+                                android:layout_width="14dp"
+                                android:layout_height="14dp" />
                             <TextView
                                 android:text="0"
                                 android:gravity="center_vertical"
                                 android:id="@+id/date2"
-                                android:textSize="16sp"
+                                android:textSize="12sp"
                                 android:layout_marginBottom="6dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -227,22 +236,22 @@
                                 android:id="@+id/linearLayout">
                                 <ImageView
                                     android:src="@drawable/elinc_sun"
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp" />
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp" />
                                 <TextView
                                     android:id="@+id/fight_num2"
-                                    android:textSize="16sp"
+                                    android:textSize="12sp"
                                     android:text="0"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />
                                 <ImageView
                                     android:layout_marginLeft="24dp"
                                     android:src="@drawable/elinc_comment"
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp" />
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp" />
                                 <TextView
                                     android:id="@+id/comment_num2"
-                                    android:textSize="16sp"
+                                    android:textSize="12sp"
                                     android:text="0"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />
@@ -257,13 +266,14 @@
                                 android:shape="rectangle"
                                 android:textColor="#FFEA00"
                                 android:gravity="center_horizontal"
-                                android:textSize="16sp"
+                                android:textSize="12sp"
                                 android:text="打卡"
                                 android:layout_alignParentRight="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
 
                             <TextView
+                                android:textSize="14sp"
                                 android:gravity="center"
                                 android:layout_marginRight="12dp"
                                 android:layout_width="wrap_content"
@@ -293,8 +303,8 @@
                 android:shape="rectangle"
                 android:elevation="25dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
@@ -304,34 +314,34 @@
 
                     <LinearLayout
                         android:layout_weight="8"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="14dp"
                         android:layout_marginLeft="24dp"
                         android:layout_marginRight="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="14dp"
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_height="match_parent">
                         <TextView
+                            android:text="0"
                             android:id="@+id/title3"
                             android:textSize="24sp"
-                            android:text=""
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
                             android:background="@drawable/corner_bg"
                             android:textSize="12sp"
                             android:id="@+id/tag3"
-                            android:text=""
+                            android:text="0"
                             android:layout_marginTop="4dp"
-                            android:layout_marginBottom="10dp"
+                            android:layout_marginBottom="4dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
-                            android:textSize="16sp"
+                            android:textSize="12sp"
                             android:id="@+id/claim3"
-                            android:text=""
+                            android:text="0"
                             android:layout_marginBottom="6dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -342,13 +352,13 @@
                             <ImageView
                                 android:gravity="center_vertical"
                                 android:src="@drawable/elinc_clock"
-                                android:layout_width="16dp"
-                                android:layout_height="16dp" />
+                                android:layout_width="14dp"
+                                android:layout_height="14dp" />
                             <TextView
                                 android:gravity="center_vertical"
                                 android:id="@+id/date3"
-                                android:textSize="16sp"
-                                android:text=""
+                                android:textSize="12sp"
+                                android:text="0"
                                 android:layout_marginBottom="6dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -364,22 +374,22 @@
                                 android:layout_height="24dp">
                                 <ImageView
                                     android:src="@drawable/elinc_sun"
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp" />
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp" />
                                 <TextView
                                     android:id="@+id/fight_num3"
-                                    android:textSize="16sp"
+                                    android:textSize="12sp"
                                     android:text="0"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />
                                 <ImageView
                                     android:layout_marginLeft="24dp"
                                     android:src="@drawable/elinc_comment"
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp" />
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp" />
                                 <TextView
                                     android:id="@+id/comment_num3"
-                                    android:textSize="16sp"
+                                    android:textSize="12sp"
                                     android:text="0"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />
@@ -394,13 +404,14 @@
                                 android:shape="rectangle"
                                 android:textColor="#66CC99"
                                 android:gravity="center_horizontal"
-                                android:textSize="16sp"
+                                android:textSize="12sp"
                                 android:text="打卡"
                                 android:layout_alignParentRight="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
 
                             <TextView
+                                android:textSize="14sp"
                                 android:gravity="center"
                                 android:layout_marginRight="12dp"
                                 android:layout_width="wrap_content"
@@ -430,8 +441,8 @@
                 android:textColor="#ffffff"
                 android:id="@+id/btn_new_goal"
                 android:background="#66CC99"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
                 android:layout_marginBottom="32dp"
                 android:text="新建目标"
                 android:layout_width="match_parent"

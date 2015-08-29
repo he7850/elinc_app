@@ -73,9 +73,9 @@
     </LinearLayout>
     <TextView
         android:id="@+id/trunk"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="220dp"
         android:layout_marginLeft="110dp"
-        android:background="#f2f2f2"
+        android:background="#E2E2E2"
         android:layout_width="2dp"
         android:layout_height="match_parent"/>
     <RelativeLayout
