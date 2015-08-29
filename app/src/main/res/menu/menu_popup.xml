@@ -18,5 +18,7 @@
     <item android:id="@+id/action_add_question" android:title="提问"
         android:orderInCategory="60"
         app:showAsAction="ifRoom"
+        android:layout_height="30dp"
+        android:layout_width="30dp"
         android:icon="@drawable/new_question_elinc"/>
 </menu>

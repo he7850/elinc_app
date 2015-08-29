@@ -93,7 +93,7 @@
                                 android:layout_height="24dp">
                                 <ImageView
                                     android:gravity="center_vertical"
-                                    android:src="@drawable/elinc_sun"
+                                    android:src="@drawable/water"
                                     android:layout_width="12dp"
                                     android:layout_height="12dp" />
                                 <TextView
@@ -235,7 +235,7 @@
                                 android:layout_height="24dp"
                                 android:id="@+id/linearLayout">
                                 <ImageView
-                                    android:src="@drawable/elinc_sun"
+                                    android:src="@drawable/water"
                                     android:layout_width="14dp"
                                     android:layout_height="14dp" />
                                 <TextView
@@ -373,7 +373,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="24dp">
                                 <ImageView
-                                    android:src="@drawable/elinc_sun"
+                                    android:src="@drawable/water"
                                     android:layout_width="14dp"
                                     android:layout_height="14dp" />
                                 <TextView

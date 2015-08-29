@@ -4,8 +4,8 @@
     </style>
 
     <style name="Base.Theme.DesignDemo" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/elinc_green</item>
-        <item name="colorPrimaryDark">@color/elinc_green</item>
+        <item name="colorPrimary">@color/elinc_main_green</item>
+        <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">@color/elinc_main_green</item>
         <item name="android:windowBackground">@color/window_background</item>
     </style>

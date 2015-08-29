@@ -22,12 +22,11 @@
         <ImageView
             android:layout_toRightOf="@+id/date_of_tree"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="-4dp"
             android:id="@+id/rectangle"
-            android:layout_gravity="bottom"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/rectangle"
-            android:layout_width="24dp"
-            android:layout_height="28dp" />
+            android:layout_width="14dp"
+            android:layout_height="14dp" />
         <ImageView
             android:layout_marginLeft="105dp"
             android:layout_alignParentBottom="true"
@@ -53,7 +52,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="6dp"
             android:layout_gravity="bottom"
-            android:src="@drawable/elinc_sun"
+            android:src="@drawable/water"
             android:layout_marginBottom="1dp"
             android:layout_width="14dp"
             android:layout_height="16dp" />

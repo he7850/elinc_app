@@ -102,44 +102,9 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 	private void init() {
 		characterParser = CharacterParser.getInstance();
 		pinyinComparator = new PinyinComparator();
-//		initTopBarForRight("联系人", R.drawable.base_action_bar_add_bg_selector,
-//				new onRightImageButtonClickListener() {
-//
-//					@Override
-//					public void onClick() {
-//						// TODO Auto-generated method stub
-//						startAnimActivity(AddFriendActivity.class);
-//					}
-//				});
 		initListView();
 		initRightLetterView();
-		//initEditText();
 	}
-
-/*	private void initEditText() {
-		mClearEditText = (ClearEditText)findViewById(R.id.et_msg_search);
-		// 根据输入框输入值的改变来过滤搜索
-		mClearEditText.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// 当输入框里面的值为空，更新为原来的列表，否则为过滤数据列表
-				filterData(s.toString());
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				
-			}
-		});
-	}*/
 
 	/**
 	 * 根据输入框中的值来过滤数据并更新ListView
@@ -216,7 +181,6 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 		RelativeLayout headView = (RelativeLayout) mInflater.inflate(R.layout.include_new_friend, null);
 		iv_msg_tips = (ImageView)headView.findViewById(R.id.iv_msg_tips);
 		layout_new =(LinearLayout)headView.findViewById(R.id.layout_new);
-		layout_near =(LinearLayout)headView.findViewById(R.id.layout_near);
 		layout_new.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -224,15 +188,6 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(getActivity(), NewFriendActivity.class);
 				intent.putExtra("from", "contact");
-				startAnimActivity(intent);
-			}
-		});
-		layout_near.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(getActivity(), NearPeopleActivity.class);
 				startAnimActivity(intent);
 			}
 		});

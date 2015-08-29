@@ -172,7 +172,7 @@ public class NearPeopleActivity extends ActivityBase implements IXListViewListen
 								break;
 							}
 						}
-						for (int i=arg0.size();i>=0;i--) {
+						for (int i=arg0.size()-1;i>=0;i--) {
 							if (i>4) {
 								arg0.remove(i);
 							}
