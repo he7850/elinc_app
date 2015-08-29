@@ -36,11 +36,8 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
     List<Question> question = new ArrayList<Question>();
     XListView mListView;
     QuestionListAdapter adapter;
-    private View view;
-    String searchName ="";
     private final int pageCapacity=5;
     int curPage = 0;
-    ProgressDialog progress ;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,8 +47,7 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_question, container, false);
-        /*listView = (ListView)view.findViewById(R.id.question_list);*/
+        View view = inflater.inflate(R.layout.fragment_question, container, false);
         return view;
     }
     @Override
@@ -63,38 +59,26 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
 
     private void initXListView() {
         mListView = (XListView) findViewById(R.id.list_question_e);
-        // 首先不允许加载更多
         mListView.setPullLoadEnable(true);
-        // 不允许下拉
         mListView.setPullRefreshEnable(true);
-        // 设置监听器
         mListView.setXListViewListener(this);
-        //
         mListView.pullRefreshing();
         mListView.setDividerHeight(2);
         adapter = new QuestionListAdapter(getActivity(), question);
         mListView.setAdapter(adapter);
-
         mListView.setOnItemClickListener(this);
-
     }
-
-
-
-
 
     @Override
     public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
         String questionId = question.get(position-1).getObjectId();
-        //ShowToast("point"+position);
         bundle.putString("questionId", questionId);
         intent.putExtras(bundle);
         intent.setClass(getActivity(), QuestionItemActivityElinc.class);
         startAnimActivity(intent);
     }
-
 
     @Override
     public void onClick(View arg0) {
@@ -124,11 +108,9 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
         mainQuery.findObjects(getActivity(), new FindListener<Question>() {
             @Override
             public void onSuccess(List<Question> list) {
-                // TODO Auto-generated method stub
                 if (CollectionUtils.isNotNull(list)) {
                     if (list.size() < pageCapacity) {
                         mListView.setPullLoadEnable(false);
-                        //ShowToast("问题加载完成!");
                     } else {
                         mListView.setPullLoadEnable(true);
                     }
@@ -139,7 +121,6 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
 
             @Override
             public void onError(int i, String s) {
-                // TODO Auto-generated method stub
                 ShowLog("搜索更多问题出错:" + s);
                 mListView.setPullLoadEnable(false);
                 refreshLoad();
@@ -167,7 +148,6 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
         allQuery.findObjects(getActivity(), new FindListener<Question>() {
             @Override
             public void onSuccess(List<Question> list) {
-                // TODO Auto-generated method stub
                 if (CollectionUtils.isNotNull(list)) {
                     question.clear();
                     question.addAll(list);
@@ -182,7 +162,6 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
             }
             @Override
             public void onError(int code, String msg) {
-                // TODO Auto-generated method stub
                 BmobLog.i("查询错误:" + msg);
                 if (question != null) {
                     question.clear();
@@ -198,7 +177,6 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
         if (CollectionUtils.isNotNull(question)) {
             if (question.size() < pageCapacity) {
                 mListView.setPullLoadEnable(false);
-                //ShowToast("问题加载完成!");
             } else {
                 mListView.setPullLoadEnable(true);
             }
@@ -218,7 +196,6 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
         mainQuery.findObjects(getActivity(), new FindListener<Question>() {
             @Override
             public void onSuccess(List<Question> list) {
-                // TODO Auto-generated method stub
                 if (CollectionUtils.isNotNull(list)) {
                     question.clear();
                     adapter.addAll(list);
@@ -235,7 +212,6 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
 
             @Override
             public void onError(int i, String s) {
-                // TODO Auto-generated method stub
                 ShowLog("搜索更多问题出错:"+s);
                 mListView.setPullLoadEnable(false);
                 refreshLoad();

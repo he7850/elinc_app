@@ -5,6 +5,9 @@
     <color name="elinc_unselected_tab">#9D9D9D</color>
     <color name="elinc_green">#31B590</color>
     <color name="elinc_border_grey">#BCBCBC</color>
+    <color name="card_color1">#FF7171</color>
+    <color name="card_color2">#66CC99</color>
+    <color name="card_color3">#267CA7</color>
 
     <color name="window_background">#FFF5F5F5</color>
     <color name="base_actionbar_bg">#f5f5f5</color>

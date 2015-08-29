@@ -62,19 +62,12 @@ import com.elinc.im.elinc.view.MyLetterView.OnTouchingLetterChangedListener;
 @SuppressLint("DefaultLocale")
 public class ContactFragment extends FragmentBase implements OnItemClickListener,OnItemLongClickListener{
 
-	//ClearEditText mClearEditText;
-
-	TextView dialog;
-
-	ListView list_friends;
-	MyLetterView right_letter;
-
+	private TextView dialog;
+	private ListView list_friends;
+	private MyLetterView right_letter;
 	private UserFriendAdapter userAdapter;// 好友
-
-	List<User> friends = new ArrayList<User>();
-
+	private List<User> friends = new ArrayList<User>();
 	private InputMethodManager inputMethodManager;
-	
 	/**
 	 * 汉字转换成拼音的类
 	 */
@@ -87,13 +80,11 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		return inflater.inflate(R.layout.fragment_contacts, container, false);
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 		init();
@@ -108,8 +99,7 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 
 	/**
 	 * 根据输入框中的值来过滤数据并更新ListView
-	 * 
-	 * @param filterStr
+	 * param filterStr
 	 */
 	private void filterData(String filterStr) {
 		List<User> filterDateList = new ArrayList<User>();
@@ -135,8 +125,8 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 
 	/**
 	 * 为ListView填充数据
-	 * @param datas
-	 * @return
+	 * param datas
+	 * return void
 	 */
 	private void filledData(List<BmobChatUser> datas) {
 		friends.clear();
@@ -171,10 +161,8 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 	}
 	
 	
-	ImageView iv_msg_tips;
-	TextView tv_new_name;
-	LinearLayout layout_new;//新朋友
-	LinearLayout layout_near;//附近的人
+	private ImageView iv_msg_tips;
+	private LinearLayout layout_new;//新朋友
 	
 	private void initListView() {
 		list_friends= (ListView)findViewById(R.id.list_friends);
@@ -185,7 +173,6 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				Intent intent = new Intent(getActivity(), NewFriendActivity.class);
 				intent.putExtra("from", "contact");
 				startAnimActivity(intent);
@@ -216,7 +203,6 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 
 	@Override
 	public void setUserVisibleHint(boolean isVisibleToUser) {
-		// TODO Auto-generated method stub
 		if (isVisibleToUser) {
 			queryMyfriends();
 		}
@@ -230,9 +216,7 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 		right_letter.setOnTouchingLetterChangedListener(new LetterListViewListener());
 	}
 
-	private class LetterListViewListener implements
-			OnTouchingLetterChangedListener {
-
+	private class LetterListViewListener implements OnTouchingLetterChangedListener {
 		@Override
 		public void onTouchingLetterChanged(String s) {
 			// 该字母首次出现的位置
@@ -245,8 +229,8 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 
 	/** 获取好友列表
 	  * queryMyfriends
-	  * @return void
-	  * @throws
+	  * return void
+	  * throws
 	  */
 	private void queryMyfriends() {
 		//是否有新的好友请求
@@ -268,6 +252,7 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 		}else{
 			for (int i = 0;i<friends.size();i++){
 				if (CollectionUtils.isNotNull(friends.get(i).getTags())){
+
 				}else{
 
 				}
@@ -326,7 +311,6 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 	
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-		// TODO Auto-generated method stub
 		User user = (User) userAdapter.getItem(position-1);
 		//先进入好友的详细资料页面
 		Intent intent =new Intent(getActivity(),SetMyInfoActivity.class);
@@ -337,9 +321,7 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 	}
 	
 	@Override
-	public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int position,
-			long arg3) {
-		// TODO Auto-generated method stub
+	public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 		User user = (User) userAdapter.getItem(position-1);
 		dialog(user);
 		return true;
@@ -363,23 +345,7 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 		});
 		builder.create().show();
 	}
-	
-	
-	/* 以下是自带的 dialogTips，
-	   已经被改成上面的dialog方法。
 
-	public void showDeleteDialog(final User user) {
-		DialogTips dialog = new DialogTips(getActivity(),user.getUsername(),"删除联系人", "确定",true,true);
-		// 设置成功事件
-		dialog.SetOnSuccessListener(new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialogInterface, int userId) {
-				deleteContact(user);
-			}
-		});
-		// 显示确认对话框
-		dialog.show();
-	}
-	*/
 	 /** 删除联系人
 	  * deleteContact
 	  * @return void
@@ -394,7 +360,6 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 			
 			@Override
 			public void onSuccess() {
-				// TODO Auto-generated method stub
 				ShowToast("删除成功");
 				//删除内存
 				CustomApplcation.getInstance().getContactList().remove(user.getUsername());
@@ -409,7 +374,6 @@ public class ContactFragment extends FragmentBase implements OnItemClickListener
 			
 			@Override
 			public void onFailure(int arg0, String arg1) {
-				// TODO Auto-generated method stub
 				ShowToast("删除失败："+arg1);
 				progress.dismiss();
 			}

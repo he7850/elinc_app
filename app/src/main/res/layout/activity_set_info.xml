@@ -20,11 +20,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/about_top_bg"
-        android:minHeight="80dp"
+        android:minHeight="60dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp" >
 
         <TextView
+            android:textSize="18sp"
             style="@style/Smile.TextView._Black"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
@@ -40,10 +41,9 @@
             <ImageView
                 android:id="@+id/iv_set_avator"
                 style="@style/Smile.ImageView"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:padding="5dp"
-                android:src="@drawable/head1" />
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/head" />
 
             <ImageView
                 android:id="@+id/iv_arraw"
@@ -80,11 +80,11 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:text="0"
+                android:layout_marginRight="20dp"
                 android:id="@+id/tv_set_nick"
                 style="@style/Smile.TextView._Black"
                 android:drawablePadding="10dp" />
-
-
         </LinearLayout>
     </RelativeLayout>
 
@@ -113,6 +113,7 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:text="0"
                 android:id="@+id/tv_set_gender"
                 style="@style/Smile.TextView._Black"
                 android:layout_marginRight="20dp"
@@ -146,6 +147,7 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:text="0"
                 android:id="@+id/tv_set_campus"
                 style="@style/Smile.TextView._Black"
                 android:layout_marginRight="20dp"
@@ -181,6 +183,7 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:text="0"
                 android:id="@+id/tv_set_sign"
                 style="@style/Smile.TextView._Black"
                 android:layout_marginRight="20dp"
@@ -224,7 +227,7 @@
     </RelativeLayout>
     <Button
         style="@style/Smile.Button.theme"
-        android:id="@+id/iv_nickarraw"
+        android:id="@+id/iv_edit"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:contentDescription="@string/action_settings"
@@ -259,7 +262,7 @@
         android:text="@string/chat" />
 
     <Button
-        android:id="@+id/btn_back"
+        android:id="@+id/btn_black"
         style="@style/Smile.Button.logout"
         android:layout_width="match_parent"
         android:layout_height="45dp"

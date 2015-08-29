@@ -52,6 +52,7 @@
                             android:paddingRight="4dp"
                             android:background="@drawable/corner_bg"
                             android:textSize="12sp"
+                            android:textColor="#ffffff"
                             android:id="@+id/tag1"
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="4dp"
@@ -126,7 +127,7 @@
                                 android:paddingLeft="12dp"
                                 android:paddingRight="12dp"
                                 android:shape="rectangle"
-                                android:textColor="#ffaeae"
+                                android:textColor="@color/card_color1"
                                 android:gravity="center_horizontal"
                                 android:text="打卡"
                                 android:layout_alignParentRight="true"
@@ -150,7 +151,7 @@
 
                     </LinearLayout>
                     <LinearLayout
-                        android:background="#FF7171"
+                        android:background="@color/card_color1"
                         android:orientation="horizontal"
                         android:layout_width="32dp"
                         android:layout_height="match_parent">
@@ -193,6 +194,7 @@
                             android:text="0"
                             android:paddingLeft="4dp"
                             android:paddingRight="4dp"
+                            android:textColor="#ffffff"
                             android:background="@drawable/corner_bg"
                             android:textSize="12sp"
                             android:id="@+id/tag2"
@@ -221,7 +223,6 @@
                                 android:gravity="center_vertical"
                                 android:id="@+id/date2"
                                 android:textSize="12sp"
-                                android:layout_marginBottom="6dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
@@ -233,8 +234,7 @@
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:layout_width="wrap_content"
-                                android:layout_height="24dp"
-                                android:id="@+id/linearLayout">
+                                android:layout_height="24dp">
                                 <ImageView
                                     android:src="@drawable/water"
                                     android:layout_width="14dp"
@@ -265,7 +265,7 @@
                                 android:paddingLeft="12dp"
                                 android:paddingRight="12dp"
                                 android:shape="rectangle"
-                                android:textColor="#FFEA00"
+                                android:textColor="@color/card_color2"
                                 android:gravity="center_horizontal"
                                 android:textSize="12sp"
                                 android:text="打卡"
@@ -283,14 +283,13 @@
                                 android:text="完成"
                                 android:visibility="gone"
                                 android:id="@+id/finish2"
-                                android:layout_alignBottom="@+id/linearLayout"
                                 android:layout_toStartOf="@+id/btn_card2"
                                 android:layout_toLeftOf="@+id/btn_card2" />
                         </RelativeLayout>
 
                     </LinearLayout>
                     <LinearLayout
-                        android:background="#FFEA00"
+                        android:background="@color/card_color2"
                         android:orientation="horizontal"
                         android:layout_width="32dp"
                         android:layout_height="match_parent">
@@ -336,6 +335,7 @@
                             android:textSize="12sp"
                             android:id="@+id/tag3"
                             android:text="0"
+                            android:textColor="#ffffff"
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="4dp"
                             android:layout_width="wrap_content"
@@ -361,7 +361,6 @@
                                 android:id="@+id/date3"
                                 android:textSize="12sp"
                                 android:text="0"
-                                android:layout_marginBottom="6dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
@@ -404,7 +403,7 @@
                                 android:paddingLeft="12dp"
                                 android:paddingRight="12dp"
                                 android:shape="rectangle"
-                                android:textColor="#66CC99"
+                                android:textColor="@color/card_color3"
                                 android:gravity="center_horizontal"
                                 android:textSize="12sp"
                                 android:text="打卡"
@@ -429,7 +428,7 @@
 
                     </LinearLayout>
                     <LinearLayout
-                        android:background="#66CC99"
+                        android:background="@color/card_color3"
                         android:orientation="horizontal"
                         android:layout_width="32dp"
                         android:layout_height="match_parent">
@@ -443,7 +442,7 @@
                 android:textSize="18sp"
                 android:textColor="#ffffff"
                 android:id="@+id/btn_new_goal"
-                android:background="#66CC99"
+                android:background="@color/card_color1"
                 android:layout_marginLeft="14dp"
                 android:layout_marginRight="14dp"
                 android:layout_marginBottom="32dp"

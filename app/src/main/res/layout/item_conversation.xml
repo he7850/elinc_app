@@ -8,28 +8,27 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="80dp"
-        android:paddingBottom="5.0dip"
-        android:paddingTop="5.0dip" 
+        android:minHeight="60dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
         >
         <com.elinc.im.elinc.view.CircleImageView
             android:id="@+id/iv_recent_avatar"
-            android:layout_height="50dp"
-            android:layout_width="50dp"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/head1"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/head"
             android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="39dp" />
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/tv_recent_name"
             android:layout_width="wrap_content"
-            android:textSize="23sp"
-            android:layout_height="30.0dip"
-            android:layout_marginLeft="10.0dip"
-            android:layout_marginRight="58.0dip"
+            android:textSize="14sp"
+            android:layout_height="24dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="58dp"
             style="@style/Smile.TextView._Black"
             android:layout_toRightOf="@id/iv_recent_avatar"
             android:ellipsize="end"
@@ -43,20 +42,21 @@
             android:id="@+id/tv_recent_msg"
             android:text="bingo"
             android:layout_width="fill_parent"
-            android:layout_height="35.0dip"
+            android:layout_height="22dp"
             android:layout_below="@id/tv_recent_name"
-             android:layout_toRightOf="@id/iv_recent_avatar"
+            android:layout_toRightOf="@id/iv_recent_avatar"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="35.0dip"
+            android:layout_marginRight="35dp"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:paddingLeft="6.0dip"
             android:paddingRight="6.0dip"
             android:singleLine="true"
             android:textColor="@drawable/recent_message_text_color_selector"
-            android:textSize="15.0sp" />
+            android:textSize="12sp" />
 
         <TextView
+            android:text="0"
             android:id="@+id/tv_recent_time"
             android:layout_width="wrap_content"
             android:layout_height="22.0dip"
@@ -66,23 +66,22 @@
             android:layout_marginRight="10dip"
             android:ellipsize="end"
             android:gravity="center"
-            android:padding="0.0dip"
             android:singleLine="true"
             android:textColor="@drawable/recent_message_text_color_selector"
-            android:textSize="10.0sp" />
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/tv_recent_unread"
-            android:layout_width="16dip"
-            android:layout_height="16.0dip"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
             android:layout_alignParentRight="true"
             android:layout_below="@id/tv_recent_time"
-            android:layout_marginRight="10.0dip"
-            android:layout_marginTop="5.0dip"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/msg_tips"
             android:gravity="center"
             android:textColor="#ffffff"
-            android:textSize="10.0dip" />
+            android:textSize="10dp" />
     </RelativeLayout>
 
     <View

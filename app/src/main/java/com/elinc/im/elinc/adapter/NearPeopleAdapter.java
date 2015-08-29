@@ -21,21 +21,19 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 /**
  * 附近的人
  * 
- * @ClassName: BlackListAdapter
- * @Description: TODO
- * @author smile
- * @date 2014-6-24 下午5:27:14
+ * ClassName: BlackListAdapter
+ * Description: TODO
+ * author smile
+ * date 2014-6-24 下午5:27:14
  */
 public class NearPeopleAdapter extends BaseListAdapter<User> {
 
 	public NearPeopleAdapter(Context context, List<User> list) {
 		super(context, list);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public View bindView(int arg0, View convertView, ViewGroup arg2) {
-		// TODO Auto-generated method stub
 		if (convertView == null) {
 			convertView = mInflater.inflate(R.layout.item_near_people, null);
 		}
@@ -47,15 +45,15 @@ public class NearPeopleAdapter extends BaseListAdapter<User> {
 		TextView tag2 = ViewHolder.get(convertView, R.id.tag2);
 		TextView tag3 = ViewHolder.get(convertView, R.id.tag3);
 		if (CollectionUtils.isNotNull(contract.getTags())) {
-			if (contract.getTags().size() > 0) {
+			if (contract.getTags().size() > 0 && contract.getTags().get(0)!=null) {
 				tag1.setText(contract.getTags().get(0));
 			}
-			if (contract.getTags().size() > 1) {
+			if (contract.getTags().size() > 1 && contract.getTags().get(1)!=null) {
 				tag2.setText(contract.getTags().get(1));
-			} else {
+			}else{
 				tag2.setVisibility(View.GONE);
 			}
-			if (contract.getTags().size() > 2) {
+			if (contract.getTags().size() > 2 && contract.getTags().get(2)!=null) {
 				tag3.setText(contract.getTags().get(2));
 			} else {
 				tag3.setVisibility(View.GONE);
@@ -71,9 +69,9 @@ public class NearPeopleAdapter extends BaseListAdapter<User> {
 		} else {
 			iv_avatar.setImageResource(R.drawable.default_head);
 		}
-		BmobGeoPoint location = contract.getLocation();
-		String currentLat = CustomApplcation.getInstance().getLatitude();
-		String currentLong = CustomApplcation.getInstance().getLongtitude();
+//		BmobGeoPoint location = contract.getLocation();
+//		String currentLat = CustomApplcation.getInstance().getLatitude();
+//		String currentLong = CustomApplcation.getInstance().getLongtitude();
 		campus.setText(contract.getCampus());
 		tv_name.setText(contract.getUsername());
 		return convertView;

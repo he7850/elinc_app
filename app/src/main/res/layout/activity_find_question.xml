@@ -6,58 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.elinc.im.elinc.ui.fragment.QuestionFragment">
-    <!--    <LinearLayout
-            android:id="@+id/wait_bar"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <ProgressBar
-                style="@android:style/Widget.ProgressBar.Large"
-                android:id="@+id/wait_circle"
-                android:layout_width="40dp"
-                android:layout_height="40dp"/>
-            <TextView
-                android:textSize="20dp"
-                android:text="刷新中..."
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>-->
 
     <include
         android:id="@+id/common_actionbar"
         layout="@layout/include_action_bar" />
-
-<!--    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <EditText
-            android:id="@+id/et_search_question"
-            android:layout_width="0dp"
-            android:layout_height="39dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1.0"
-            android:background="@drawable/button_normal_shape"
-            android:hint="问题关键词 标签"
-            android:paddingLeft="5dp"
-            android:singleLine="true"
-            android:textColorHint="#b3b3b3"
-            android:textSize="18sp" />
-        &lt;!&ndash;style="@style/Smile.TextView._White"&ndash;&gt;
-        <Button
-            android:id="@+id/btn_search_question"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginRight="11dp"
-            android:background="@drawable/find_elinc"
-            android:textSize="14sp" />
-    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -68,8 +20,6 @@
         android:paddingLeft="5dp"
         android:paddingRight="5dp" >
 
-
-
         <EditText
             android:id="@+id/et_search_question"
             android:layout_width="0dp"
@@ -77,21 +27,16 @@
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
             android:layout_weight="1.0"
-            android:gravity="center"
             android:background="@drawable/base_edit_input"
             android:singleLine="true"
             android:padding="5dp" />
-
-
         <Button
             android:id="@+id/btn_search_question"
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:background="@drawable/find_elinc_green"
             android:gravity="center"
-            android:textColor="@color/base_color_text_black" >
-        </Button>
-
+            android:textColor="@color/base_color_text_black"/> >
     </LinearLayout>
 
     <View
@@ -125,10 +70,6 @@
             android:visibility="gone"
             layout="@layout/include_chat_add" />
     </LinearLayout>
-
-
-
-
     <com.elinc.im.elinc.view.xlist.XListView
         android:id="@+id/list_question_e"
         android:layout_width="match_parent"

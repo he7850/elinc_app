@@ -13,7 +13,9 @@ import android.widget.TextView;
 import cn.bmob.im.bean.BmobRecent;
 import cn.bmob.im.config.BmobConfig;
 import cn.bmob.im.db.BmobDB;
+import cn.bmob.im.util.BmobLog;
 
+import com.bumptech.glide.Glide;
 import com.elinc.im.elinc.R;
 import com.elinc.im.elinc.adapter.base.ViewHolder;
 import com.elinc.im.elinc.util.FaceTextUtils;
@@ -37,13 +39,12 @@ public class MessageRecentAdapter extends ArrayAdapter<BmobRecent> implements Fi
 	public MessageRecentAdapter(Context context, int textViewResourceId, List<BmobRecent> objects) {
 		super(context, textViewResourceId, objects);
 		inflater = LayoutInflater.from(context);
-		this.mContext = context;
+		mContext = context;
 		mData = objects;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
 		final BmobRecent item = mData.get(position);
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.item_conversation, parent, false);
@@ -57,6 +58,7 @@ public class MessageRecentAdapter extends ArrayAdapter<BmobRecent> implements Fi
 		//填充数据
 		String avatar = item.getAvatar();
 		if(avatar!=null&& !avatar.equals("")){
+			BmobLog.i("avatar");
 			ImageLoader.getInstance().displayImage(avatar, iv_recent_avatar, ImageLoadOptions.getOptions());
 		}else{
 			iv_recent_avatar.setImageResource(R.drawable.head);
