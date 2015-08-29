@@ -183,12 +183,13 @@
    </ScrollView>-->
 </LinearLayout>
 
-
+     <!--   android:background="@drawable/base_comment_emo_bar"-->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/base_comment_emo_bar">
+        android:background="#FFFFFF"
+        >
         <Button
             android:layout_width="35dp"
             android:layout_height="35dp"
@@ -207,13 +208,16 @@
             android:layout_gravity="center"
             android:background="#bdbcbc"/>
 
+
+        <!--android:background="@drawable/base_edit_input"-->
         <EditText
             android:id="@+id/edit_answer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:hint="点击添加你的回答"
             android:minHeight="40dp"
-            android:background="@drawable/base_edit_input"
+
             android:layout_margin="5dp"
             android:singleLine="false"
             android:layout_weight="1"
