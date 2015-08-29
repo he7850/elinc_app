@@ -61,6 +61,7 @@ public class MyTreeActivity extends ActivityBase {
         BmobQuery<Goal> bmobQuery = new BmobQuery<>();
         User currentUser = new User();
         currentUser.setObjectId(userId);
+        bmobQuery.order("-createdAt");
         bmobQuery.addWhereEqualTo("author",new BmobPointer(currentUser));
         bmobQuery.findObjects(MyTreeActivity.this, new FindListener<Goal>() {
             @Override
@@ -74,6 +75,7 @@ public class MyTreeActivity extends ActivityBase {
                     BmobQuery<Card> bmobQuery1 = new BmobQuery<Card>();
                     bmobQuery1.addWhereEqualTo("goal",new BmobPointer(goalRecordList.get(i).getGoal()));
                     final int finalI = i;
+                    bmobQuery1.order("-createdAt");
                     bmobQuery1.findObjects(MyTreeActivity.this, new FindListener<Card>() {
                         @Override
                         public void onSuccess(List<Card> list) {

@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +54,7 @@ public class CardFragment extends FragmentBase{
     private TextView comment_num1,comment_num2,comment_num3;
     private Button btn_add_goal;
     private String time1;
+    private Boolean checked=false;
     TextView card1,card2,card3;
     private TextView finish1,finish2,finish3;
 
@@ -199,12 +202,12 @@ public class CardFragment extends FragmentBase{
 
                         }
                     });
-                    finish1.setOnClickListener(new View.OnClickListener() {
+                    /*finish1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             finish(0);
                         }
-                    });
+                    });*/
                 }
                 if (goalNum > 1) {
                     goal2.setVisibility(View.VISIBLE);
@@ -274,12 +277,12 @@ public class CardFragment extends FragmentBase{
 
                         }
                     });
-                    finish2.setOnClickListener(new View.OnClickListener() {
+                    /*finish2.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             finish(1);
                         }
-                    });
+                    });*/
                 }
                 if (goalNum > 2) {
                     goal3.setVisibility(View.VISIBLE);
@@ -348,12 +351,12 @@ public class CardFragment extends FragmentBase{
 
                         }
                     });
-                    finish3.setOnClickListener(new View.OnClickListener() {
+                    /*finish3.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             finish(2);
                         }
-                    });
+                    });*/
                     btn_add_goal.setVisibility(View.GONE);
                 }
 
@@ -367,7 +370,7 @@ public class CardFragment extends FragmentBase{
 
     }
 
-    private void finish(final int i) {
+/*    private void finish(final int i) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         final View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_hit_card, null);
         //设置我们自己定义的布局文件作为弹出框的Content
@@ -376,25 +379,7 @@ public class CardFragment extends FragmentBase{
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                final EditText et = (EditText) view.findViewById(R.id.dialog_message);
-                if (et.getText().toString().equals("")) {
-                    ShowToast("还没有说一句话呢");
-                } else {
-                    goal[i].setOut(true);
-                    goal[i].update(getContext(), goal[i].getObjectId(), new UpdateListener() {
 
-                        @Override
-                        public void onSuccess() {
-                            ShowToast("目标完成!成长树将会记录你的轨迹!");
-                            initList();
-                        }
-
-                        @Override
-                        public void onFailure(int i, String s) {
-                            ShowToast("操作失败请重试");
-                        }
-                    });
-                }
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -404,7 +389,7 @@ public class CardFragment extends FragmentBase{
             }
         });
         builder.create().show();
-    }
+    }*/
 
     private void dialog(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -412,31 +397,60 @@ public class CardFragment extends FragmentBase{
         //设置我们自己定义的布局文件作为弹出框的Content
         builder.setView(view);
         builder.setTitle("今日打卡");
+        final CheckBox done= (CheckBox) view.findViewById(R.id.done);
+        done.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                checked = b;
+            }
+        });
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                final EditText et = (EditText) view.findViewById(R.id.dialog_message);
-                if (et.getText().toString().equals("")) {
-                    ShowToast("还没有说一句话呢");
-                } else {
-                    Card card = new Card();
-                    card.setGoal(goal[position]);
-                    card.setLikedBy(new BmobRelation());
-                    card.setLikedByNum(0);
-                    card.setReply(new BmobRelation());
-                    card.setCardClaim(et.getText().toString());
-                    card.save(getContext(), new SaveListener() {
-                        @Override
-                        public void onSuccess() {
-                            ShowToast("打卡成功");
-                        }
+                if (checked == false) {
+                    final EditText et = (EditText) view.findViewById(R.id.dialog_message);
 
-                        @Override
-                        public void onFailure(int i, String s) {
-                            ShowToast("打卡失败");
-                        }
-                    });
+                    if (et.getText().toString().equals("")) {
+                        ShowToast("还没有说一句话呢");
+                    } else {
+                        Card card = new Card();
+                        card.setGoal(goal[position]);
+                        card.setLikedBy(new BmobRelation());
+                        card.setLikedByNum(0);
+                        card.setReply(new BmobRelation());
+                        card.setCardClaim(et.getText().toString());
+                        card.save(getContext(), new SaveListener() {
+                            @Override
+                            public void onSuccess() {
+                                ShowToast("打卡成功");
+                            }
+
+                            @Override
+                            public void onFailure(int i, String s) {
+                                ShowToast("打卡失败");
+                            }
+                        });
+                    }
+                } else {
+                    final EditText et = (EditText) view.findViewById(R.id.dialog_message);
+                    if (et.getText().toString().equals("")) {
+                        ShowToast("还没有说一句话呢");
+                    } else {
+                        goal[position].setOut(true);
+                        goal[position].update(getContext(), goal[position].getObjectId(), new UpdateListener() {
+                            @Override
+                            public void onSuccess() {
+                                ShowToast("目标完成!成长树将会记录你的轨迹!");
+                                initList();
+                            }
+                            @Override
+                            public void onFailure(int i, String s) {
+                                ShowToast("操作失败请重试");
+                            }
+                        });
+                    }
                 }
+
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
