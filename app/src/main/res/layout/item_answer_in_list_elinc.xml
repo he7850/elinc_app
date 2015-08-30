@@ -52,14 +52,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                style="@style/content_elinc"
                 android:id="@+id/answer_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/loading"
-                android:textSize="14sp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:fontFamily="微软雅黑"
                 />
             <ImageView
                 android:id="@+id/avatar_for_answer_iv"
@@ -84,12 +83,14 @@
                 android:src="@drawable/like"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
+                android:layout_marginRight="2dp"
                 android:layout_marginLeft="20dp"
                 />
             <TextView
                 android:id="@+id/answer_number"
                 android:paddingTop="2dp"
                 android:text="@string/loading"
+                android:layout_marginLeft="2dp"
                 android:textSize="8sp"
                 android:gravity="center"
                 android:fontFamily="微软雅黑"

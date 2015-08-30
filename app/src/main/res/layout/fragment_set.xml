@@ -26,9 +26,10 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
-            android:textSize="18sp"
-            android:textColor="@color/base_color_text_black"
-            android:gravity="top"
+            android:textSize="16sp"
+            android:paddingBottom="3dp"
+            style="@style/title_elinc"
+            android:gravity="bottom"
             android:text="@string/set_notify" />
 
         <ImageView
@@ -48,6 +49,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
+            android:scaleType="fitXY"
             android:background="@drawable/off"
             android:visibility="invisible" />
     </RelativeLayout>
@@ -66,14 +68,15 @@
         android:padding="10dip" >
 
         <TextView
-            android:textColor="@color/base_color_text_black"
+            style="@style/title_elinc"
             android:layout_width="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
+            android:paddingBottom="3dp"
             android:layout_height="wrap_content"
-            android:gravity="top"
+            android:text="@string/set_voice"
             android:layout_centerVertical="true"
-            android:text="@string/set_voice" />
+            android:gravity="center"
+            android:layout_marginLeft="16dp"/>
 
         <ImageView
             android:id="@+id/iv_open_voice"
@@ -92,6 +95,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
+            android:scaleType="fitXY"
             android:background="@drawable/off"
             android:visibility="invisible" />
     </RelativeLayout>
@@ -115,9 +119,10 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:gravity="top"
-            android:textColor="@color/base_color_text_black"
+            style="@style/title_elinc"
+            android:paddingBottom="3dp"
             android:text="@string/set_vibrate" />
 
         <ImageView
@@ -136,6 +141,7 @@
             android:layout_height="24dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:scaleType="fitXY"
             android:layout_marginRight="16dp"
             android:background="@drawable/off"
             android:visibility="invisible" />
@@ -160,11 +166,12 @@
             android:layout_marginLeft="16dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:gravity="top"
-            android:textSize="18sp"
+            android:gravity="center_horizontal"
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/base_color_text_black"
+            style="@style/title_elinc"
+            android:paddingBottom="3dp"
             android:text="黑名单" />
 
         <TextView
