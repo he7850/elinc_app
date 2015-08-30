@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.elinc.im.elinc"
-        minSdkVersion  21
+        minSdkVersion  17
         targetSdkVersion 22
     }
 
