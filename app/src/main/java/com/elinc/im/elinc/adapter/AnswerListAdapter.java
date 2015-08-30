@@ -14,6 +14,7 @@ import com.elinc.im.elinc.R;
 import com.elinc.im.elinc.adapter.base.BaseListAdapter;
 import com.elinc.im.elinc.adapter.base.ViewHolder;
 import com.elinc.im.elinc.bean.Answer;
+import com.elinc.im.elinc.bean.Tool;
 import com.elinc.im.elinc.bean.User;
 import com.elinc.im.elinc.ui.ImageBrowserActivity;
 import com.elinc.im.elinc.ui.SetMyInfoActivity;
@@ -77,13 +78,13 @@ public class AnswerListAdapter extends BaseListAdapter<Answer> {
         refreshNumber(contract,answer_number);
 
         TextView answer_content = ViewHolder.get(convertView, R.id.answer_content);
-        TextView answer_date  =ViewHolder.get(convertView,R.id.answer_date);
+        TextView answer_date = ViewHolder.get(convertView,R.id.answer_date);
         final TextView answer_responder = ViewHolder.get(convertView, R.id.answer_responder);
         CircleImageView avatar_for_responder= ViewHolder.get(convertView,R.id.avatar_for_responder);
         ImageView avatar_for_answer_iv = ViewHolder.get(convertView, R.id.avatar_for_answer_iv);
         answer_content.setText(contract.getAnswerContent());
         answer_responder.setText(contract.getResponder().getUsername());
-        answer_date.setText(contract.getCreatedAt());
+        answer_date.setText(Tool.showdate(contract.getCreatedAt()));
         String avatar=contract.getResponder().getAvatar();
         ImageView like_answer;
         like_answer = ViewHolder.get(convertView,R.id.like_answer);

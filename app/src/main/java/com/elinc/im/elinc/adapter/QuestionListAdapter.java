@@ -15,6 +15,7 @@ import com.elinc.im.elinc.R;
 import com.elinc.im.elinc.adapter.base.BaseListAdapter;
 import com.elinc.im.elinc.adapter.base.ViewHolder;
 import com.elinc.im.elinc.bean.Question;
+import com.elinc.im.elinc.bean.Tool;
 import com.elinc.im.elinc.util.ImageLoadOptions;
 import com.elinc.im.elinc.view.CircleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -56,7 +57,7 @@ public class QuestionListAdapter extends BaseListAdapter<Question> {
         if(contract.getTitle()!=null){question_title.setText(contract.getTitle());}
         if(contract.getQuestionContent()!=null){question_content.setText(contract.getQuestionContent());}
         if(contract.getAuthor()!=null){question_author.setText(contract.getAuthor().getUsername());}
-        question_date.setText(contract.getCreatedAt());
+        question_date.setText(Tool.showdate(contract.getCreatedAt()));
         String avatar=contract.getAuthor().getAvatar();
         if(avatar!=null && !avatar.equals("")){//加载头像-为了不每次都加载头像
             ImageLoader.getInstance().displayImage(avatar, user_avatar, ImageLoadOptions.getOptions(),animateFirstListener);

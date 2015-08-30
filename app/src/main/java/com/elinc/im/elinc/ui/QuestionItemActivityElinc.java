@@ -2,9 +2,11 @@ package com.elinc.im.elinc.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -25,6 +27,10 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bmob.BTPFileResponse;
+import com.bmob.BmobProFile;
+import com.bmob.btp.callback.LocalThumbnailListener;
+import com.bmob.btp.callback.UploadListener;
 import com.elinc.im.elinc.R;
 import com.elinc.im.elinc.adapter.AnswerListAdapter;
 import com.elinc.im.elinc.bean.Answer;
@@ -176,7 +182,12 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
             @Override
             public void onClick(View view) {
                 EditText a = (EditText) findViewById(R.id.edit_answer);
-                QuestionItemActivityElinc.this.submitAnswer(a.getText().toString());
+
+                if(!a.equals("")&& a!=null){
+                    submitAnswer(a.getText().toString());
+                }else{
+                    ShowToast("请输入答案");
+                }
             }
         });
         initBasicView();
@@ -199,7 +210,7 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
                 TextView contentTV = (TextView) findViewById(R.id.question_item_question_content);
                 contentTV.setText(object.getQuestionContent());
                 question_date_in_question_list = (TextView) findViewById(R.id.question_date_in_question_list);
-                question_date_in_question_list.setText(object.getCreatedAt());
+                question_date_in_question_list.setText(Tool.showdate(object.getCreatedAt()));
                 TextView question_detail_tags= (TextView) findViewById(R.id.question_detail_tags);
                 question_detail_tags.setText(object.getTags().toString());
                 author_in_question_list.setText(object.getAuthor().getUsername());
@@ -534,43 +545,14 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
 
             @Override
             public void onClick(View arg0) {
-                ShowLog("点击拍照");
-                // TODO Auto-generated method stub
-                layout_choose.setBackgroundColor(getResources().getColor(
-                        R.color.base_color_text_white));
-                layout_photo.setBackgroundDrawable(getResources().getDrawable(
-                        R.drawable.pop_bg_press));
-                File dir = new File(BmobConstants.MyAvatarDir);
-                if (!dir.exists()) {
-                    dir.mkdirs();
-                }
-                // 原图
-                File file = new File(dir, new SimpleDateFormat("yyMMddHHmmss")
-                        .format(new Date()));
-                filePath = file.getAbsolutePath();// 获取相片的保存路径
-                Uri imageUri = Uri.fromFile(file);
-
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                startActivityForResult(intent,
-                        BmobConstants.REQUESTCODE_UPLOADAVATAR_CAMERA);
+                selectImageFromCamera();
             }
         });
         layout_choose.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                // TODO Auto-generated method stub
-                ShowLog("点击相册");
-                layout_photo.setBackgroundColor(getResources().getColor(
-                        R.color.base_color_text_white));
-                layout_choose.setBackgroundDrawable(getResources().getDrawable(
-                        R.drawable.pop_bg_press));
-                Intent intent = new Intent(Intent.ACTION_PICK, null);
-                intent.setDataAndType(
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                startActivityForResult(intent,
-                        BmobConstants.REQUESTCODE_UPLOADAVATAR_LOCATION);
+               selectImageFromLocal();
             }
         });
 
@@ -600,70 +582,7 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
     boolean isFromCamera = false;// 区分拍照旋转
     int degree = 0;
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case BmobConstants.REQUESTCODE_UPLOADAVATAR_CAMERA:// 拍照修改头像
-                if (resultCode == RESULT_OK) {
-                    if (!Environment.getExternalStorageState().equals(
-                            Environment.MEDIA_MOUNTED)) {
-                        ShowToast("SD不可用");
-                        return;
-                    }
-                    isFromCamera = true;
-                    File file = new File(filePath);
-                    degree = PhotoUtil.readPictureDegree(file.getAbsolutePath());
-                    Log.i("life", "拍照后的角度：" + degree);
-                    startImageAction(Uri.fromFile(file), 500, 500,
-                            BmobConstants.REQUESTCODE_UPLOADAVATAR_CROP, true);
-                }
-                break;
-            case BmobConstants.REQUESTCODE_UPLOADAVATAR_LOCATION:// 本地修改头像
-                if (avatorPop != null) {
-                    avatorPop.dismiss();
-                }
-                Uri uri = null;
-                if (data == null) {
-                    return;
-                }
-                if (resultCode == RESULT_OK) {
-                    if (!Environment.getExternalStorageState().equals(
-                            Environment.MEDIA_MOUNTED)) {
-                        ShowToast("SD不可用");
-                        return;
-                    }
-                    isFromCamera = false;
-                    uri = data.getData();
-                    startImageAction(uri, 500, 500,
-                            BmobConstants.REQUESTCODE_UPLOADAVATAR_CROP, true);
-                } else {
-                    ShowToast("照片获取失败");
-                }
 
-                break;
-            case BmobConstants.REQUESTCODE_UPLOADAVATAR_CROP:// 裁剪头像返回
-                // TODO sent to crop
-                if (avatorPop != null) {
-                    avatorPop.dismiss();
-                }
-                if (data == null) {
-                    // Toast.makeText(this, "取消选择", Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
-                    saveCropAvator(data);
-                }
-                // 初始化文件路径
-                filePath = "";
-                // 上传头像
-                uploadAvatar();
-                break;
-            default:
-                break;
-
-        }
-    }
     String path;
     private void uploadAvatar() {
         BmobLog.i("头像地址：" + path);
@@ -675,7 +594,7 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
                 // TODO Auto-generated method stub
                 String url = bmobFile.getFileUrl(QuestionItemActivityElinc.this);
                 //ShowToast(url);
-                if (url!=null){
+                if (url != null) {
                     new_answer.setAnswerAvatar(url);
                 }
             }
@@ -694,9 +613,6 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
         });
     }
 
-    private void updateAnswerAvatar(String url) {
-        new_answer.setAnswerAvatar(url);
-    }
 
 
     private void saveCropAvator(Intent data) {
@@ -726,37 +642,7 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
         }
     }
 
-    private void refreshAvatar(String avatar) {
-        if (avatar != null && !avatar.equals("")) {
-            ImageLoader.getInstance().displayImage(avatar, answer_iv,
-                    ImageLoadOptions.getOptions());
-        } else {
-            answer_iv.setImageResource(R.drawable.default_head);
-        }
-    }
 
-
-    private void startImageAction(Uri uri, int outputX, int outputY,
-                                  int requestCode, boolean isCrop) {
-        Intent intent = null;
-        if (isCrop) {
-            intent = new Intent("com.android.camera.action.CROP");
-        } else {
-            intent = new Intent(Intent.ACTION_GET_CONTENT, null);
-        }
-        intent.setDataAndType(uri, "image/*");
-        intent.putExtra("crop", "true");
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        intent.putExtra("outputX", outputX);
-        intent.putExtra("outputY", outputY);
-        intent.putExtra("scale", true);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-        intent.putExtra("return-data", true);
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-        intent.putExtra("noFaceDetection", true); // no face detection
-        startActivityForResult(intent, requestCode);
-    }
     private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {
 
         static final List<String> displayedImages = Collections.synchronizedList(new LinkedList<String>());
@@ -832,4 +718,232 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
 
         return super.onOptionsItemSelected(item);
     }
+
+    private String localCameraPath = "";// 拍照后得到的图片地址
+
+    /**
+     * 启动相机拍照 startCamera
+     *
+     * @Title: startCamera
+     * @throws
+     */
+    public void selectImageFromCamera() {
+        Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        File dir = new File(BmobConstants.BMOB_PICTURE_PATH);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        File file = new File(dir, String.valueOf(System.currentTimeMillis())
+                + ".jpg");
+        localCameraPath = file.getPath();
+        Uri imageUri = Uri.fromFile(file);
+        openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        startActivityForResult(openCameraIntent,
+                BmobConstants.REQUESTCODE_TAKE_CAMERA);
+    }
+
+    /**
+     * 选择图片
+     * @Title: selectImage
+     * @Description: TODO
+     * @param
+     * @return void
+     * @throws
+     */
+    public void selectImageFromLocal() {
+        Intent intent;
+        if (Build.VERSION.SDK_INT < 19) {
+            intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+        } else {
+            intent = new Intent(
+                    Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        }
+        startActivityForResult(intent, BmobConstants.REQUESTCODE_TAKE_LOCAL);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        avatorPop.dismiss();
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case BmobConstants.REQUESTCODE_TAKE_CAMERA:// 当取到值的时候才上传path路径下的图片到服务器
+                    ShowLog("本地图片的地址：" + localCameraPath);
+                    ShowToast("开始上传");
+                    upload(localCameraPath);
+                    break;
+                case BmobConstants.REQUESTCODE_TAKE_LOCAL:
+                    if (data != null) {
+                        Uri selectedImage = data.getData();
+                        if (selectedImage != null) {
+                            Cursor cursor = getContentResolver().query(
+                                    selectedImage, null, null, null, null);
+                            cursor.moveToFirst();
+                            int columnIndex = cursor.getColumnIndex("_data");
+                            String localSelectPath = cursor.getString(columnIndex);
+                            cursor.close();
+                            if (localSelectPath == null
+                                    || localSelectPath.equals("null")) {
+                                ShowToast("找不到您想要的图片");
+                                return;
+                            }
+                            upload(localSelectPath);
+                        }
+                    }
+                    break;
+
+            }
+        }
+    }
+
+    public void upload(String path) {
+        BmobProFile.getInstance(QuestionItemActivityElinc.this).getLocalThumbnail(path,1, new LocalThumbnailListener() {
+
+            @Override
+            public void onError(int statuscode, String errormsg) {
+                // TODO Auto-generated method stub
+                Log.i("bmob","本地缩略图创建失败 :"+statuscode+","+errormsg);
+            }
+
+            @Override
+            public void onSuccess(String thumbnailPath) {
+                // TODO Auto-generated method stub
+                Log.i("bmob","本地缩略图创建成功  :"+thumbnailPath);
+                BTPFileResponse response = BmobProFile.getInstance(QuestionItemActivityElinc.this).upload(thumbnailPath, new UploadListener() {
+                    @Override
+                    public void onSuccess(String fileName, String url, BmobFile file) {
+                        ShowToast("图片上传中，请稍后");
+                        Log.i("bmob", "文件上传成功：" + fileName + ",可访问的文件地址：" + file.getUrl());
+                        new_answer.setAnswerAvatar(file.getUrl());
+                        submit_answer_avatar.setBackgroundResource(R.drawable.added_picture);
+
+                    }
+
+                    @Override
+                    public void onProgress(int progress) {
+                        // TODO Auto-generated method stub
+                        ShowToast("图片上传中，请稍后");
+                        Log.i("bmob", "onProgress :" + progress);
+                    }
+
+                    @Override
+                    public void onError(int statuscode, String errormsg) {
+                        // TODO Auto-generated method stub
+                        Log.i("bmob", "文件上传失败：" + errormsg);
+                        ShowToast("图片上传失败，请检查网络");
+                    }
+                });
+            }
+        });
+
+    }
 }
+
+
+/*
+    private void updateAnswerAvatar(String url) {
+        new_answer.setAnswerAvatar(url);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case BmobConstants.REQUESTCODE_UPLOADAVATAR_CAMERA:// 拍照修改头像
+                if (resultCode == RESULT_OK) {
+                    if (!Environment.getExternalStorageState().equals(
+                            Environment.MEDIA_MOUNTED)) {
+                        ShowToast("SD不可用");
+                        return;
+                    }
+                    isFromCamera = true;
+                    File file = new File(filePath);
+                    degree = PhotoUtil.readPictureDegree(file.getAbsolutePath());
+                    Log.i("life", "拍照后的角度：" + degree);
+                    startImageAction(Uri.fromFile(file), 500, 500,
+                            BmobConstants.REQUESTCODE_UPLOADAVATAR_CROP, true);
+                }
+                break;
+            case BmobConstants.REQUESTCODE_UPLOADAVATAR_LOCATION:// 本地修改头像
+                if (avatorPop != null) {
+                    avatorPop.dismiss();
+                }
+                Uri uri = null;
+                if (data == null) {
+                    return;
+                }
+                if (resultCode == RESULT_OK) {
+                    if (!Environment.getExternalStorageState().equals(
+                            Environment.MEDIA_MOUNTED)) {
+                        ShowToast("SD不可用");
+                        return;
+                    }
+                    isFromCamera = false;
+                    uri = data.getData();
+                    startImageAction(uri, 500, 500,
+                            BmobConstants.REQUESTCODE_UPLOADAVATAR_CROP, true);
+                } else {
+                    ShowToast("照片获取失败");
+                }
+
+                break;
+            case BmobConstants.REQUESTCODE_UPLOADAVATAR_CROP:// 裁剪头像返回
+                // TODO sent to crop
+                if (avatorPop != null) {
+                    avatorPop.dismiss();
+                }
+                if (data == null) {
+                    // Toast.makeText(this, "取消选择", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    saveCropAvator(data);
+                }
+                // 初始化文件路径
+                filePath = "";
+                // 上传头像
+                uploadAvatar();
+                break;
+            default:
+                break;
+
+        }
+    }
+
+     private void refreshAvatar(String avatar) {
+        if (avatar != null && !avatar.equals("")) {
+            ImageLoader.getInstance().displayImage(avatar, answer_iv,
+                    ImageLoadOptions.getOptions());
+        } else {
+            answer_iv.setImageResource(R.drawable.default_head);
+        }
+    }
+
+
+    private void startImageAction(Uri uri, int outputX, int outputY,
+                                  int requestCode, boolean isCrop) {
+        Intent intent = null;
+        if (isCrop) {
+            intent = new Intent("com.android.camera.action.CROP");
+        } else {
+            intent = new Intent(Intent.ACTION_GET_CONTENT, null);
+        }
+        intent.setDataAndType(uri, "image/*");
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("outputX", outputX);
+        intent.putExtra("outputY", outputY);
+        intent.putExtra("scale", true);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        intent.putExtra("return-data", true);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        intent.putExtra("noFaceDetection", true); // no face detection
+        startActivityForResult(intent, requestCode);
+    }
+    }
+
+
+*/
+

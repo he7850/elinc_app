@@ -22,6 +22,10 @@ public  class Tool{
     public static void alert(Context a, String sentence){
         Toast.makeText(a, sentence, Toast.LENGTH_SHORT).show();
     }
+    public static String showdate(String a){
+        return a.substring(0,16);
+    }
+
 
     public static void alert(Context a, BmobException sentence){
         Toast.makeText(a, sentence.getLocalizedMessage(), Toast.LENGTH_SHORT).show();

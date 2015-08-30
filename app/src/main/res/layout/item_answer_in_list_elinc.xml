@@ -8,45 +8,69 @@
         android:layout_width="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp">
+
         <LinearLayout
             android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <com.elinc.im.elinc.view.CircleImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginRight="10dp"
                 android:id="@+id/avatar_for_responder"
                 />
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <TextView
-                    android:id="@+id/answer_responder"
-                    android:text="@string/loading"
-                    android:textSize="8sp"
-                    android:fontFamily="微软雅黑"
-                    android:layout_marginTop="1dp"
-                    android:layout_gravity="center_vertical"
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="3dp">
+                        <TextView
+                            android:text="加载中"
+                            android:fontFamily="微软雅黑"
+                            android:id="@+id/answer_responder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:typeface="sans"
+
+                            android:textSize="12sp"
+                            android:textColor="#66cc99"
+
+                            />
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textColor="#424142"
-                    />
-                <TextView
-                    android:id="@+id/answer_date"
-                    android:layout_marginTop="1dp"
-                    android:text="@string/loading"
-                    android:textSize="8sp"
-                    android:textColor="#757575"
-                    android:fontFamily="微软雅黑"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    />
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="加载中"
+                        android:fontFamily="微软雅黑"
+                        android:id="@+id/answer_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:typeface="sans"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="2dp"
+                        android:textSize="10sp"
+                        android:textColor="#757575"
+                        />
+                </LinearLayout>
+
+
             </LinearLayout>
+
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
