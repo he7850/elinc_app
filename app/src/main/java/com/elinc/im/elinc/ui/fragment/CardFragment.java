@@ -56,7 +56,6 @@ public class CardFragment extends FragmentBase{
     private String time1;
     private Boolean checked=false;
     TextView card1,card2,card3;
-    private TextView finish1,finish2,finish3;
 
     public CardFragment() {}
 
@@ -99,9 +98,6 @@ public class CardFragment extends FragmentBase{
         card1 = (TextView) findViewById(R.id.btn_card1);
         card2 = (TextView) findViewById(R.id.btn_card2);
         card3 = (TextView) findViewById(R.id.btn_card3);
-        finish1 = (TextView) findViewById(R.id.finish1);
-        finish2 = (TextView) findViewById(R.id.finish2);
-        finish3 = (TextView) findViewById(R.id.finish3);
         btn_add_goal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,7 +133,7 @@ public class CardFragment extends FragmentBase{
                 }
                 if (goalNum > 0) {
                     goal1.setVisibility(View.VISIBLE);
-                    btn_add_goal.setBackgroundColor(Color.parseColor("#FF7171"));
+                    btn_add_goal.setBackgroundColor(getResources().getColor(R.color.card_color2));
                     title1.setText(goal[0].getGoalContent());
                     tag1.setText(goal[0].getType());
                     claim1.setText(goal[0].getClaim());
@@ -168,9 +164,8 @@ public class CardFragment extends FragmentBase{
                             Bmob.getServerTime(getActivity(), new GetServerTimeListener() {
                                 @Override
                                 public void onSuccess(long time) {
-                                    // TODO Auto-generated method stub
-                                    BmobQuery<Card> query=new BmobQuery<Card>();
-                                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                                    BmobQuery<Card> query=new BmobQuery<>();
+                                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd",Locale.CHINA);
                                     time1 = formatter.format(new Date(time * 1000L));
                                     Log.i("bmob", "当前服务器时间为:" + time1);
                                     query.addWhereEqualTo("goal", goal[0]);
@@ -179,7 +174,7 @@ public class CardFragment extends FragmentBase{
                                     query.findObjects(getActivity(), new FindListener<Card>() {
                                         @Override
                                         public void onSuccess(List<Card> list) {
-                                            if (list.size() == 0 || !list.get(0).getCreatedAt().toString().contains(time1)) {
+                                            if (list.size() == 0 || !list.get(0).getCreatedAt().contains(time1)) {
                                                 dialog(0);
                                             } else {
                                                 ShowToast("一天只能打一次卡");
@@ -195,23 +190,16 @@ public class CardFragment extends FragmentBase{
 
                                 @Override
                                 public void onFailure(int code, String msg) {
-                                    // TODO Auto-generated method stub
                                     Log.i("bmob", "获取服务器时间失败:" + msg);
                                 }
                             });
 
                         }
                     });
-                    /*finish1.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finish(0);
-                        }
-                    });*/
                 }
                 if (goalNum > 1) {
                     goal2.setVisibility(View.VISIBLE);
-                    btn_add_goal.setBackgroundColor(Color.parseColor("#FFEA00"));
+                    btn_add_goal.setBackgroundColor(getResources().getColor(R.color.card_color3));
                     title2.setText(goal[1].getGoalContent());
                     tag2.setText(goal[1].getType());
                     claim2.setText(goal[1].getClaim());
@@ -243,9 +231,8 @@ public class CardFragment extends FragmentBase{
                             Bmob.getServerTime(getActivity(), new GetServerTimeListener() {
                                 @Override
                                 public void onSuccess(long time) {
-                                    // TODO Auto-generated method stub
-                                    BmobQuery<Card> query = new BmobQuery<Card>();
-                                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                                    BmobQuery<Card> query = new BmobQuery<>();
+                                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd",Locale.CHINA);
                                     time1 = formatter.format(new Date(time * 1000L));
                                     Log.i("bmob", "当前服务器时间为:" + time1);
                                     query.addWhereEqualTo("goal", goal[1]);
@@ -254,7 +241,7 @@ public class CardFragment extends FragmentBase{
                                     query.findObjects(getActivity(), new FindListener<Card>() {
                                         @Override
                                         public void onSuccess(List<Card> list) {
-                                            if (list.size() == 0 || !list.get(0).getCreatedAt().toString().contains(time1)) {
+                                            if (list.size() == 0 || !list.get(0).getCreatedAt().contains(time1)) {
                                                 dialog(1);
                                             } else {
                                                 ShowToast("一天只能打一次卡");
@@ -270,23 +257,15 @@ public class CardFragment extends FragmentBase{
 
                                 @Override
                                 public void onFailure(int code, String msg) {
-                                    // TODO Auto-generated method stub
                                     Log.i("bmob", "获取服务器时间失败:" + msg);
                                 }
                             });
 
                         }
                     });
-                    /*finish2.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finish(1);
-                        }
-                    });*/
                 }
                 if (goalNum > 2) {
                     goal3.setVisibility(View.VISIBLE);
-                    btn_add_goal.setBackgroundColor(Color.parseColor("#66CC99"));
                     title3.setText(goal[2].getGoalContent());
                     tag3.setText(goal[2].getType());
                     claim3.setText(goal[2].getClaim());
@@ -317,9 +296,8 @@ public class CardFragment extends FragmentBase{
                             Bmob.getServerTime(getActivity(), new GetServerTimeListener() {
                                 @Override
                                 public void onSuccess(long time) {
-                                    // TODO Auto-generated method stub
-                                    BmobQuery<Card> query=new BmobQuery<Card>();
-                                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                                    BmobQuery<Card> query=new BmobQuery<>();
+                                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd",Locale.CHINA);
                                     time1 = formatter.format(new Date(time * 1000L));
                                     Log.i("bmob", "当前服务器时间为:" + time1);
                                     query.addWhereEqualTo("goal", goal[2]);
@@ -328,7 +306,7 @@ public class CardFragment extends FragmentBase{
                                     query.findObjects(getActivity(), new FindListener<Card>() {
                                         @Override
                                         public void onSuccess(List<Card> list) {
-                                            if (list.size() == 0 || !list.get(0).getCreatedAt().toString().contains(time1)) {
+                                            if (list.size() == 0 || !list.get(0).getCreatedAt().contains(time1)) {
                                                 dialog(2);
                                             } else {
                                                 ShowToast("一天只能打一次卡");
@@ -344,19 +322,12 @@ public class CardFragment extends FragmentBase{
 
                                 @Override
                                 public void onFailure(int code, String msg) {
-                                    // TODO Auto-generated method stub
                                     Log.i("bmob", "获取服务器时间失败:" + msg);
                                 }
                             });
 
                         }
                     });
-                    /*finish3.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finish(2);
-                        }
-                    });*/
                     btn_add_goal.setVisibility(View.GONE);
                 }
 
@@ -369,27 +340,6 @@ public class CardFragment extends FragmentBase{
         });
 
     }
-
-/*    private void finish(final int i) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        final View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_hit_card, null);
-        //设置我们自己定义的布局文件作为弹出框的Content
-        builder.setView(view);
-        builder.setTitle("完成目标");
-        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        builder.create().show();
-    }*/
 
     private void dialog(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -407,7 +357,7 @@ public class CardFragment extends FragmentBase{
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (checked == false) {
+                if (!checked) {
                     final EditText et = (EditText) view.findViewById(R.id.dialog_message);
 
                     if (et.getText().toString().equals("")) {

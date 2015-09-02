@@ -19,12 +19,27 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.elinc.im.elinc.CustomApplcation;
+import com.elinc.im.elinc.MyMessageReceiver;
+import com.elinc.im.elinc.R;
+import com.elinc.im.elinc.bean.User;
+import com.elinc.im.elinc.ui.fragment.CardFragment;
+import com.elinc.im.elinc.ui.fragment.ContactFragment;
+import com.elinc.im.elinc.ui.fragment.QuestionFragment;
+import com.elinc.im.elinc.util.ImageLoadOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.bmob.im.BmobChatManager;
 import cn.bmob.im.BmobNotifyManager;
@@ -39,20 +54,6 @@ import cn.bmob.v3.listener.BmobUpdateListener;
 import cn.bmob.v3.update.BmobUpdateAgent;
 import cn.bmob.v3.update.UpdateResponse;
 import cn.bmob.v3.update.UpdateStatus;
-
-import com.elinc.im.elinc.CustomApplcation;
-import com.elinc.im.elinc.MyMessageReceiver;
-import com.elinc.im.elinc.R;
-import com.elinc.im.elinc.bean.User;
-import com.elinc.im.elinc.ui.fragment.ContactFragment;
-import com.elinc.im.elinc.ui.fragment.CardFragment;
-import com.elinc.im.elinc.ui.fragment.QuestionFragment;
-import com.elinc.im.elinc.util.ImageLoadOptions;
-import com.bumptech.glide.Glide;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 登陆
@@ -71,8 +72,9 @@ public class MainActivity extends ActivityBase implements EventListener{
     private PopupWindow popupWindow;
     private LayoutInflater layoutInflater;
     private LinearLayout view;
+	private Toolbar toolbar;
 
-    @Override
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
@@ -82,7 +84,7 @@ public class MainActivity extends ActivityBase implements EventListener{
 		//开启广播接收器
 		initNewMessageBroadCast();
 		initTagMessageBroadCast();
-		initView();
+		//initView();
 		//发起自动更新
 		BmobUpdateAgent.setUpdateListener(new BmobUpdateListener() {
 			@Override
@@ -109,9 +111,8 @@ public class MainActivity extends ActivityBase implements EventListener{
 	private void initView(){
 		me = BmobUserManager.getInstance(MainActivity.this).getCurrentUser(User.class);
 
-        layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = (LinearLayout)layoutInflater.inflate(R.layout.popup_menu, null);
-		Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
+        view = (LinearLayout)LayoutInflater.from(this).inflate(R.layout.popup_menu, null);
+		toolbar= (Toolbar) findViewById(R.id.toolbar);
 		toolbar.setTitle("郁林");
 		toolbar.setBackgroundColor(getResources().getColor(R.color.elinc_main_green));
 		setSupportActionBar(toolbar);
@@ -122,72 +123,72 @@ public class MainActivity extends ActivityBase implements EventListener{
 		}
 		final Context context = this;
 
-		toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.action_chat:
-                    startAnimActivity(RecentActivity.class);
-                    break;
-                case R.id.action_find:
-                    startAnimActivity(FindQuestion.class);
-                    break;
-                case R.id.action_add:
-                    if (popupWindow == null) {
-                        popupWindow = new PopupWindow(view, 320, 320);
-                    }
-                    popupWindow.setOutsideTouchable(true);
-                    popupWindow.setBackgroundDrawable(new BitmapDrawable());
-                    popupWindow.setFocusable(true);
-                    WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-                    int xoffset = windowManager.getDefaultDisplay().getWidth() - popupWindow.getWidth();
-                    popupWindow.showAsDropDown(findViewById(R.id.toolbar), xoffset, 0);
-                    LinearLayout new_friends = (LinearLayout) view.findViewById(R.id.new_friends);
-                    new_friends.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startAnimActivity(NearPeopleActivity.class);
-                            if (popupWindow != null) {
-                                popupWindow.dismiss();
-                            }
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_chat:
+                        startAnimActivity(RecentActivity.class);
+                        break;
+                    case R.id.action_find:
+                        startAnimActivity(FindQuestion.class);
+                        break;
+                    case R.id.action_add:
+                        if (popupWindow == null) {
+                            popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         }
-                    });
-                    LinearLayout add_friend = (LinearLayout) view.findViewById(R.id.add_friend);
-                    add_friend.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startAnimActivity(AddFriendActivity.class);
-                            if (popupWindow != null) {
-                                popupWindow.dismiss();
-                            }
-                        }
-                    });
-                    LinearLayout new_question = (LinearLayout) view.findViewById(R.id.new_question);
-                    new_question.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startAnimActivity(NewQuestionActivityElinc.class);
-                            if (popupWindow != null) {
-                                popupWindow.dismiss();
-                            }
-                        }
-                    });
-                    view.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                        @Override
-                        public void onFocusChange(View v, boolean hasFocus) {
-                            if (!hasFocus) {
+                        popupWindow.setOutsideTouchable(true);
+                        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+                        popupWindow.setFocusable(true);
+                        WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+                        int xoffset = windowManager.getDefaultDisplay().getWidth() - popupWindow.getWidth();
+                        popupWindow.showAsDropDown(findViewById(R.id.toolbar), xoffset, 0);
+                        LinearLayout new_friends = (LinearLayout) view.findViewById(R.id.new_friends);
+                        new_friends.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startAnimActivity(NearPeopleActivity.class);
                                 if (popupWindow != null) {
                                     popupWindow.dismiss();
                                 }
                             }
-                        }
-                    });
+                        });
+                        LinearLayout add_friend = (LinearLayout) view.findViewById(R.id.add_friend);
+                        add_friend.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startAnimActivity(AddFriendActivity.class);
+                                if (popupWindow != null) {
+                                    popupWindow.dismiss();
+                                }
+                            }
+                        });
+                        LinearLayout new_question = (LinearLayout) view.findViewById(R.id.new_question);
+                        new_question.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startAnimActivity(NewQuestionActivityElinc.class);
+                                if (popupWindow != null) {
+                                    popupWindow.dismiss();
+                                }
+                            }
+                        });
+                        view.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                            @Override
+                            public void onFocusChange(View v, boolean hasFocus) {
+                                if (!hasFocus) {
+                                    if (popupWindow != null) {
+                                        popupWindow.dismiss();
+                                    }
+                                }
+                            }
+                        });
 
-                    break;
+                        break;
+                }
+                return false;
             }
-            return false;
-			}
-		});
+        });
 
 
 		/**
@@ -355,6 +356,7 @@ public class MainActivity extends ActivityBase implements EventListener{
 		// TODO Auto-generated method stub
 		super.onResume();
 		initView();
+
 		MyMessageReceiver.ehList.add(this);// 监听推送的消息
 		MyMessageReceiver.mNewNum=0;//清空
 	}
