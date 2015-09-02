@@ -71,8 +71,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/tags_question_e"
                 android:scaleType="fitXY"
@@ -80,6 +80,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_gravity="bottom"
+                android:textSize="12sp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/loading"
@@ -117,7 +118,7 @@
                 android:text="@string/loading"
                 android:textSize="12sp"
                 android:fontFamily="微软雅黑"
-                android:textColor="#424142"
+                android:textColor="#66cc99"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_alignParentBottom="true"

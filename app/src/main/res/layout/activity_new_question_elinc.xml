@@ -22,8 +22,9 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical">
     <TextView android:text="标题"
+        style="@style/title_elinc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -32,73 +33,12 @@
         android:id="@+id/question_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/border"
         android:maxLength="25"/>
 </LinearLayout>
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal">
-
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="8dp"
-               android:text="标签"
-               android:textAppearance="?android:attr/textAppearanceLarge"
-               android:id="@+id/textView7" />
-
-           <EditText
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:id="@+id/et_input_tags"
-               android:maxLength="8"
-               android:layout_gravity="center_horizontal" />
-
-       </LinearLayout>
-
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:orientation="horizontal">
-            <Button
-                android:layout_width="50dp"
-                android:layout_height="25dp"
-                android:text="美食"
-                android:textColor="#ffffff"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/corner_bg"
-                android:id="@+id/btn_add_food" />
-            <Button
-                android:layout_width="50dp"
-                android:layout_height="25dp"
-                android:textColor="#ffffff"
-                android:background="@drawable/corner_bg_yellow"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:text="娱乐"
-                android:id="@+id/btn_add_fun" />
-            <Button
-                android:layout_width="50dp"
-                android:layout_height="25dp"
-                android:background="@drawable/corner_bg_green"
-                android:layout_marginRight="10dp"
-                android:textColor="#ffffff"
-                android:layout_marginTop="10dp"
-                android:text="学习"
-                android:id="@+id/btn_add_study" />
-            <Button
-                android:layout_width="50dp"
-                android:layout_height="25dp"
-                android:textColor="#ffffff"
-                android:background="@drawable/corner_bg_blue"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:text="旅行"
-                android:id="@+id/btn_add_life" />
-        </LinearLayout>
 
         <TextView
+            style="@style/title_elinc"
             android:layout_width="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_height="wrap_content"
@@ -114,9 +54,78 @@
             android:gravity="top"
             android:background="@drawable/border"
             android:lines="4"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/title_elinc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="标签"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/textView7" />
+
+            <EditText
+                style="@style/title_elinc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_input_tags"
+                android:maxLength="12"
+                android:background="@drawable/border"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:background="@drawable/corner_bg_green"
+                android:layout_marginRight="10dp"
+                android:textColor="#ffffff"
+                android:layout_marginTop="10dp"
+                android:text="学习"
+                android:id="@+id/btn_add_study" />
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:text="生活"
+                android:textColor="#ffffff"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/corner_bg"
+                android:id="@+id/btn_add_food" />
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:textColor="#ffffff"
+                android:background="@drawable/corner_bg_yellow"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="娱乐"
+                android:id="@+id/btn_add_fun" />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:textColor="#ffffff"
+                android:background="@drawable/corner_bg_blue"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="旅行"
+                android:id="@+id/btn_add_life" />
+        </LinearLayout>
 
 
         <Button
+            style="@style/title_elinc"
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -86,8 +86,49 @@ public class AnswerListAdapter extends BaseListAdapter<Answer> {
         answer_responder.setText(contract.getResponder().getUsername());
         answer_date.setText(Tool.showdate(contract.getCreatedAt()));
         String avatar=contract.getResponder().getAvatar();
-        ImageView like_answer;
+        final ImageView like_answer;
         like_answer = ViewHolder.get(convertView,R.id.like_answer);
+
+//初始化点赞按钮
+        BmobQuery<User> query1 = new BmobQuery<User>();
+        BmobQuery<User> query2 = new BmobQuery<User>();
+        Answer ans = new Answer();
+        ans.setObjectId(contract.getObjectId());
+        User u=BmobUser.getCurrentUser(context,User.class);
+        query1.addWhereEqualTo("objectId", u.getObjectId());
+        query2.addWhereRelatedTo("likedBy", new BmobPointer(ans));
+        List<BmobQuery<User>> queries = new ArrayList<BmobQuery<User>>();
+        queries.add(query1);
+        queries.add(query2);
+        BmobQuery<User> mainQuery = new BmobQuery<User>();
+        mainQuery.and(queries);
+        mainQuery.count(context, User.class, new CountListener() {
+            @Override
+            public void onSuccess(int count) {
+                if (count > 0) {
+
+                            refreshNumber(contract, answer_number);
+                            like_answer.setBackgroundResource(R.drawable.like);
+                            Log.i("life", "多对多关联添加成功");
+                } else {
+                            /*还没有点赞*/
+                            refreshNumber(contract,answer_number);
+                            //ShowToast("点赞成功");
+                            like_answer.setBackgroundResource(R.drawable.no_like);
+
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String msg) {
+                // TODO Auto-generated method stub
+                //ShowToast("count failure："+msg);
+                ShowToast("亲，断网了呢");
+            }
+        });
+
+
+
         like_answer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,7 +160,7 @@ public class AnswerListAdapter extends BaseListAdapter<Answer> {
                                 public void onSuccess() {
                                     // TODO Auto-generated method stub
                                     refreshNumber(contract, answer_number);
-                                    //ShowToast("点赞成功");
+                                    like_answer.setBackgroundResource(R.drawable.no_like);
                                     Log.i("life", "多对多关联添加成功");
                                 }
 
@@ -144,6 +185,7 @@ public class AnswerListAdapter extends BaseListAdapter<Answer> {
                                     // TODO Auto-generated method stub
                                     refreshNumber(contract,answer_number);
                                     //ShowToast("点赞成功");
+                                    like_answer.setBackgroundResource(R.drawable.like);
                                     Log.i("life", "多对多关联添加成功");
                                 }
 

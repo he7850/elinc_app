@@ -105,8 +105,8 @@
             <ImageView
                 android:id="@+id/like_answer"
                 android:src="@drawable/like"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_marginRight="2dp"
                 android:layout_marginLeft="20dp"
                 />
@@ -115,7 +115,7 @@
                 android:paddingTop="2dp"
                 android:text="@string/loading"
                 android:layout_marginLeft="2dp"
-                android:textSize="8sp"
+                android:textSize="10sp"
                 android:gravity="center"
                 android:fontFamily="微软雅黑"
                 android:layout_gravity="bottom"
