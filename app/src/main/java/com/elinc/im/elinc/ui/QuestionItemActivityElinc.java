@@ -212,7 +212,13 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
                 question_date_in_question_list = (TextView) findViewById(R.id.question_date_in_question_list);
                 question_date_in_question_list.setText(Tool.showdate(object.getCreatedAt()));
                 TextView question_detail_tags= (TextView) findViewById(R.id.question_detail_tags);
-                question_detail_tags.setText(object.getTags().toString());
+                List<String> a=object.getTags();
+                String show="";
+                int ii;
+                for(ii=0;ii<a.size();ii++){
+                    show=show+" "+a.get(ii);
+                }
+                question_detail_tags.setText(show);
                 author_in_question_list.setText(object.getAuthor().getUsername());
                 author = object.getAuthor();
                 author_name = object.getAuthor().getUsername();

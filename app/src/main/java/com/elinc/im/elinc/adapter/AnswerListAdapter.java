@@ -42,6 +42,7 @@ import cn.bmob.v3.listener.UpdateListener;
  */
 public class AnswerListAdapter extends BaseListAdapter<Answer> {
     Context context;
+
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
     private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {
 
@@ -75,7 +76,7 @@ public class AnswerListAdapter extends BaseListAdapter<Answer> {
         final Integer[] like_number = new Integer[1];
         final TextView answer_number= ViewHolder.get(convertView, R.id.answer_number);
 
-        refreshNumber(contract,answer_number);
+
 
         TextView answer_content = ViewHolder.get(convertView, R.id.answer_content);
         TextView answer_date = ViewHolder.get(convertView,R.id.answer_date);
@@ -88,6 +89,8 @@ public class AnswerListAdapter extends BaseListAdapter<Answer> {
         String avatar=contract.getResponder().getAvatar();
         final ImageView like_answer;
         like_answer = ViewHolder.get(convertView,R.id.like_answer);
+        refreshNumber(contract,answer_number,R.drawable.no_like,like_answer);
+
 
 //初始化点赞按钮
         BmobQuery<User> query1 = new BmobQuery<User>();
@@ -107,12 +110,12 @@ public class AnswerListAdapter extends BaseListAdapter<Answer> {
             public void onSuccess(int count) {
                 if (count > 0) {
 
-                            refreshNumber(contract, answer_number);
+                            refreshNumber(contract, answer_number,R.drawable.like,like_answer);
                             like_answer.setBackgroundResource(R.drawable.like);
                             Log.i("life", "多对多关联添加成功");
                 } else {
                             /*还没有点赞*/
-                            refreshNumber(contract,answer_number);
+                            refreshNumber(contract, answer_number,R.drawable.no_like,like_answer);
                             //ShowToast("点赞成功");
                             like_answer.setBackgroundResource(R.drawable.no_like);
 
@@ -159,8 +162,7 @@ public class AnswerListAdapter extends BaseListAdapter<Answer> {
                                 @Override
                                 public void onSuccess() {
                                     // TODO Auto-generated method stub
-                                    refreshNumber(contract, answer_number);
-                                    like_answer.setBackgroundResource(R.drawable.no_like);
+                                    refreshNumber(contract, answer_number, R.drawable.no_like,like_answer);
                                     Log.i("life", "多对多关联添加成功");
                                 }
 
@@ -183,9 +185,8 @@ public class AnswerListAdapter extends BaseListAdapter<Answer> {
                                 @Override
                                 public void onSuccess() {
                                     // TODO Auto-generated method stub
-                                    refreshNumber(contract,answer_number);
+                                    refreshNumber(contract, answer_number, R.drawable.like,like_answer);
                                     //ShowToast("点赞成功");
-                                    like_answer.setBackgroundResource(R.drawable.like);
                                     Log.i("life", "多对多关联添加成功");
                                 }
 
@@ -270,7 +271,7 @@ public class AnswerListAdapter extends BaseListAdapter<Answer> {
         });
         return convertView;
     }
-    public void refreshNumber(Answer contract, final TextView answer_number){
+    public void refreshNumber(Answer contract, final TextView answer_number,final int color,final ImageView like_answer){
         BmobQuery<User> query = new BmobQuery<User>();
         Answer ans = new Answer();
         ans.setObjectId(contract.getObjectId());
@@ -280,6 +281,7 @@ public class AnswerListAdapter extends BaseListAdapter<Answer> {
             @Override
             public void onSuccess(int count) {
                 answer_number.setText(count + "");
+                like_answer.setBackgroundResource(color);
                 // TODO Auto-generated method stub
                 //ShowToast("Barbie has played" + count + "games");
             }
