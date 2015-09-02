@@ -104,11 +104,12 @@
             android:layout_alignParentRight="true">
             <ImageView
                 android:id="@+id/like_answer"
-                android:src="@drawable/like"
+                android:background="@drawable/no_like"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_marginRight="2dp"
                 android:layout_marginLeft="20dp"
+                android:scaleType="centerCrop"
                 />
             <TextView
                 android:id="@+id/answer_number"
