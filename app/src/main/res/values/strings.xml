@@ -97,7 +97,7 @@
     <string name="title_activity_find_password">FindPassword</string>
     <string name="title_activity_pic_drag_zoom_activity_elinc">PicDragZoomActivityElinc</string>
     <string name="title_activity_find_question">FindQuestion</string>
-    <drawable name="green_normal">#66cc99</drawable>
-    <drawable name="green_pressed">#5bb285</drawable>
+    <drawable name="green_normal">#65cb98</drawable>
+    <drawable name="green_pressed">#65cb98</drawable>
     <string name="title_activity_my_tree">MyTreeActivity</string>
 </resources>

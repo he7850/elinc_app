@@ -9,80 +9,70 @@
         android:id="@+id/common_actionbar"
         layout="@layout/include_action_bar" />
 
-    <LinearLayout style="@style/Register_Input" >
+    <LinearLayout style="@style/input_out"
+        android:layout_marginTop="24dp">
         <TextView
-            style="@style/Smile.TextView._Black"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
+            style="@style/input_left"
             android:text="手机号"
             android:textStyle="bold" />
         <EditText
             android:singleLine="true"
             android:id="@+id/et_username"
-            style="@style/Register_Edit"
-            android:hint="@string/login_username_hint" />
+            style="@style/input_right"
+            />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
-            android:layout_width="240dp"
-            android:layout_height="@dimen/base_action_bar_height"
-            android:background="@drawable/base_edit_input"
+            style="@style/input_out"
             android:layout_weight="1"
-            android:layout_marginTop="@dimen/register_margin"
-            android:layout_marginLeft="@dimen/register_margin"
-            android:layout_marginRight="@dimen/register_margin"
-            android:orientation="horizontal" >
+            >
             <TextView
-                style="@style/Smile.TextView._Black"
+                style="@style/input_left"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:paddingLeft="10dp"
                 android:text="验证码"
                 android:textStyle="bold" />
-            <EditText style="@style/Register_Edit"
+            <EditText style="@style/input_right"
                 android:singleLine="true"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
                 android:id="@+id/et_verify_code"
-                android:hint="请输入手机验证码"/>
+                />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/btn_verify_code"
             android:layout_width="wrap_content"
-            android:layout_height="46dp"
+            android:layout_height="36dp"
             android:text="发送验证码"
-            android:padding="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/green_button_selector"
-            android:layout_marginTop="@dimen/register_margin"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/corner_bg_small_btn"
             android:textColor="@color/base_color_text_white"
             android:textSize="@dimen/text_size_large" />
     </LinearLayout>
-    <LinearLayout style="@style/Register_Input" >
+    <LinearLayout style="@style/input_out" >
         <TextView
-            style="@style/Smile.TextView._Black"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
+            style="@style/input_left"
             android:text="推荐人"
             android:textStyle="bold" />
         <EditText
             android:singleLine="true"
             android:id="@+id/et_inviter"
-            style="@style/Register_Edit"
+            style="@style/input_right"
             android:hint="请输入推荐人手机号(可选)" />
     </LinearLayout>
     <Button
+        android:layout_marginTop="12dp"
         android:id="@+id/btn_register"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/base_action_bar_height"
-        android:layout_margin="@dimen/activity_vertical_margin"
+        android:layout_height="40dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
         android:background="@drawable/green_button_selector"
         android:text="@string/register"
         android:textColor="@color/base_color_text_white"
