@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import com.elinc.im.elinc.R;
 import com.elinc.im.elinc.bean.User;
@@ -19,29 +22,30 @@ import cn.bmob.v3.BmobInstallation;
 import cn.bmob.v3.listener.SaveListener;
 
 public class FirstUpdateInfoElinc extends BaseActivity {
-    private EditText et_nick,et_uni,et_password,et_password_again;
+    private EditText et_nick, et_uni, et_password, et_password_again;
     private RadioGroup sex;
-    private RadioGroup campus;
-    private RadioButton sex_woman,sex_man,first_zjg,first_zj,first_yq,first_xx,first_hjc,first_zs;
+    private Spinner campus;
+    private RadioButton sex_woman, sex_man, first_zjg, first_zj, first_yq, first_xx, first_hjc, first_zs;
     private Boolean chosenSex;
     private Button confirm;
     private String mobilePhone;
     private String inviter;
     private String chosenCampus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_update_info_elinc);
         mobilePhone = getIntent().getExtras().getString("mobile_phone");//电话号码
         inviter = getIntent().getExtras().getString("inviter");//电话号码
-        Log.i("1",mobilePhone+"");
-        et_password = (EditText)findViewById(R.id.et_password);
-        et_password_again = (EditText)findViewById(R.id.et_password_again);
-        et_nick= (EditText) findViewById(R.id.et_nick);
-        et_uni= (EditText) findViewById(R.id.et_uni);
-        sex= (RadioGroup) findViewById(R.id.sex);
-        sex_woman= (RadioButton) findViewById(R.id.sex_woman);
-        sex_man= (RadioButton) findViewById(R.id.sex_man);
+        Log.i("1", mobilePhone + "");
+        et_password = (EditText) findViewById(R.id.et_password);
+        et_password_again = (EditText) findViewById(R.id.et_password_again);
+        et_nick = (EditText) findViewById(R.id.et_nick);
+        et_uni = (EditText) findViewById(R.id.et_uni);
+        sex = (RadioGroup) findViewById(R.id.sex);
+        sex_woman = (RadioButton) findViewById(R.id.sex_woman);
+        sex_man = (RadioButton) findViewById(R.id.sex_man);
         sex_man.setChecked(true);
         chosenSex = true;
         sex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -55,32 +59,30 @@ public class FirstUpdateInfoElinc extends BaseActivity {
         });
 
         //新增校区的选择，不能乱填
-        campus= (Spinner) findViewById(R.id.campus);
-        chosenCampus ="紫金港";
-        campus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == first_zjg.getId()) {
-                    chosenCampus="紫金港";
-                } else if (checkedId == first_zj.getId()) {
-                    chosenCampus="之江";
-                }
-                else if (checkedId == first_xx.getId()) {
-                    chosenCampus="西溪";
-                }
-                else if (checkedId == first_yq.getId()) {
-                    chosenCampus="玉泉";
-                }
-                else if (checkedId == first_zs.getId()) {
-                    chosenCampus="舟山";
-                }
-                else{
-                    chosenCampus="华家池";
-                }
+        campus = (Spinner) findViewById(R.id.campus);
+        chosenCampus = "紫金港";
+        // 建立数据源
+        String[] mItems = getResources().getStringArray(R.array.campus);
+        // 建立Adapter并且绑定数据源
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mItems);
+        //绑定 Adapter到控件
+        adapter.setDropDownViewResource(R.layout.elinc_spinner);
+        campus.setAdapter(adapter);
+        campus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chosenCampus = parent.getItemAtPosition(position).toString();
+                Log.i("click", chosenCampus);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
 
-        confirm= (Button) findViewById(R.id.confirm_first_info);
+        confirm = (Button) findViewById(R.id.confirm_first_info);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
