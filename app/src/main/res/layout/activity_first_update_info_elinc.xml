@@ -48,6 +48,7 @@
 
             <TextView
                 style="@style/input_left"
+
                 android:text="确认"
                 android:textStyle="bold" />
 

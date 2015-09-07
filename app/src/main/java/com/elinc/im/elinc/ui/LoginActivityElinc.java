@@ -36,7 +36,8 @@ public class LoginActivityElinc extends BaseActivity implements OnClickListener 
 
 	EditText et_username, et_password;
 	Button btn_login;
-	TextView btn_register,btn_find_pwd_in_login;
+	Button btn_register;
+	TextView btn_find_pwd_in_login;
 
 	private MyBroadcastReceiver receiver = new MyBroadcastReceiver();
 
@@ -70,7 +71,7 @@ public class LoginActivityElinc extends BaseActivity implements OnClickListener 
 		et_username = (EditText) findViewById(R.id.et_username);
 		et_password = (EditText) findViewById(R.id.et_password);
 		btn_login = (Button) findViewById(R.id.btn_login);
-		btn_register = (TextView) findViewById(R.id.btn_register);
+		btn_register = (Button) findViewById(R.id.btn_register);
 		btn_find_pwd_in_login= (TextView) findViewById(R.id.btn_find_pwd_in_login);
 		btn_login.setOnClickListener(this);
 		btn_register.setOnClickListener(this);
