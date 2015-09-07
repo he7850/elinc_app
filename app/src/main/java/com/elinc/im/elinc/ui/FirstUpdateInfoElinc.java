@@ -55,13 +55,13 @@ public class FirstUpdateInfoElinc extends BaseActivity {
         });
 
         //新增校区的选择，不能乱填
-        campus= (RadioGroup) findViewById(R.id.first_select_campus);
-        first_zjg= (RadioButton) findViewById(R.id.first_zjg);
-        first_zj= (RadioButton) findViewById(R.id.first_zj);
-        first_xx= (RadioButton) findViewById(R.id.first_xx);
-        first_yq= (RadioButton) findViewById(R.id.first_yq);
-        first_zs= (RadioButton) findViewById(R.id.first_zs);
-        first_hjc= (RadioButton) findViewById(R.id.first_hjc);
+//        campus= (RadioGroup) findViewById(R.id.first_select_campus);
+//        first_zjg= (RadioButton) findViewById(R.id.first_zjg);
+//        first_zj= (RadioButton) findViewById(R.id.first_zj);
+//        first_xx= (RadioButton) findViewById(R.id.first_xx);
+//        first_yq= (RadioButton) findViewById(R.id.first_yq);
+//        first_zs= (RadioButton) findViewById(R.id.first_zs);
+//        first_hjc= (RadioButton) findViewById(R.id.first_hjc);
         first_zjg.setChecked(true);
         chosenCampus ="紫金港";
         campus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

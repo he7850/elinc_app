@@ -129,11 +129,11 @@ public class CardFragment extends FragmentBase{
                 Log.i("goalNum", goalNum + "");
                 btn_add_goal.setVisibility(View.VISIBLE);
                 if (goalNum == 0) {
-                    btn_add_goal.setBackgroundColor(Color.parseColor("#FF7171"));
+                    btn_add_goal.setBackgroundResource(R.drawable.corner_bg_large_btn_card1);
                 }
                 if (goalNum > 0) {
                     goal1.setVisibility(View.VISIBLE);
-                    btn_add_goal.setBackgroundColor(getResources().getColor(R.color.card_color2));
+                    btn_add_goal.setBackgroundResource(R.drawable.corner_bg_large_btn_card2);
                     title1.setText(goal[0].getGoalContent());
                     tag1.setText(goal[0].getType());
                     claim1.setText(goal[0].getClaim());
@@ -199,7 +199,7 @@ public class CardFragment extends FragmentBase{
                 }
                 if (goalNum > 1) {
                     goal2.setVisibility(View.VISIBLE);
-                    btn_add_goal.setBackgroundColor(getResources().getColor(R.color.card_color3));
+                    btn_add_goal.setBackgroundResource(R.drawable.corner_bg_large_btn_card3);
                     title2.setText(goal[1].getGoalContent());
                     tag2.setText(goal[1].getType());
                     claim2.setText(goal[1].getClaim());

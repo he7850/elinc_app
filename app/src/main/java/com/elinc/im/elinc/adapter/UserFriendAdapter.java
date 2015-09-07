@@ -102,38 +102,41 @@ public class UserFriendAdapter extends BaseAdapter implements SectionIndexer {
 		}
 		viewHolder.name.setText(name);
 		viewHolder.campus.setText(friend.getCampus());
-		if (CollectionUtils.isNotNull(friend.getTags())) {
-			if (friend.getTags().size() == 0){
-				viewHolder.tag1.setText("TA还没有设置目标");
-			}
-			if (friend.getTags().size() > 0) {
-				if (friend.getTags().get(0)!=null&&!friend.getTags().get(0).equals("")) {
-					viewHolder.tag1.setText(friend.getTags().get(0));
-				}
-			}
-			if (friend.getTags().size() > 1) {
-				if (friend.getTags().get(1)!=null&&!friend.getTags().get(1).equals("")) {
-					viewHolder.tag2.setText(friend.getTags().get(1));
-				}else{
-					viewHolder.tag2.setVisibility(View.GONE);
-				}
-			} else {
-				viewHolder.tag2.setVisibility(View.GONE);
-			}
-			if (friend.getTags().size() > 2) {
-				if (friend.getTags().get(2)!=null&&!friend.getTags().get(2).equals("")) {
-					viewHolder.tag3.setText(friend.getTags().get(2));
-				}else{
-					viewHolder.tag3.setVisibility(View.GONE);
-				}
-			} else {
-				viewHolder.tag3.setVisibility(View.GONE);
-			}
-		}else {
-			viewHolder.tag1.setText("TA还没有设置目标");
-			viewHolder.tag2.setVisibility(View.GONE);
-			viewHolder.tag3.setVisibility(View.GONE);
-		}
+		viewHolder.tag2.setVisibility(View.GONE);
+		viewHolder.tag3.setVisibility(View.GONE);
+		viewHolder.tag1.setText(friend.getSignature().toString());
+//		if (CollectionUtils.isNotNull(friend.getTags())) {
+//			if (friend.getTags().size() == 0){
+//				viewHolder.tag1.setText("TA还没有设置目标");
+//			}
+//			if (friend.getTags().size() > 0) {
+//				if (friend.getTags().get(0)!=null&&!friend.getTags().get(0).equals("")) {
+//					viewHolder.tag1.setText(friend.getTags().get(0));
+//				}
+//			}
+//			if (friend.getTags().size() > 1) {
+//				if (friend.getTags().get(1)!=null&&!friend.getTags().get(1).equals("")) {
+//					viewHolder.tag2.setText(friend.getTags().get(1));
+//				}else{
+//					viewHolder.tag2.setVisibility(View.GONE);
+//				}
+//			} else {
+//				viewHolder.tag2.setVisibility(View.GONE);
+//			}
+//			if (friend.getTags().size() > 2) {
+//				if (friend.getTags().get(2)!=null&&!friend.getTags().get(2).equals("")) {
+//					viewHolder.tag3.setText(friend.getTags().get(2));
+//				}else{
+//					viewHolder.tag3.setVisibility(View.GONE);
+//				}
+//			} else {
+//				viewHolder.tag3.setVisibility(View.GONE);
+//			}
+//		}else {
+//			viewHolder.tag1.setText("TA还没有设置目标");
+//			viewHolder.tag2.setVisibility(View.GONE);
+//			viewHolder.tag3.setVisibility(View.GONE);
+//		}
 		viewHolder.campus.setText(friend.getCampus());
 
 

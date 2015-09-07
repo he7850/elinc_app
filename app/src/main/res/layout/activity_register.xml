@@ -21,13 +21,9 @@
             style="@style/input_right"
             />
     </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
         <LinearLayout
             style="@style/input_out"
-            android:layout_weight="1"
             >
             <TextView
                 style="@style/input_left"
@@ -41,16 +37,15 @@
                 android:id="@+id/et_verify_code"
                 />
 
-        </LinearLayout>
 
         <Button
             android:id="@+id/btn_verify_code"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:text="发送验证码"
+            android:layout_marginLeft="16dp"
             android:paddingRight="8dp"
             android:paddingLeft="8dp"
-            android:layout_marginRight="24dp"
             android:background="@drawable/corner_bg_small_btn"
             android:textColor="@color/base_color_text_white"
             android:textSize="@dimen/text_size_large" />
@@ -64,20 +59,12 @@
             android:singleLine="true"
             android:id="@+id/et_inviter"
             style="@style/input_right"
-            android:hint="请输入推荐人手机号(可选)" />
+            android:hint="推荐人手机号(可选)" />
     </LinearLayout>
     <Button
         android:id="@+id/btn_register"
         android:text="@string/register"
-
-        android:layout_marginTop="12dp"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:background="@drawable/green_button_selector"
-
-        android:textColor="@color/base_color_text_white"
-        android:textSize="@dimen/text_size_large" />
+        style="@style/large_btn"
+        android:layout_marginTop="12dp" />
 
 </LinearLayout>
