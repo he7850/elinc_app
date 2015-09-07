@@ -71,8 +71,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
                             <ImageView
+                                android:padding="2dp"
                                 android:gravity="center_vertical"
                                 android:src="@drawable/elinc_clock"
+                                android:layout_marginRight="2dp"
                                 android:layout_width="14dp"
                                 android:layout_height="match_parent" />
                             <TextView
@@ -91,12 +93,14 @@
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:layout_width="wrap_content"
-                                android:layout_height="24dp">
+                                android:layout_height="24dp"
+                                >
                                 <ImageView
                                     android:gravity="center_vertical"
                                     android:src="@drawable/water"
                                     android:layout_width="12dp"
-                                    android:layout_height="12dp" />
+                                    android:layout_height="12dp"
+                                    android:layout_marginRight="4dp"/>
                                 <TextView
                                     android:text="0"
                                     android:gravity="center_vertical"
@@ -109,6 +113,7 @@
                                     android:layout_marginLeft="24dp"
                                     android:src="@drawable/elinc_comment"
                                     android:layout_width="12dp"
+                                    android:visibility="gone"
                                     android:layout_height="12dp" />
                                 <TextView
                                     android:text="0"
@@ -116,7 +121,8 @@
                                     android:id="@+id/comment_num1"
                                     android:textSize="12sp"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"/>
                             </LinearLayout>
                             <TextView
                                 android:id="@+id/btn_card1"
@@ -217,6 +223,8 @@
                                 android:gravity="center_vertical"
                                 android:src="@drawable/elinc_clock"
                                 android:layout_width="14dp"
+                                android:padding="2dp"
+                                android:layout_marginRight="4dp"
                                 android:layout_height="14dp" />
                             <TextView
                                 android:text="0"
@@ -238,7 +246,8 @@
                                 <ImageView
                                     android:src="@drawable/water"
                                     android:layout_width="14dp"
-                                    android:layout_height="14dp" />
+                                    android:layout_height="14dp"
+                                    android:layout_marginRight="4dp"/>
                                 <TextView
                                     android:id="@+id/fight_num2"
                                     android:textSize="12sp"
@@ -249,13 +258,15 @@
                                     android:layout_marginLeft="24dp"
                                     android:src="@drawable/elinc_comment"
                                     android:layout_width="14dp"
-                                    android:layout_height="14dp" />
+                                    android:layout_height="14dp"
+                                    android:visibility="gone"/>
                                 <TextView
                                     android:id="@+id/comment_num2"
                                     android:textSize="12sp"
                                     android:text="0"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"/>
                             </LinearLayout>
                             <TextView
                                 android:id="@+id/btn_card2"
@@ -355,6 +366,8 @@
                                 android:gravity="center_vertical"
                                 android:src="@drawable/elinc_clock"
                                 android:layout_width="14dp"
+                                android:padding="2dp"
+                                android:layout_marginRight="2dp"
                                 android:layout_height="14dp" />
                             <TextView
                                 android:gravity="center_vertical"
@@ -376,7 +389,8 @@
                                 <ImageView
                                     android:src="@drawable/water"
                                     android:layout_width="14dp"
-                                    android:layout_height="14dp" />
+                                    android:layout_height="14dp"
+                                    android:layout_marginRight="2dp"/>
                                 <TextView
                                     android:id="@+id/fight_num3"
                                     android:textSize="12sp"
@@ -387,13 +401,15 @@
                                     android:layout_marginLeft="24dp"
                                     android:src="@drawable/elinc_comment"
                                     android:layout_width="14dp"
-                                    android:layout_height="14dp" />
+                                    android:layout_height="14dp"
+                                    android:visibility="gone"/>
                                 <TextView
                                     android:id="@+id/comment_num3"
                                     android:textSize="12sp"
                                     android:text="0"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"/>
                             </LinearLayout>
                             <TextView
                                 android:id="@+id/btn_card3"
@@ -442,7 +458,7 @@
                 android:textSize="18sp"
                 android:textColor="#ffffff"
                 android:id="@+id/btn_new_goal"
-                android:background="@color/card_color1"
+                android:background="@drawable/corner_bg_large_btn_card1"
                 android:layout_marginLeft="14dp"
                 android:layout_marginRight="14dp"
                 android:layout_marginBottom="32dp"

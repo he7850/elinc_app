@@ -11,9 +11,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
     <com.elinc.im.elinc.view.CircleImageView
-        android:layout_marginTop="20dp"
         android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:id="@+id/civUserAvantar"
@@ -27,9 +26,20 @@
         android:text="用户名"
         android:textSize="18sp"
         android:textColor="@android:color/background_dark"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:layout_gravity="center_vertical"
         android:layout_below="@+id/civUserAvantar"
+        android:layout_marginBottom="5dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:text="    "
+        android:textColor="#ffffff"
+        android:background="@drawable/corner_bg"
+        android:id="@+id/tv_signature"
+        android:layout_below="@+id/tvNavUsername"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

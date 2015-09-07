@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 
 import com.elinc.im.elinc.R;
 import com.elinc.im.elinc.bean.User;
@@ -24,14 +21,13 @@ import cn.bmob.v3.listener.SaveListener;
 public class FirstUpdateInfoElinc extends BaseActivity {
     private EditText et_nick,et_uni,et_password,et_password_again;
     private RadioGroup sex;
-    private Spinner campus;
+    private RadioGroup campus;
     private RadioButton sex_woman,sex_man,first_zjg,first_zj,first_yq,first_xx,first_hjc,first_zs;
     private Boolean chosenSex;
     private Button confirm;
     private String mobilePhone;
     private String inviter;
     private String chosenCampus;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,44 +57,25 @@ public class FirstUpdateInfoElinc extends BaseActivity {
         //新增校区的选择，不能乱填
         campus= (Spinner) findViewById(R.id.campus);
         chosenCampus ="紫金港";
-        // 建立数据源
-        String[] mItems = getResources().getStringArray(R.array.campus);
-        // 建立Adapter并且绑定数据源
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, mItems);
-        //绑定 Adapter到控件
-        adapter.setDropDownViewResource(R.layout.elinc_spinner);
-        campus.setAdapter(adapter);
-        campus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-            /**
-             * <p>Callback method to be invoked when an item in this view has been
-             * selected. This callback is invoked only when the newly selected
-             * position is different from the previously selected position or if
-             * there was no selected item.</p>
-             * <p/>
-             * Impelmenters can call getItemAtPosition(position) if they need to access the
-             * data associated with the selected item.
-             *
-             * @param parent   The AdapterView where the selection happened
-             * @param view     The view within the AdapterView that was clicked
-             * @param position The position of the view in the adapter
-             * @param id       The row id of the item that is selected
-             */
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                chosenCampus = parent.getItemAtPosition(position).toString();
-                Log.i("click",chosenCampus);
-            }
-
-            /**
-             * Callback method to be invoked when the selection disappears from this
-             * view. The selection can disappear for instance when touch is activated
-             * or when the adapter becomes empty.
-             *
-             * @param parent The AdapterView that now contains no selected item.
-             */
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+        campus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == first_zjg.getId()) {
+                    chosenCampus="紫金港";
+                } else if (checkedId == first_zj.getId()) {
+                    chosenCampus="之江";
+                }
+                else if (checkedId == first_xx.getId()) {
+                    chosenCampus="西溪";
+                }
+                else if (checkedId == first_yq.getId()) {
+                    chosenCampus="玉泉";
+                }
+                else if (checkedId == first_zs.getId()) {
+                    chosenCampus="舟山";
+                }
+                else{
+                    chosenCampus="华家池";
+                }
             }
         });
 

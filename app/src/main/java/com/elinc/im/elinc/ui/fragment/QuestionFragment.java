@@ -183,7 +183,7 @@ public class QuestionFragment extends FragmentBase implements OnClickListener,IX
         } else {
             mListView.setPullLoadEnable(false);
             refreshPull();
-            ShowToast("没有您要找的问题，去提问吧");
+            //ShowToast("没有您要找的问题，去提问吧");
         }
         refreshPull();
     }

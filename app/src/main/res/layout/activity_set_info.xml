@@ -21,8 +21,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/about_top_bg"
         android:minHeight="60dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp" >
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp" >
 
         <TextView
             android:textSize="18sp"
@@ -59,8 +59,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/about_mid_bg"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         >
@@ -93,8 +93,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/about_mid_bg"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
         android:paddingBottom="10dp"
         android:paddingTop="10dp" >
 
@@ -127,8 +127,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/about_mid_bg"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
         android:paddingBottom="10dp"
         android:paddingTop="10dp">
 
@@ -163,8 +163,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/about_mid_bg"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
         android:paddingBottom="10dp"
         android:paddingTop="10dp" >
 
@@ -196,8 +196,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/about_mid_bg"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
         android:paddingBottom="10dp"
         android:paddingTop="10dp" >
 
@@ -228,16 +228,12 @@
     <Button
         style="@style/large_btn"
         android:id="@+id/iv_edit"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:text="编辑资料"
         />
     <Button
         android:id="@+id/btn_add_friend"
-        style="@style/Smile.Button.theme"
-        android:background="@drawable/green_button_selector"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_vertical_margin"
+        style="@style/large_btn"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:text="@string/add_friend"
         android:visibility="gone" />
@@ -247,12 +243,12 @@
     <Button
         android:id="@+id/btn_chat"
         style="@style/large_btn"
-
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:text="@string/chat" />
 
     <Button
         android:id="@+id/btn_black"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         style="@style/large_btn"
 
         android:text="@string/blacklist" />
