@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -40,6 +42,7 @@ public class LoginActivityElinc extends BaseActivity implements OnClickListener 
 	TextView btn_find_pwd_in_login;
 
 	private MyBroadcastReceiver receiver = new MyBroadcastReceiver();
+	private TextView elinc;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,11 @@ public class LoginActivityElinc extends BaseActivity implements OnClickListener 
 		btn_login.setOnClickListener(this);
 		btn_register.setOnClickListener(this);
 		btn_find_pwd_in_login.setOnClickListener(this);
+		elinc = (TextView) findViewById(R.id.elinc);
+
+		AssetManager mgr=getAssets();
+		Typeface tf=Typeface.createFromAsset(mgr, "raw/Blokletters-Balpen.ttf");
+		elinc.setTypeface(tf);
 
 	}
 
