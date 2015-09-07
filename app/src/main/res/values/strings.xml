@@ -101,14 +101,12 @@
     <drawable name="green_pressed">#65cb98</drawable>
     <string name="title_activity_my_tree">MyTreeActivity</string>
 
-    <resources>
-        <string-array name="campus">
-            <item>紫金港校区</item>
-            <item>玉泉校区</item>
-            <item>西溪校区</item>
-            <item>枝江校区</item>
-            <item>舟山校区</item>
-            <item>华家池校区</item>
-        </string-array>
-    </resources>
+    <string-array name="campus">
+        <item>紫金港校区</item>
+        <item>玉泉校区</item>
+        <item>西溪校区</item>
+        <item>枝江校区</item>
+        <item>舟山校区</item>
+        <item>华家池校区</item>
+    </string-array>
 </resources>

@@ -16,10 +16,10 @@
             android:text="手机号"
             android:textStyle="bold" />
         <EditText
+            android:inputType="number"
             android:singleLine="true"
             android:id="@+id/et_username"
-            style="@style/input_right"
-            />
+            style="@style/input_right" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -27,19 +27,17 @@
         android:layout_height="wrap_content">
         <LinearLayout
             style="@style/input_out"
-            android:layout_weight="1"
-            >
+            android:layout_weight="1">
             <TextView
                 style="@style/input_left"
-                android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:text="验证码"
                 android:textStyle="bold" />
             <EditText style="@style/input_right"
+                android:inputType="number"
                 android:singleLine="true"
                 android:layout_weight="1"
-                android:id="@+id/et_verify_code"
-                />
+                android:id="@+id/et_verify_code" />
 
         </LinearLayout>
 
@@ -55,12 +53,13 @@
             android:textColor="@color/base_color_text_white"
             android:textSize="@dimen/text_size_large" />
     </LinearLayout>
-    <LinearLayout style="@style/input_out" >
+    <LinearLayout style="@style/input_out">
         <TextView
             style="@style/input_left"
             android:text="推荐人"
             android:textStyle="bold" />
         <EditText
+            android:inputType="number"
             android:singleLine="true"
             android:id="@+id/et_inviter"
             style="@style/input_right"

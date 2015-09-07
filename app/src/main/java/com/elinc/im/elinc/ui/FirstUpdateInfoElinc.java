@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -30,6 +31,7 @@ public class FirstUpdateInfoElinc extends BaseActivity {
     private String mobilePhone;
     private String inviter;
     private String chosenCampus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,30 +60,45 @@ public class FirstUpdateInfoElinc extends BaseActivity {
 
         //新增校区的选择，不能乱填
         campus= (Spinner) findViewById(R.id.campus);
-        //first_zjg= (RadioButton) findViewById(R.id.first_zjg);
-        //first_zj= (RadioButton) findViewById(R.id.first_zj);
-//        first_xx= (RadioButton) findViewById(R.id.first_xx);
-//        first_yq= (RadioButton) findViewById(R.id.first_yq);
-//        first_zs= (RadioButton) findViewById(R.id.first_zs);
-//        first_hjc= (RadioButton) findViewById(R.id.first_hjc);
-//        first_zjg.setChecked(true);
         chosenCampus ="紫金港";
-        campus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        // 建立数据源
+        String[] mItems = getResources().getStringArray(R.array.campus);
+        // 建立Adapter并且绑定数据源
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, mItems);
+        //绑定 Adapter到控件
+        adapter.setDropDownViewResource(R.layout.elinc_spinner);
+        campus.setAdapter(adapter);
+        campus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            /**
+             * <p>Callback method to be invoked when an item in this view has been
+             * selected. This callback is invoked only when the newly selected
+             * position is different from the previously selected position or if
+             * there was no selected item.</p>
+             * <p/>
+             * Impelmenters can call getItemAtPosition(position) if they need to access the
+             * data associated with the selected item.
+             *
+             * @param parent   The AdapterView where the selection happened
+             * @param view     The view within the AdapterView that was clicked
+             * @param position The position of the view in the adapter
+             * @param id       The row id of the item that is selected
+             */
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    chosenCampus = "紫金港";
-                } else if (position == 1) {
-                    chosenCampus = "玉泉";
-                } else if (position == 2) {
-                    chosenCampus = "西溪";
-                } else if (position == 3) {
-                    chosenCampus = "枝江";
-                } else if (position == 4) {
-                    chosenCampus = "舟山";
-                } else {
-                    chosenCampus = "华家池";
-                }
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chosenCampus = parent.getItemAtPosition(position).toString();
+                Log.i("click",chosenCampus);
+            }
+
+            /**
+             * Callback method to be invoked when the selection disappears from this
+             * view. The selection can disappear for instance when touch is activated
+             * or when the adapter becomes empty.
+             *
+             * @param parent The AdapterView that now contains no selected item.
+             */
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 

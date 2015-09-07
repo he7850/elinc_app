@@ -2,19 +2,20 @@ package com.elinc.im.elinc.ui;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
-
-import cn.bmob.v3.listener.UpdateListener;
 
 import com.elinc.im.elinc.R;
 import com.elinc.im.elinc.bean.User;
+
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * 设置昵称和性别
@@ -25,11 +26,14 @@ import com.elinc.im.elinc.bean.User;
  * @date 2014-6-7 下午4:03:40
  */
 public class UpdateInfoActivityElinc extends ActivityBase {
-	private EditText et_uni,et_campus,et_sign;
+	private EditText et_uni,et_sign;
+	private String chosenCampus;
 	private RadioGroup sex;
 	private RadioButton sex_woman,sex_man;
 	private Boolean chosenSex;
 	private Button confirm;
+	private Spinner campus;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,7 +45,6 @@ public class UpdateInfoActivityElinc extends ActivityBase {
 		initListener();
 	}
 	private void initView(){
-		et_campus= (EditText) findViewById(R.id.et_campus);
 		et_sign= (EditText) findViewById(R.id.edit_sign_text);
 		et_uni= (EditText) findViewById(R.id.et_university);
 		sex= (RadioGroup) findViewById(R.id.sex);
@@ -52,7 +55,6 @@ public class UpdateInfoActivityElinc extends ActivityBase {
 		bufferType = TextView.BufferType.EDITABLE;
 		final User user = userManager.getCurrentUser(User.class);
 		Log.i("1", user.getCampus());
-		et_campus.setText(user.getCampus(),bufferType);
 		et_uni.setText(user.getUniversity(),bufferType);
 		if(user.getSex()){
 			sex_man.setChecked(true);
@@ -61,6 +63,26 @@ public class UpdateInfoActivityElinc extends ActivityBase {
 			sex_woman.setChecked(true);
 			sex_man.setChecked(false);
 		}
+		campus= (Spinner) findViewById(R.id.campus);
+		chosenCampus ="紫金港";
+		// 建立数据源
+		String[] mItems = getResources().getStringArray(R.array.campus);
+		// 建立Adapter并且绑定数据源
+		ArrayAdapter<String> adapter=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, mItems);
+		//绑定 Adapter到控件
+		adapter.setDropDownViewResource(R.layout.elinc_spinner);
+		campus.setAdapter(adapter);
+		campus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				chosenCampus = parent.getItemAtPosition(position).toString();
+				Log.i("click", chosenCampus);
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		});
 	}
 	private void initListener(){
 		sex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -79,7 +101,7 @@ public class UpdateInfoActivityElinc extends ActivityBase {
 				User u = new User();
 				u.setSex(chosenSex);
 				u.setUniversity(et_uni.getText().toString());
-				u.setCampus(et_campus.getText().toString());
+				u.setCampus(chosenCampus);
 				u.setSignature(et_sign.getText().toString());
 				u.setObjectId(user.getObjectId());
 				u.update(UpdateInfoActivityElinc.this, new UpdateListener() {
@@ -99,27 +121,5 @@ public class UpdateInfoActivityElinc extends ActivityBase {
 				});
 			}
 		});
-	}
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.menu_first_update_info, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
-
-			return true;
-		}
-
-		return super.onOptionsItemSelected(item);
 	}
 }

@@ -22,21 +22,20 @@
             style="@style/input_right"
             android:id="@+id/et_university"
             android:gravity="center_vertical"
+            android:enabled="false"
             android:text="浙江大学"
             />
     </LinearLayout>
-    <LinearLayout
-        style="@style/input_out">
+    <LinearLayout style="@style/input_out">
 
         <TextView
             style="@style/input_left"
-            android:gravity="center_vertical"
-            android:text="校区"/>
+            android:text="校区" />
 
-        <EditText
-            android:id="@+id/et_campus"
+        <Spinner
+            android:id="@+id/campus"
             style="@style/input_right"
-            />
+            android:paddingLeft="0dp"/>
     </LinearLayout>
     <LinearLayout
         style="@style/input_out">
