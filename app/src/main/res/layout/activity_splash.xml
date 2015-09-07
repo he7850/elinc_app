@@ -6,7 +6,7 @@
     android:orientation="vertical" >
     <TextView
         android:layout_marginTop="130dp"
-        android:paddingBottom="20dp"
+        android:paddingBottom="4dp"
         android:textColor="@android:color/white"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
@@ -19,7 +19,7 @@
         android:layout_centerHorizontal="true" />
     <TextView
         android:id="@+id/textView22"
-        android:paddingBottom="20dp"
+        android:paddingBottom="4dp"
         android:layout_gravity="center"
         android:textColor="@android:color/white"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
-        android:text="－－－Elinc 郁林"
+        android:text="－－Elinc 郁林"
         android:textSize="16sp"
         android:lineSpacingExtra="10dp"
         android:gravity="center_vertical|center_horizontal"
