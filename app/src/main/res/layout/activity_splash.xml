@@ -5,13 +5,45 @@
     android:background="@color/elinc_green"
     android:orientation="vertical" >
     <TextView
-        android:paddingBottom="100dp"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="130dp"
+        android:paddingBottom="20dp"
         android:textColor="@android:color/white"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/begin_page_string"
-    android:textSize="20dp"
-    android:lineSpacingExtra="10dp"
-    android:gravity="center_vertical|center_horizontal" />
-    </RelativeLayout>
+        android:text="每一个目标"
+        android:textSize="22sp"
+        android:lineSpacingExtra="10dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:id="@+id/textView11"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:id="@+id/textView22"
+        android:paddingBottom="20dp"
+        android:layout_gravity="center"
+        android:textColor="@android:color/white"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="都是你人生的重要组成部分"
+        android:textSize="22sp"
+        android:lineSpacingExtra="10dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_below="@+id/textView11"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:paddingBottom="50dp"
+        android:textColor="@android:color/white"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:text="－－－Elinc 郁林"
+        android:textSize="16sp"
+        android:lineSpacingExtra="10dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:id="@+id/textView33"
+        android:layout_below="@+id/textView22"
+        android:layout_alignRight="@+id/textView22"
+        android:layout_alignEnd="@+id/textView22" />
+
+
+</RelativeLayout>

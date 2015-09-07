@@ -38,21 +38,36 @@
             <TextView
                 style="@style/input_left"
                 android:layout_marginBottom="5dp"
+                android:layout_gravity="top"
+                android:layout_marginTop="4dp"
                 android:text="目标宣言"/>
+            <EditText
+                style="@style/input_right"
+                android:layout_height="wrap_content"
+                android:lines="3"
+                android:maxLength="20"
+                android:gravity="top"
+                android:id="@+id/claim_new_goal" />
         </LinearLayout>
-<LinearLayout
-    style="@style/input_out">
 
-    <EditText
-        style="@style/input_right"
-        android:layout_height="wrap_content"
-        android:lines="3"
-        android:maxLength="20"
-        android:gravity="top"
-        android:id="@+id/claim_new_goal" />
+        <LinearLayout
+            style="@style/input_out"
+            android:layout_marginTop="8dp">
 
-</LinearLayout>
+            <TextView
+                style="@style/input_left"
+                android:text="限定天数"/>
 
+            <EditText
+                style="@style/input_right"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:maxLength="3"
+                android:digits="1234567890"
+                android:id="@+id/day" />
+
+
+        </LinearLayout>
 
         <TextView
             style="@style/input_left"
@@ -172,24 +187,7 @@
 
         </LinearLayout>
 
-><LinearLayout
-        style="@style/input_out"
-        android:layout_marginTop="8dp">
 
-        <TextView
-            style="@style/input_left"
-            android:text="限定天数"/>
-
-        <EditText
-            style="@style/input_right"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:maxLength="3"
-            android:digits="1234567890"
-            android:id="@+id/day" />
-
-
-    </LinearLayout>
 
 
         <Button
