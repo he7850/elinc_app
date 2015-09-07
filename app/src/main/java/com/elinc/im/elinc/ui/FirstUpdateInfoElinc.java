@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import com.elinc.im.elinc.R;
 import com.elinc.im.elinc.bean.User;
@@ -21,7 +23,7 @@ import cn.bmob.v3.listener.SaveListener;
 public class FirstUpdateInfoElinc extends BaseActivity {
     private EditText et_nick,et_uni,et_password,et_password_again;
     private RadioGroup sex;
-    private RadioGroup campus;
+    private Spinner campus;
     private RadioButton sex_woman,sex_man,first_zjg,first_zj,first_yq,first_xx,first_hjc,first_zs;
     private Boolean chosenSex;
     private Button confirm;
@@ -55,33 +57,30 @@ public class FirstUpdateInfoElinc extends BaseActivity {
         });
 
         //新增校区的选择，不能乱填
-        campus= (RadioGroup) findViewById(R.id.first_select_campus);
-        first_zjg= (RadioButton) findViewById(R.id.first_zjg);
-        first_zj= (RadioButton) findViewById(R.id.first_zj);
-        first_xx= (RadioButton) findViewById(R.id.first_xx);
-        first_yq= (RadioButton) findViewById(R.id.first_yq);
-        first_zs= (RadioButton) findViewById(R.id.first_zs);
-        first_hjc= (RadioButton) findViewById(R.id.first_hjc);
-        first_zjg.setChecked(true);
+        campus= (Spinner) findViewById(R.id.campus);
+        //first_zjg= (RadioButton) findViewById(R.id.first_zjg);
+        //first_zj= (RadioButton) findViewById(R.id.first_zj);
+//        first_xx= (RadioButton) findViewById(R.id.first_xx);
+//        first_yq= (RadioButton) findViewById(R.id.first_yq);
+//        first_zs= (RadioButton) findViewById(R.id.first_zs);
+//        first_hjc= (RadioButton) findViewById(R.id.first_hjc);
+//        first_zjg.setChecked(true);
         chosenCampus ="紫金港";
-        campus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == first_zjg.getId()) {
-                    chosenCampus="紫金港";
-                } else if (checkedId == first_zj.getId()) {
-                    chosenCampus="之江";
-                }
-                else if (checkedId == first_xx.getId()) {
-                    chosenCampus="西溪";
-                }
-                else if (checkedId == first_yq.getId()) {
-                    chosenCampus="玉泉";
-                }
-                else if (checkedId == first_zs.getId()) {
-                    chosenCampus="舟山";
-                }
-                else{
-                    chosenCampus="华家池";
+        campus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    chosenCampus = "紫金港";
+                } else if (position == 1) {
+                    chosenCampus = "玉泉";
+                } else if (position == 2) {
+                    chosenCampus = "西溪";
+                } else if (position == 3) {
+                    chosenCampus = "枝江";
+                } else if (position == 4) {
+                    chosenCampus = "舟山";
+                } else {
+                    chosenCampus = "华家池";
                 }
             }
         });
