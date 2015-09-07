@@ -118,7 +118,7 @@
         android:layout_height="40dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:background="@drawable/green_button_selector"
+        android:background="@drawable/corner_bg_large_btn"
         android:text="@string/register"
         android:textColor="@color/base_color_text_white"
         android:textSize="@dimen/text_size_large" />

@@ -193,13 +193,13 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="提交"
             android:maxLength="5"
             android:id="@+id/button"
             android:textColor="#ffffff"
             android:textSize="18dp"
-            android:background="@drawable/green_button_selector"
+            android:background="@drawable/corner_bg_large_btn"
             android:layout_gravity="center_horizontal"/>
 
 

@@ -63,7 +63,7 @@
             android:textSize="18dp"
 
             android:id="@+id/btn_send_bug"
-            android:background="@drawable/green_button_selector"
+            android:background="@drawable/corner_bg_large_btn"
             android:layout_gravity="center_horizontal" />
 
     </LinearLayout>

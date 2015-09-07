@@ -142,10 +142,10 @@
             android:id="@+id/button_new_question"
             android:text="提交"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:textColor="#ffffff"
             android:textSize="18dp"
-            android:background="@drawable/green_button_selector"
+            android:background="@drawable/corner_bg_large_btn"
             android:layout_gravity="center_horizontal"
             />
 
