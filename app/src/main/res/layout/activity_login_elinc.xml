@@ -10,18 +10,36 @@
         android:gravity="center"
         android:layout_centerInParent="true"
         android:orientation="vertical" >
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:padding="5dp"
+                android:id="@+id/iv_icon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/logo_for_login" />
+            <TextView
+                android:layout_marginLeft="4dp"
+                android:id="@+id/elinc"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:textSize="35sp"
+                android:textColor="@color/base_color_text_white"
+                android:text="Elinc"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/iv_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_marginBottom="5dp"
-            android:src="@drawable/logo_for_login" />
 
         <LinearLayout
             style="@style/input_out">
             <TextView
                 style="@style/input_left"
+                android:textStyle="normal"
                 android:text="手机号"
 
                 android:textColor="#ffffff"/>
@@ -33,6 +51,7 @@
         <LinearLayout
             style="@style/input_out">
             <TextView
+                android:textStyle="normal"
                 style="@style/input_left"
                 android:text="密码"
                 android:textColor="#ffffff"/>
