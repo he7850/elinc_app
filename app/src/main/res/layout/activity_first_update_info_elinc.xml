@@ -61,58 +61,55 @@
         </LinearLayout>
 
 
-        <TextView
-            android:layout_marginLeft="16dp"
-            android:padding="10dp"
-            style="@style/Smile.TextView._Black"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:text="校区"/>
+    <TextView
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        style="@style/Smile.TextView._Black"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:text="校区"/>
 
         <Spinner
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/campus" />
+            android:id="@+id/spinner" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <TextView
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="16dp"
-                android:padding="10dp"
-                style="@style/Smile.TextView._Black"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textStyle="bold"
-                android:text="性别"/>
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:id="@+id/sex">
+    <TextView
+        android:layout_marginLeft="16dp"
+        android:padding="10dp"
+        style="@style/Smile.TextView._Black"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:text="性别"/>
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:id="@+id/sex">
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="女"
-                    android:id="@+id/sex_woman"
-                    android:layout_gravity="center_horizontal" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="女"
+            android:id="@+id/sex_woman"
+            android:layout_gravity="center_horizontal" />
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="男"
-                    android:id="@+id/sex_man"
-                    android:layout_gravity="center_horizontal" />
-            </RadioGroup>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="男"
+            android:id="@+id/sex_man"
+            android:layout_gravity="center_horizontal" />
+    </RadioGroup>
         </LinearLayout>
         <Button
             android:layout_marginTop="12dp"

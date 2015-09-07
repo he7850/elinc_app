@@ -88,12 +88,5 @@
         android:layout_gravity="center"
         android:id="@+id/submit_info"
         android:layout_marginTop="12dp"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:background="@drawable/green_button_selector"
-
-        android:textColor="@color/base_color_text_white"
-        android:textSize="@dimen/text_size_large" />
+        style="@style/large_btn" />
 </LinearLayout>
