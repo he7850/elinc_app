@@ -10,83 +10,45 @@
         layout="@layout/include_action_bar" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/input_bg"
-        android:orientation="horizontal" >
+        android:layout_marginTop="24dp"
+        style="@style/input_out" >
 
         <TextView
-            style="@style/Smile.TextView._Black"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            style="@style/input_left"
             android:gravity="center_vertical"
-            android:text="学校"
-            android:textSize="20sp" />
+            android:text="学校" />
 
         <EditText
+            style="@style/input_right"
             android:id="@+id/et_university"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            android:background="@color/transparent"
             android:gravity="center_vertical"
-            android:hint="输入你的学校..."
+            android:text="浙江大学"
             />
     </LinearLayout>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/input_bg"
-        android:orientation="horizontal" >
+        style="@style/input_out">
 
         <TextView
-            style="@style/Smile.TextView._Black"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            style="@style/input_left"
             android:gravity="center_vertical"
-            android:text="校区"
-            android:textSize="20sp" />
+            android:text="校区"/>
 
         <EditText
             android:id="@+id/et_campus"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            android:background="@color/transparent"
-            android:gravity="center_vertical"
-            android:hint="请输入你的校区"
+            style="@style/input_right"
             />
     </LinearLayout>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/input_bg"
-        android:orientation="horizontal" >
+        style="@style/input_out">
 
         <TextView
-            style="@style/Smile.TextView._Black"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:gravity="center_vertical"
-            android:text="性别"
-            android:textSize="20sp" />
+            style="@style/input_left"
+            android:text="性别" />
 
         <RadioGroup
+            style="@style/input_right"
             android:gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+
             android:id="@+id/sex"
             android:orientation="horizontal"
             android:baselineAligned="false">
@@ -108,30 +70,16 @@
 
     </LinearLayout>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/input_bg"
-        android:orientation="horizontal" >
+        style="@style/input_out">
 
         <TextView
-            style="@style/Smile.TextView._Black"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:gravity="center_vertical"
-            android:text="状态"
-            android:textSize="20sp" />
+            style="@style/input_left"
+            android:text="状态" />
 
         <EditText
             android:id="@+id/edit_sign_text"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            android:background="@color/transparent"
-            android:gravity="center_vertical"
+            style="@style/input_right"
+            android:maxLength="8"
             android:hint="Fighting！"
             />
     </LinearLayout>
@@ -139,6 +87,13 @@
         android:text="完成"
         android:layout_gravity="center"
         android:id="@+id/submit_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_marginTop="12dp"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/green_button_selector"
+
+        android:textColor="@color/base_color_text_white"
+        android:textSize="@dimen/text_size_large" />
 </LinearLayout>

@@ -27,10 +27,8 @@
             android:id="@+id/textView" />
 
         <EditText
-            android:layout_width="match_parent"
+            style="@style/input_right"
             android:layout_height="wrap_content"
-            android:background="@drawable/border"
-            android:padding="5dp"
             android:gravity="top"
             android:id="@+id/et_bug_title"
             android:lines="4" />
@@ -59,7 +57,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="@string/bold_submit"
             android:textColor="#ffffff"
             android:textSize="18dp"
