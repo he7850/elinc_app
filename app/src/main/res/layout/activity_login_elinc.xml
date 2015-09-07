@@ -23,6 +23,7 @@
             <TextView
                 style="@style/input_left"
                 android:text="手机号"
+
                 android:textColor="#ffffff"/>
             <EditText
                 android:id="@+id/et_username"
@@ -36,8 +37,10 @@
                 android:text="密码"
                 android:textColor="#ffffff"/>
             <EditText
+                android:inputType="textPassword"
                 android:id="@+id/et_password"
-                style="@style/input_right" />
+                style="@style/input_right"
+                />
 
         </LinearLayout>
 
