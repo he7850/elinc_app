@@ -507,6 +507,7 @@ public class NewQuestionActivityElinc extends ActivityBase {
                     public void onSuccess(String fileName, String url, BmobFile file) {
                         Log.i("bmob", "文件上传成功：" + fileName + ",可访问的文件地址：" + file.getUrl());
                         new_question.setQuestionAvatar(file.getUrl());
+                        iv_set_question_avatar.setVisibility(View.VISIBLE);
                         ImageLoader.getInstance().displayImage(file.getUrl(), iv_set_question_avatar, ImageLoadOptions.getOptions(), animateFirstListener);
                     }
 

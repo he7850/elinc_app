@@ -13,76 +13,60 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
+
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:orientation="vertical"
         >
 <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    style="@style/input_out">
     <TextView android:text="标题"
-        style="@style/title_elinc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        style="@style/input_left"
         android:id="@+id/title" />
     <EditText
         android:id="@+id/question_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/border"
+        style="@style/input_right"
         android:maxLength="25"/>
 </LinearLayout>
+<LinearLayout
+    style="@style/input_out"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="4dp">
+    <TextView
+        style="@style/input_left"
 
-        <TextView
-            style="@style/title_elinc"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="问题描述" />
+        android:text="问题描述" />
+</LinearLayout>
+
 
 
         <EditText
             android:id="@+id/question_content"
-            android:layout_width="match_parent"
+            android:layout_marginRight="24dp"
+            android:layout_marginLeft="24dp"
             android:layout_height="wrap_content"
+            style="@style/input_right"
             android:maxLength="125"
             android:gravity="top"
-            android:background="@drawable/border"
             android:lines="4"/>
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            style="@style/input_out"
+            android:layout_marginTop="12dp">
 
             <TextView
-                style="@style/title_elinc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                style="@style/input_left"
                 android:text="标签"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/textView7" />
 
             <EditText
-                style="@style/title_elinc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/input_right"
                 android:id="@+id/et_input_tags"
-                android:maxLength="12"
-                android:background="@drawable/border"
-                android:layout_gravity="center_horizontal" />
+                android:maxLength="12" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:orientation="horizontal">
+            style="@style/input_out">
 
             <Button
                 android:layout_width="50dp"
@@ -126,7 +110,7 @@
 
         <Button
             style="@style/title_elinc"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="24dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="上传图片"
@@ -134,18 +118,18 @@
             android:id="@+id/question_add_photo" />
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:visibility="gone"
             android:id="@+id/iv_set_question_avatar" />
 
         <Button
             android:id="@+id/button_new_question"
+            android:layout_marginTop="24dp"
             android:text="提交"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:textColor="#ffffff"
-            android:textSize="18dp"
-            android:background="@drawable/corner_bg_large_btn"
+            style="@style/large_btn"
             android:layout_gravity="center_horizontal"
             />
 

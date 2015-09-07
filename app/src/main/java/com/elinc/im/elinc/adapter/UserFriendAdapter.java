@@ -104,7 +104,13 @@ public class UserFriendAdapter extends BaseAdapter implements SectionIndexer {
 		viewHolder.campus.setText(friend.getCampus());
 		viewHolder.tag2.setVisibility(View.GONE);
 		viewHolder.tag3.setVisibility(View.GONE);
-		viewHolder.tag1.setText(friend.getSignature().toString());
+		if (friend.getSignature()==null || friend.getSignature()=="") {
+			viewHolder.tag1.setText("这家伙真懒，什么都没留下");
+		}
+		else{
+			viewHolder.tag1.setText(friend.getSignature().toString());
+		}
+
 //		if (CollectionUtils.isNotNull(friend.getTags())) {
 //			if (friend.getTags().size() == 0){
 //				viewHolder.tag1.setText("TA还没有设置目标");

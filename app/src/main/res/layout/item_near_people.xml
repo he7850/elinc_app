@@ -6,6 +6,8 @@
 
     <LinearLayout
         android:orientation="horizontal"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -50,14 +52,14 @@
                     android:layout_gravity="bottom"
                     android:layout_marginBottom="4dp"
                     android:layout_width="14dp"
-                    android:layout_height="15dp" />
+                    android:layout_height="15dp"
+                    android:visibility="gone"/>
                 <TextView
                     android:id="@+id/campus"
                     android:gravity="bottom"
                     android:layout_gravity="bottom"
                     android:textSize="12sp"
                     android:layout_marginTop="1sp"
-                    android:layout_marginRight="30sp"
                     android:layout_alignParentRight="true"
                     android:text="玉泉"
                     android:layout_width="wrap_content"
@@ -77,7 +79,7 @@
                     android:layout_marginTop="4dp"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
-                    android:background="@drawable/corner_bg"
+                    android:background="@null"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -88,14 +90,14 @@
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
                     android:layout_marginLeft="6dp"
-                    android:background="@drawable/corner_bg"
+                    android:background="@null"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/tag3"
                     android:gravity="center"
                     android:textSize="10sp"
-                    android:background="@drawable/corner_bg"
+                    android:background="@null"
                     android:paddingBottom="1dp"
                     android:layout_marginTop="4dp"
                     android:paddingLeft="8dp"
