@@ -13,10 +13,10 @@
     <EditText
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
         android:id="@+id/dialog_message"
         android:maxLength="20"
-
+        style="@style/input_right"
         android:gravity="left|center"
         android:hint="说点什么吧，记录你的成长"/>
 
