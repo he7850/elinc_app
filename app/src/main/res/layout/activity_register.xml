@@ -64,7 +64,7 @@
             android:singleLine="true"
             android:id="@+id/et_inviter"
             style="@style/input_right"
-            android:hint="请输入推荐人手机号(可选)" />
+            android:hint="推荐人手机号(可选)" />
     </LinearLayout>
     <Button
         android:id="@+id/btn_register"
