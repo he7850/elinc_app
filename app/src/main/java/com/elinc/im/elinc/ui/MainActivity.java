@@ -31,6 +31,7 @@ import com.bumptech.glide.Glide;
 import com.elinc.im.elinc.CustomApplcation;
 import com.elinc.im.elinc.MyMessageReceiver;
 import com.elinc.im.elinc.R;
+import com.elinc.im.elinc.bean.ActivityCollection;
 import com.elinc.im.elinc.bean.User;
 import com.elinc.im.elinc.ui.fragment.CardFragment;
 import com.elinc.im.elinc.ui.fragment.ContactFragment;
@@ -84,6 +85,7 @@ public class MainActivity extends ActivityBase implements EventListener{
 		//如果你觉得检测服务比较耗流量和电量，你也可以去掉这句话-同时还有onDestory方法里面的stopPollService方法
 		//BmobChat.getInstance(this).startPollService(30);
 		//开启广播接收器
+		ActivityCollection.addActivity(this);
 		initNewMessageBroadCast();
 		initTagMessageBroadCast();
 		initView();

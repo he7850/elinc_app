@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import com.elinc.im.elinc.CustomApplcation;
 import com.elinc.im.elinc.R;
 import com.elinc.im.elinc.util.SharePreferenceUtil;
+import com.elinc.im.elinc.bean.ActivityCollection;
 
 public class SettingActivity extends ActivityBase implements View.OnClickListener {
     Context a;
@@ -91,10 +92,12 @@ public class SettingActivity extends ActivityBase implements View.OnClickListene
             case R.id.btn_logout:
                 CustomApplcation.getInstance().logout();
                 Intent intent=new Intent();
-                intent.setClass(SettingActivity.this,LoginActivityElinc.class);
+                intent.setClass(SettingActivity.this, LoginActivityElinc.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
+                ActivityCollection.finishAll();
+
                 break;
             case R.id.rl_switch_notification:
                 if (iv_open_notification.getVisibility() == View.VISIBLE) {
