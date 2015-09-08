@@ -12,6 +12,15 @@ public class Card extends BmobObject {
     private BmobRelation likedBy;
     private BmobRelation reply;
     private Integer likedByNum;
+    private Integer emo;
+
+    public Integer getEmo() {
+        return emo;
+    }
+
+    public void setEmo(Integer emo) {
+        this.emo = emo;
+    }
 
     public Integer getLikedByNum() {
         return likedByNum;

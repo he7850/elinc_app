@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +45,7 @@ import cn.bmob.v3.listener.UpdateListener;
 
 public class CardFragment extends FragmentBase{
     private User me;
+    Integer emo;
     private Goal[] goal;
     private int goalNum = 3;
     private CardView goal1,goal2,goal3;
@@ -347,6 +350,25 @@ public class CardFragment extends FragmentBase{
         //设置我们自己定义的布局文件作为弹出框的Content
         builder.setView(view);
         builder.setTitle("今日打卡");
+        final RadioButton e1= (RadioButton) view.findViewById(R.id.radioButton);
+        final RadioButton e2= (RadioButton) view.findViewById(R.id.radioButton2);
+        final RadioButton e3= (RadioButton) view.findViewById(R.id.radioButton3);
+        final RadioButton e4= (RadioButton) view.findViewById(R.id.radioButton4);
+        final RadioGroup r= (RadioGroup) view.findViewById(R.id.emo_radio);
+        r.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(i==e1.getId()){
+                    emo=1;
+                }else if(i==e2.getId()){
+                    emo=2;
+                }else if(i==e3.getId()){
+                    emo=3;
+                }else {
+                    emo=4;
+                }
+            }
+        });
         final CheckBox done= (CheckBox) view.findViewById(R.id.done);
         done.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -367,6 +389,7 @@ public class CardFragment extends FragmentBase{
                         card.setGoal(goal[position]);
                         card.setLikedBy(new BmobRelation());
                         card.setLikedByNum(0);
+                        card.setEmo(emo);
                         card.setReply(new BmobRelation());
                         card.setCardClaim(et.getText().toString());
                         card.save(getContext(), new SaveListener() {
@@ -386,6 +409,26 @@ public class CardFragment extends FragmentBase{
                     if (et.getText().toString().equals("")) {
                         ShowToast("还没有说一句话呢");
                     } else {
+                        Card card = new Card();
+                        card.setGoal(goal[position]);
+                        card.setLikedBy(new BmobRelation());
+                        card.setLikedByNum(0);
+                        card.setReply(new BmobRelation());
+                        card.setCardClaim(et.getText().toString());
+                        card.save(getContext(), new SaveListener() {
+                            @Override
+                            public void onSuccess() {
+                                //ShowToast("打卡成功");
+                            }
+
+                            @Override
+                            public void onFailure(int i, String s) {
+                                //ShowToast("打卡失败");
+                            }
+                        });
+
+
+
                         goal[position].setOut(true);
                         goal[position].update(getContext(), goal[position].getObjectId(), new UpdateListener() {
                             @Override

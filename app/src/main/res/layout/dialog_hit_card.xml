@@ -19,9 +19,68 @@
 
         android:gravity="left|center"
         android:hint="说点什么吧，记录你的成长"/>
-<RelativeLayout
+
+
+
+    <RadioGroup
+        android:layout_margin="10dp"
+        android:id="@+id/emo_radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text=" "
+
+            android:id="@+id/radioButton" />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/emo1"
+            android:layout_marginRight="5dp"
+            />
+        <RadioButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text=" "
+            android:id="@+id/radioButton2" />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/emo2"
+            android:layout_marginRight="5dp"
+            />
+        <RadioButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text=""
+            android:id="@+id/radioButton3" />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/emo3"
+            android:layout_marginRight="5dp"
+            />
+        <RadioButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text=" "
+            android:id="@+id/radioButton4"
+            android:layout_alignBottom="@+id/done"
+            />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/emo4"
+            android:layout_marginRight="5dp"
+            />
+    </RadioGroup>
+
+    <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <CheckBox
         android:layout_marginRight="10dp"
@@ -32,7 +91,9 @@
         android:text="目标已完成"
         android:id="@+id/done" />
 
-</RelativeLayout>
+
+
+    </RelativeLayout>
 
 
 
