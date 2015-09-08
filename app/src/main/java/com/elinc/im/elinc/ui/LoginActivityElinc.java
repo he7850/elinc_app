@@ -200,9 +200,14 @@ public class LoginActivityElinc extends BaseActivity implements OnClickListener 
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
+		 //TODO Auto-generated method stub
 		super.onDestroy();
-		unregisterReceiver(receiver);
+		try {
+			unregisterReceiver(receiver);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	private static String MD5(String str) {
@@ -233,4 +238,18 @@ public class LoginActivityElinc extends BaseActivity implements OnClickListener 
 		return hexValue.toString();
 	}
 
+
+	private static long firstTime;
+	/**
+	 * 连续按两次返回键就退出
+	 */
+	@Override
+	public void onBackPressed() {
+		if (firstTime + 2000 > System.currentTimeMillis()) {
+			finish();
+		} else {
+			ShowToast("再按一次退出程序");
+		}
+		firstTime = System.currentTimeMillis();
+	}
 }

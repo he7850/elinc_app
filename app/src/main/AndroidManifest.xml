@@ -86,7 +86,8 @@
             android:name="com.elinc.im.elinc.ui.MainActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity android:name="com.elinc.im.elinc.ui.LoginActivityElinc" />
+        <activity android:name="com.elinc.im.elinc.ui.LoginActivityElinc"
+            android:launchMode="singleTop"/>
         <activity android:name="com.elinc.im.elinc.ui.LocationActivity" />
         <activity android:name="com.elinc.im.elinc.ui.BlackListActivity" />
         <activity android:name="com.elinc.im.elinc.ui.ImageBrowserActivity" />

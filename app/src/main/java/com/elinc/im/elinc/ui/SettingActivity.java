@@ -1,5 +1,6 @@
 package com.elinc.im.elinc.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +13,7 @@ import com.elinc.im.elinc.R;
 import com.elinc.im.elinc.util.SharePreferenceUtil;
 
 public class SettingActivity extends ActivityBase implements View.OnClickListener {
-
+    Context a;
     Button btn_logout;
     RelativeLayout rl_switch_notification, rl_switch_voice, rl_switch_vibrate,layout_blacklist;
     ImageView iv_open_notification, iv_close_notification, iv_open_voice, iv_close_voice, iv_open_vibrate, iv_close_vibrate;
@@ -89,8 +90,11 @@ public class SettingActivity extends ActivityBase implements View.OnClickListene
                 break;
             case R.id.btn_logout:
                 CustomApplcation.getInstance().logout();
-                this.finish();
-                startActivity(new Intent(this, LoginActivityElinc.class));
+                Intent intent=new Intent();
+                intent.setClass(SettingActivity.this,LoginActivityElinc.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.rl_switch_notification:
                 if (iv_open_notification.getVisibility() == View.VISIBLE) {
