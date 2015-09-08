@@ -75,9 +75,10 @@
         android:id="@+id/trunk"
         android:layout_marginTop="220dp"
         android:layout_marginLeft="110dp"
-        android:background="#E2E2E2"
+        android:background="#000000"
         android:layout_width="2dp"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
