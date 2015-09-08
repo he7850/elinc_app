@@ -4,35 +4,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="40dp">
         <TextView
-            android:layout_marginLeft="25dp"
-            android:text="15.07.23"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/card_date"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <ImageView
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:src="@drawable/face"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="10dp"
-            android:id="@+id/card_emotion"
-            android:layout_width="25dp"
-            android:layout_height="25dp" />
+            android:layout_height="wrap_content"
+            android:text="2015.2.3"
+            android:id="@+id/card_date"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
         <TextView
+            android:layout_marginLeft="112dp"
+            android:background="#E0E0E0"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/emo1"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/card_emotion"
+            android:layout_centerVertical="true"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_marginLeft="168dp"
             android:layout_gravity="center_vertical"
             android:text="评论"
-            android:textSize="20sp"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
             android:id="@+id/card_claim"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-    </LinearLayout>
+    </RelativeLayout>
     <View
         android:background="#F0F0F0"
         android:layout_width="match_parent"

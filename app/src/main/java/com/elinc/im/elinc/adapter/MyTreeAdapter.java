@@ -88,7 +88,22 @@ public class MyTreeAdapter extends RecyclerView.Adapter{
                 e.printStackTrace();
             }
             cardViewHolder.card_claim.setText(cardList.get(j).getCardClaim());
-            //cardViewHolder.card_emotion.setImageResource(R.drawable.face);
+            switch (cardList.get(j).getEmo()){
+                case 1:
+                    cardViewHolder.card_emotion.setImageResource(R.drawable.emo1);
+                    break;
+                case 2:
+                    cardViewHolder.card_emotion.setImageResource(R.drawable.emo2);
+                    break;
+                case 3:
+                    cardViewHolder.card_emotion.setImageResource(R.drawable.emo3);
+                    break;
+                case 4:
+                    cardViewHolder.card_emotion.setImageResource(R.drawable.emo4);
+                    break;
+                default:
+                    break;
+            }
             myViewHolder.card_list.addView(cardLayout);
         }
 
