@@ -156,7 +156,6 @@ public class LoginActivityElinc extends BaseActivity implements OnClickListener 
 					progress.dismiss();
 					Intent intent = new Intent(LoginActivityElinc.this,MainActivity.class);
 					startActivity(intent);
-					finish();
 				}else{
 					progress.dismiss();
 					//BmobLog.i(e);
