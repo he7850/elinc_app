@@ -223,7 +223,7 @@
             android:layout_weight="1.0"
             android:background="@drawable/base_edit_input"
             android:imeOptions="flagNoExtractUi"
-            android:minHeight="@dimen/tab_padding_left_right"
+            android:minHeight="34dp"
             android:padding="5dp"
             />
     <Button
