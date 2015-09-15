@@ -39,11 +39,11 @@
         <ImageView
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:layout_marginLeft="106dp"
+            android:layout_marginLeft="105dp"
             android:layout_centerVertical="true"
             android:layout_marginRight="4dp"
-            android:layout_width="25px"
-            android:layout_height="25px"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:id="@+id/leaf_of_tree"
             android:src="@drawable/cir_doing"
             />
