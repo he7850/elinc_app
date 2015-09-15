@@ -277,9 +277,9 @@ public class MainActivity extends ActivityBase implements EventListener{
                         case R.id.nav_bug_report:
                             startAnimActivity(BugReportActivityElinc.class);
                             break;
-                        case R.id.nav_about_us:
-                            startAnimActivity(AboutUsActivityElinc.class);
-                            break;
+//                        case R.id.nav_about_us:
+//                            startAnimActivity(AboutUsActivityElinc.class);
+//                            break;
                     }
 
                     return false;

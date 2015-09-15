@@ -41,10 +41,10 @@
                 android:id="@+id/nav_bug_report"
                 android:icon="@drawable/ic_bug_report"
                 android:title="BUG反馈" />
-            <item
-                android:id="@+id/nav_about_us"
-                android:icon="@drawable/ic_about_us"
-                android:title="关于我们" />
+            <!--<item-->
+                <!--android:id="@+id/nav_about_us"-->
+                <!--android:icon="@drawable/ic_about_us"-->
+                <!--android:title="关于我们" />-->
         </menu>
     </item>
 
