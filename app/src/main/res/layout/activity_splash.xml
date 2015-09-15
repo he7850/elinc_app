@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
-        android:text="－－Elinc 郁林"
+        android:text="— Elinc 郁林(内测版)"
         android:textSize="16sp"
         android:lineSpacingExtra="10dp"
         android:gravity="center_vertical|center_horizontal"

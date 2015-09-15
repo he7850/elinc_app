@@ -87,16 +87,16 @@ public class FirstUpdateInfoElinc extends BaseActivity {
             @Override
             public void onClick(View view) {
                 String password = MD5(et_password.getText().toString());
-                if (password.equals("")) {
-                    ShowToast("密码为空真的好吗");
+                if (et_password.getText().toString().length()<5) {
+                    ShowToast("密码这么短真的好吗");
                     return;
                 }
                 if (!password.equals(MD5(et_password_again.getText().toString()))) {
                     ShowToast("第二个密码填错了亲");
                     return;
                 }
-                if (et_nick.getText().toString().equals("")) {
-                    ShowToast("昵称不能不甜！");
+                if (et_nick.getText().toString().length()<3) {
+                    ShowToast("用户名这么短真的好吗！");
                     return;
                 }
                 if (et_uni.getText().toString().equals("")) {
