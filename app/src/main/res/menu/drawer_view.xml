@@ -19,7 +19,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_my_tree"
-            android:icon="@drawable/ic_my_goal"
+            android:icon="@drawable/ic_my_tree"
             android:title="成长树" />
         <!--<item
             android:id="@+id/nav_recommend"
