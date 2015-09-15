@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_selector"
-        android:padding="10dip" >
+        android:padding="10dp" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:textSize="16sp"
-            android:paddingBottom="3dp"
+ 
             style="@style/title_elinc"
             android:gravity="bottom"
             android:text="@string/set_notify" />
@@ -65,13 +65,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_selector"
-        android:padding="10dip" >
+        android:padding="10dp">
 
         <TextView
             style="@style/title_elinc"
             android:layout_width="wrap_content"
             android:textSize="16sp"
-            android:paddingBottom="3dp"
+ 
             android:layout_height="wrap_content"
             android:text="@string/set_voice"
             android:layout_centerVertical="true"
@@ -112,7 +112,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_selector"
-        android:padding="10dip" >
+        android:padding="10dp" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -122,7 +122,7 @@
             android:textSize="16sp"
             android:gravity="top"
             style="@style/title_elinc"
-            android:paddingBottom="3dp"
+ 
             android:text="@string/set_vibrate" />
 
         <ImageView
@@ -171,7 +171,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/title_elinc"
-            android:paddingBottom="3dp"
+ 
             android:text="黑名单" />
 
         <TextView
