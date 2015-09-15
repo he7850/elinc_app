@@ -33,16 +33,17 @@
         android:layout_marginBottom="5dp"
         android:layout_centerHorizontal="true" />
 
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:textSize="12sp"-->
-        <!--android:text="    "-->
-        <!--android:textColor="#ffffff"-->
-        <!--android:background="@drawable/corner_bg"-->
-        <!--android:id="@+id/tv_signature"-->
-        <!--android:layout_below="@+id/tvNavUsername"-->
-        <!--android:layout_centerHorizontal="true" />-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:text="    "
+        android:textColor="#ffffff"
+        android:background="@drawable/corner_bg"
+        android:id="@+id/tv_signature"
+        android:visibility="gone"
+        android:layout_below="@+id/tvNavUsername"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
 
