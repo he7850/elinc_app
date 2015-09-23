@@ -257,7 +257,7 @@ public class QuestionItemActivityElinc extends ActivityBase  implements View.OnC
         bmobQuery.addWhereEqualTo("questionId", bundle.getString("questionId"));
         bmobQuery.include("responder,questionId");
         bmobQuery.setLimit(pageCapacity);
-        bmobQuery.order("-createdAt");
+        bmobQuery.order("createdAt");
         bmobQuery.findObjects(QuestionItemActivityElinc.this, new FindListener<Answer>() {
             @Override
             public void onSuccess(List<Answer> list) {
